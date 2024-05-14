@@ -29,22 +29,32 @@ public class UserController {
     
     // 회원가입
     @PostMapping("/join")
-    public ResponseEntity<String> join(@RequestBody User user) {
+    public ResponseEntity<Integer> join(@RequestBody User user) {
     	
         int result = userService.join(user);
         
+        /*
+         * 반환하는 숫자의 의미
+         * 1: userId 중복
+         * 2: nickname 중복
+         * 3: phone 중복
+         * 4: ID 규칙 위반
+         * 5: 비밀번호 규칙 위반
+         * 6: 회원가입 완료
+         * 7: 기타 서버 오류
+         */
         switch(result) {
-        case 1: return new ResponseEntity<>("ID 중복", HttpStatus.CONFLICT);
-        case 2: return new ResponseEntity<>("별명 중복", HttpStatus.CONFLICT);
-        case 3: return new ResponseEntity<>("전화번호 중복", HttpStatus.CONFLICT);
+        case 1: return new ResponseEntity<>(1, HttpStatus.CONFLICT);
+        case 2: return new ResponseEntity<>(2, HttpStatus.CONFLICT);
+        case 3: return new ResponseEntity<>(3, HttpStatus.CONFLICT);
         
-        case 4: return new ResponseEntity<>("ID 규칙 위반", HttpStatus.BAD_REQUEST);
-        case 5: return new ResponseEntity<>("비밀번호 규칙 위반", HttpStatus.BAD_REQUEST);
+        case 4: return new ResponseEntity<>(4, HttpStatus.BAD_REQUEST);
+        case 5: return new ResponseEntity<>(5, HttpStatus.BAD_REQUEST);
 
-        case 6: return new ResponseEntity<>("회원가입 완료", HttpStatus.OK);
+        case 6: return new ResponseEntity<>(6, HttpStatus.OK);
         }
         
-        return new ResponseEntity<>("서버 오류", HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(7, HttpStatus.INTERNAL_SERVER_ERROR);
         
     }
 }

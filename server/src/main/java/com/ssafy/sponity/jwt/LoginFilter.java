@@ -5,6 +5,8 @@ import java.io.InputStream;
 import java.util.Collection;
 import java.util.Iterator;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -26,7 +28,7 @@ import lombok.Data;
  * - 그 인증결과를 받은 이 클래스는 로그인 성공시 JWT를 클라이언트에 반환합니다.
  */
 public class LoginFilter extends UsernamePasswordAuthenticationFilter {
-
+	
 	// JSON 타입의 요청 데이터를 파싱해 userId를 추출하기 위해 사용하는 객체
 	private final ObjectMapper objectMapper = new ObjectMapper();
 	
@@ -35,11 +37,12 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 	// - JWT도 함께 주입
     private final AuthenticationManager authenticationManager;
     private final JWTUtil jwtUtil;
+
     public LoginFilter(AuthenticationManager authenticationManager, JWTUtil jwtUtil) {
         this.authenticationManager = authenticationManager;
         this.jwtUtil = jwtUtil;
     }
-
+    
     
     // 로그인 인증
     @Override
@@ -60,10 +63,11 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
             String userId = loginRequest.getUserId();
             String password = loginRequest.getPassword();
-
+            
+            
             // 로그인 인증정보를 토큰에 담기
             UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userId, password, null);
-
+            
             // 로그인 인증을 수행하는 AuthenticationManager로 토큰을 전달
             return authenticationManager.authenticate(authToken);
         } catch (IOException e) {
@@ -76,7 +80,8 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 	// 로그인 성공 - JWT 발급
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication) {
-        CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
+    	
+    	CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
 
         String userId = customUserDetails.getUsername();
 
@@ -94,8 +99,10 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
     
 	// 로그인 실패 - Unauthorized(401) 상태코드 반환
     @Override
-    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) {
-    	response.setStatus(401);
+    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException {
+        response.setStatus(HttpStatus.UNAUTHORIZED.value());
+        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+        objectMapper.writeValue(response.getWriter(), new ErrorResponse("Authentication failed"));
     }
     
     
@@ -104,6 +111,16 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
     static class LoginRequest {
         private String userId;
         private String password;
+    }
+    
+    // 에러 메시지 반환시 사용하는 클래스
+    @Data
+    static class ErrorResponse {
+        private String message;
+
+        public ErrorResponse(String message) {
+            this.message = message;
+        }
     }
 }
 
