@@ -21,8 +21,7 @@ public class UserServiceImpl implements UserService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	
-	// 회원가입 처리
-	// 추후 수정 : 회원가입 성공시 true, 실패시 false를 반환하도록 수정해야함
+	// 회원가입
 	@Override
     public int join(User user) {
 		
@@ -38,8 +37,8 @@ public class UserServiceImpl implements UserService {
 		if (isNicknameExists) {
 			return 2;
 		}
-		boolean isPhoneExists = userDao.existsByPhone(user.getPhone());
-		if (isPhoneExists) {
+		boolean isEmailExists = userDao.existsByEmail(user.getEmail());
+		if (isEmailExists) {
 			return 3;
 		}
 		
@@ -69,6 +68,14 @@ public class UserServiceImpl implements UserService {
         
         return -1;
     }
+
+	
+	// 아이디 찾기
+	@Override
+	public String findId(String userName, String amail) {
+		return userDao.findId(userName, amail);
+	}
 	
 	
+	// 비밀번호 찾기
 }

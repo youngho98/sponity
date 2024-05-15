@@ -6,8 +6,8 @@
 
 	<!-- 회원가입 처리 -->
 	<insert id="join" parameterType="User">
-		INSERT INTO user(user_id, password, user_name, nickname, phone, wide_area, detail_area)
-		VALUES(#{userId}, #{password}, #{userName}, #{nickname}, #{phone}, #{wideArea}, #{detailArea})
+		INSERT INTO user(user_id, password, user_name, nickname, email, wide_area, detail_area)
+		VALUES(#{userId}, #{password}, #{userName}, #{nickname}, #{email}, #{wideArea}, #{detailArea})
 	</insert>
 
 
@@ -26,16 +26,26 @@
 	</select>
 	
 	<!-- 전화번호 중복 검증 -->
-	<select id="existsByPhone" resultType="boolean" parameterType="String">
+	<select id="existsByEmail" resultType="boolean" parameterType="String">
     	SELECT COUNT(*) > 0 
     	FROM user 
-    	WHERE phone = #{phone}
+    	WHERE email = #{email}
 	</select>
 	
 	
-	<!-- 로그인 인증을 위해 id로 사용자 조회 -->
+	<!-- 로그인 인증을 위해 id로 사용자 조회 (CustomUserDetailsService 클래스에서 사용) -->
 	<select id="findByUserId" resultType="User" parameterType="String">
     	SELECT * FROM user 
     	WHERE user_id = #{userId}
 	</select>
+	
+	
+	<!-- 아이디 찾기 -->
+	<select id="findId" resultType="String" parameterType="String">
+		SELECT user_id
+		FROM user
+		WHERE user_name = #{userName} AND email = #{email}
+	</select>
+	
+	<!-- 비밀번호 찾기 -->
 </mapper>

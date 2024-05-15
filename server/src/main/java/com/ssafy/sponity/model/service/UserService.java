@@ -4,5 +4,8 @@ import com.ssafy.sponity.model.dto.User;
 
 public interface UserService {
 	
-	public int join(User user);
+	int join(User user);
+	
+	String findId(String userName, String amail);
+	
 }
