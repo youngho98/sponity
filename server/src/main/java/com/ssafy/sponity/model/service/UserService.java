@@ -8,4 +8,6 @@ public interface UserService {
 	
 	String findId(String userName, String amail);
 	
+	int resetPassword(String userId, String email);
+	
 }

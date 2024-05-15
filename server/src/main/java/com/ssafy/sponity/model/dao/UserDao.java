@@ -12,10 +12,12 @@ public interface UserDao {
 	
 	boolean existsByNickname(String nickname);
 	
-	boolean existsByEmail(String phone);
+	boolean existsByEmail(String email);
 	
-	User findByUserId(String userId);
+	String findId(@Param("userName") String userName, @Param("email") String email);
+
+	User selectByUserId(String userId);
 	
-	String findId(@Param("userName") String userName, @Param("email") String amail);
+	void updatePassword(@Param("userId") String userId, @Param("tempPassword") String tempPassword);
 	
 }

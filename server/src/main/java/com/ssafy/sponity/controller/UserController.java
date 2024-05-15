@@ -20,7 +20,7 @@ public class UserController {
 		this.userService = userService;
 	}
 	
-    
+	
     // 회원가입
     @PostMapping("/join")
     public ResponseEntity<Integer> join(@RequestBody User user) {
@@ -68,5 +68,27 @@ public class UserController {
     }
     
     
-    // 비밀번호 찾기
+    // 비밀번호 재설정
+    // - 이메일로 임시 비밀번호 전송
+    @GetMapping("/reset-pw/{userId}/{email}")
+    public ResponseEntity<Integer> resetPassword(@PathVariable("userId") String userId, @PathVariable("email") String email) {
+
+    	int result = userService.resetPassword(userId, email);
+    	
+    	/*
+    	 * 반환하는 숫자의 의미
+    	 * 1: 회원가입 내역 없음
+    	 * 2: 가입된 ID이지만, 이메일이 불일치
+    	 * 3: 이메일로 임시 비밀번호 전송 성공
+    	 * 4: 기타 서버 오류
+    	 */
+        switch(result) {
+        case 1: return new ResponseEntity<>(1, HttpStatus.NOT_FOUND);
+        case 2: return new ResponseEntity<>(2, HttpStatus.BAD_REQUEST);
+        case 3: return new ResponseEntity<>(3, HttpStatus.OK);
+        }
+        
+        return new ResponseEntity<>(4, HttpStatus.INTERNAL_SERVER_ERROR);
+        
+    }
 }

@@ -70,7 +70,7 @@ public class SecurityConfig {
 		// 요청 인가
         http
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/", "/join", "/login", "/find-id/**").permitAll()
+                        .requestMatchers("/", "/join", "/login", "/find-id/**", "reset-pw/**").permitAll()
 						.requestMatchers("/admin").hasRole("ADMIN")
                         .anyRequest().authenticated());
 
