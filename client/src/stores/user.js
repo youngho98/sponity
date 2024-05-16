@@ -6,7 +6,7 @@ import router from '@/router';
 const URL = "http://localhost:8080";
 
 export const useUserStore = defineStore('user', () => {
-  const loginUserId = ref('');
+  const loginUserNickname = ref('');
 
   const register = function (userInfo) {
     if (userInfo.value.userId === '' || userInfo.value.password === '' || userInfo.value.userName === '' || userInfo.value.nickname === '' || userInfo.value.email === '' || userInfo.value.wideArea === '' || userInfo.value.detailArea === '') {
@@ -46,14 +46,26 @@ export const useUserStore = defineStore('user', () => {
   const login = function (loginInfo) {
     axios.post(`${URL}/login`, loginInfo.value)
       .then((response) => {
-        // JWT 토큰 헤더에서 받아서 저장해두기
-        sessionStorage.setItem('access-token', response.data['access-token']);
+        // 세션에 access-token 저장
+        sessionStorage.setItem('access-token', response.headers.authorization);
+        
+        const rawToken = response.headers.authorization.split(' ');
+        const token = rawToken[1].split('.');
 
-        const token = response.data['access-token'].split('.');
-        let id = JSON.parse(atob(token[1]));
-        loginUserId.value = id;
+        // Base64 디코딩 함수
+        const decodeBase64 = (str) => {
+          const bytes = Uint8Array.from(atob(str), c => c.charCodeAt(0));
+          return new TextDecoder().decode(bytes);
+        };
 
-        // 요청 보낼 때 마다 헤더에 실어서 넘겨야 함.
+        // payload 부분 디코딩
+        const payload = decodeBase64(token[1]);
+        const payloadObj = JSON.parse(payload);
+
+        // 한글 닉네임 가져오기
+        let nickname = payloadObj.nickname;
+        loginUserNickname.value = nickname;
+
         router.replace({ name: 'home' });
       })
       .catch(() => {
@@ -93,5 +105,7 @@ export const useUserStore = defineStore('user', () => {
       })
   }
 
-  return { loginUserId, register, login, findId, resetPw }
-})
+  return { loginUserNickname, register, login, findId, resetPw }
+}, { persist: {
+  storage: sessionStorage
+}});
