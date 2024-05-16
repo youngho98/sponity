@@ -48,7 +48,7 @@ export const useUserStore = defineStore('user', () => {
       .then((response) => {
         // 세션에 access-token 저장
         sessionStorage.setItem('access-token', response.headers.authorization);
-        
+
         const rawToken = response.headers.authorization.split(' ');
         const token = rawToken[1].split('.');
 
@@ -105,7 +105,14 @@ export const useUserStore = defineStore('user', () => {
       })
   }
 
-  return { loginUserNickname, register, login, findId, resetPw }
-}, { persist: {
-  storage: sessionStorage
-}});
+  const logout = function () {
+    sessionStorage.removeItem('access-token');
+    loginUserNickname.value = '';
+  }
+
+  return { loginUserNickname, register, login, findId, resetPw, logout }
+}, {
+  persist: {
+    storage: sessionStorage
+  }
+});
