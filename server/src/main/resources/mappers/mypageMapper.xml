@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.sponity.model.dao.MypageDao">
+
+	<!-- 내 정보 조회 -->
+	<select id="selectByNickname" resultType="User" parameterType="String">
+    	SELECT user_id, user_name, nickname, email, wide_area, detail_area
+    	FROM user
+    	WHERE nickname = #{nickname}
+	</select>
+	
+
+	
+</mapper>
