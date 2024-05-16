@@ -40,9 +40,10 @@ public class JWTUtil {
 
     
     // JWT 발급
-    public String createJwt(String userId, String role, Long expiredMs) {
+    public String createJwt(String userId, String nickname, String role, Long expiredMs) {
         return Jwts.builder()
                 .claim("userId", userId)
+                .claim("nickname", nickname)
                 .claim("role", role)
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis() + expiredMs))

@@ -45,6 +45,10 @@ public class CustomUserDetails implements UserDetails {
     public String getUsername() {
         return user.getUserId(); // id를 반환하기
     }
+    
+    public String getNickname() {
+        return user.getNickname();
+    }
 
 
     @Override
