@@ -10,7 +10,7 @@
               </a>
               <RouterLink to="/"
                 class="text-green-500  hover:text-green-800 px-3 py-2 ml-12 rounded-md text-xl font-medium">
-                Home
+                chatBot
               </RouterLink>
               <RouterLink class="text-green-500  hover:text-green-800 px-3 py-2 rounded-md text-xl font-medium">
                 Club
@@ -34,6 +34,10 @@
                   </span>
                   <span class="text-green-500 pr-3 py-2 rounded-md text-xl font-medium">
                     님 환영합니다.</span>
+                  <RouterLink :to="{ name: 'myPageView' }"
+                    class="text-green-500  hover:text-green-800 px-3 py-2 rounded-md text-xl font-medium">
+                    마이페이지
+                  </RouterLink>
                   <RouterLink :to="{ name: 'home' }" @click="logout"
                     class="text-green-500  hover:text-green-800 px-3 py-2 rounded-md text-xl font-medium">
                     로그아웃

@@ -110,7 +110,30 @@ export const useUserStore = defineStore('user', () => {
     loginUserNickname.value = '';
   }
 
-  return { loginUserNickname, register, login, findId, resetPw, logout }
+  const getUserInfo = function() {
+    axios.post(`${URL}/my-page`, loginUserNickname.value, {
+      headers: {
+        Authorization: sessionStorage.getItem('access-token')
+      }
+    })
+    .then((response) => {
+      return JSON.parse(response.data);
+    })
+    .catch(() => {
+      // alert("다시 로그인 해주세요.");
+      // router.replace({ name: 'loginForm' });
+    });
+  }
+
+  return {
+    loginUserNickname,
+    register,
+    login,
+    findId,
+    resetPw,
+    logout,
+    getUserInfo,
+  }
 }, {
   persist: {
     storage: sessionStorage
