@@ -13,45 +13,45 @@
       <form action="#">
         <div class="flex flex-col mb-2">
           <div class=" relative ">
-            <input type="text" id="create-account-id" v-model="userInfo.userId"
+            <input type="text" v-model="userInfo.userId"
               class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
               name="ID" placeholder="ID" />
           </div>
         </div>
         <div class="flex flex-col mb-2">
           <div class=" relative ">
-            <input type="text" id="create-account-password" v-model="userInfo.password"
+            <input type="text" v-model="userInfo.password"
               class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
               name="Password" placeholder="Password" />
           </div>
         </div>
         <div class="flex flex-col mb-2">
           <div class=" relative ">
-            <input type="text" id="create-account-name" v-model="userInfo.userName"
+            <input type="text" v-model="userInfo.userName"
               class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
               name="Name" placeholder="Name" />
           </div>
         </div>
         <div class="flex flex-col mb-2">
           <div class=" relative ">
-            <input type="text" id="create-account-nickname" v-model="userInfo.nickname"
+            <input type="text" v-model="userInfo.nickname"
               class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
               name="Nickname" placeholder="Nickname" />
           </div>
         </div>
         <div class="flex flex-col mb-2">
           <div class=" relative ">
-            <input type="text" id="create-account-phone" v-model="userInfo.phone"
+            <input type="text" v-model="userInfo.email"
               class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
-              name="phone" placeholder="Phone Number" />
+              name="email" placeholder="Email Address" />
           </div>
         </div>
         <div class="flex flex-col mb-2">
           <div class=" relative flex">
-            <input type="text" id="create-account-widearea"
+            <input type="text"
               class="w-5/12 rounded-lg border-transparent appearance-none border border-gray-300 py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
               name="phone" readonly :value="userInfo.wideArea" placeholder="도/특별시/광역시" />
-            <input type="text" id="create-account-detailarea"
+            <input type="text"
               class="w-1/3 rounded-lg border-transparent appearance-none border border-gray-300 py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
               name="phone" readonly :value="userInfo.detailArea" placeholder="시/군/구" />
             <input type="button" @click="execDaumPostcode" value="주소 입력" :disabled="!isScriptLoaded"
@@ -68,33 +68,26 @@
 </template>
 
 <script setup>
-import router from '@/router';
-import axios from 'axios';
+import { useUserStore } from '@/stores/user';
 import { ref, onMounted } from 'vue';
-
-const isScriptLoaded = ref(false);
 
 const userInfo = ref({
   userId: '',
   password: '',
   userName: '',
   nickname: '',
-  phone: '',
+  email: '',
   wideArea: '',
   detailArea: ''
 });
 
+const store = useUserStore();
+
 const register = function () {
-  axios.post("http://localhost:8080/user/join", userInfo.value)
-    .then(() => {
-      router.replace({ name: 'loginForm' });
-    })
-    .catch(() => {
-      console.log("fail");
-      console.log(userInfo.value)
-      router.replace({ name: 'loginForm' });
-    });
+  store.register(userInfo);
 }
+
+const isScriptLoaded = ref(false);
 
 onMounted(() => {
   loadDaumPostcodeScript();
