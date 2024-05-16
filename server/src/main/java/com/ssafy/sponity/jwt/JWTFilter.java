@@ -33,14 +33,7 @@ public class JWTFilter extends OncePerRequestFilter {
 				
 		// request에서 Authorization 헤더를 찾음
         String authorization= request.getHeader("Authorization");
-				
-        // 회원가입 및 로그인 요청에 대해서는 JWT 검증을 수행하지 않음
-        String requestURI = request.getRequestURI();
-        if (requestURI.equals("/join") || requestURI.equals("/login")) {
-        	filterChain.doFilter(request, response);
-            return;
-        }
-        
+ 
 		// Authorization 헤더 검증
         if (authorization == null || !authorization.startsWith("Bearer ")) {
 

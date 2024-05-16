@@ -1,16 +1,23 @@
 package com.ssafy.sponity.model.dao;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.ssafy.sponity.model.dto.User;
 
 public interface UserDao {
 	
-	public int join(User user);
+	int join(User user);
 	
-	public boolean existsById(String userId);
+	boolean existsById(String userId);
 	
-	public boolean existsByNickname(String nickname);
+	boolean existsByNickname(String nickname);
 	
-	public boolean existsByPhone(String phone);
+	boolean existsByEmail(String email);
 	
-	User findByUserId(String userId);
+	String findId(@Param("userName") String userName, @Param("email") String email);
+
+	User selectByUserId(String userId);
+	
+	void updatePassword(@Param("userId") String userId, @Param("tempPassword") String tempPassword);
+	
 }

@@ -67,10 +67,10 @@ public class SecurityConfig {
         http
                 .httpBasic((auth) -> auth.disable());
 
-		// 경로별 인가 작업
+		// 요청 인가
         http
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/", "/join", "/login").permitAll()
+                        .requestMatchers("/", "/join", "/login", "/find-id", "/reset-pw").permitAll()
 						.requestMatchers("/admin").hasRole("ADMIN")
                         .anyRequest().authenticated());
 
