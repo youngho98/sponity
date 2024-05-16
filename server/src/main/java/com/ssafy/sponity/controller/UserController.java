@@ -54,10 +54,10 @@ public class UserController {
     
     
     // 아이디 찾기
-    @GetMapping("/find-id/{userName}/{email}")
-    public ResponseEntity<String> findId(@PathVariable("userName") String userName, @PathVariable("email") String email) {
+    @PostMapping("/find-id")
+    public ResponseEntity<String> findId(@RequestBody User user) {
 
-    	String id = userService.findId(userName, email);
+    	String id = userService.findId(user.getUserName(), user.getEmail());
     	
     	if (id != null) {
     		return new ResponseEntity<>(id, HttpStatus.OK);
@@ -70,10 +70,10 @@ public class UserController {
     
     // 비밀번호 재설정
     // - 이메일로 임시 비밀번호 전송
-    @GetMapping("/reset-pw/{userId}/{email}")
-    public ResponseEntity<Integer> resetPassword(@PathVariable("userId") String userId, @PathVariable("email") String email) {
+    @PostMapping("/reset-pw")
+    public ResponseEntity<Integer> resetPassword(@RequestBody User user) {
 
-    	int result = userService.resetPassword(userId, email);
+    	int result = userService.resetPassword(user.getUserId(), user.getEmail());
     	
     	/*
     	 * 반환하는 숫자의 의미
