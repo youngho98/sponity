@@ -34,7 +34,7 @@
                   </span>
                   <span class="text-green-500 pr-3 py-2 rounded-md text-xl font-medium">
                     님 환영합니다.</span>
-                  <RouterLink :to="{ name: 'myPageView' }"
+                  <RouterLink :to="{ name: 'myPage' }"
                     class="text-green-500  hover:text-green-800 px-3 py-2 rounded-md text-xl font-medium">
                     마이페이지
                   </RouterLink>
