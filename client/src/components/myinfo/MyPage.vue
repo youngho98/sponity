@@ -72,13 +72,19 @@
           </h2>
           <div class="max-w-sm mx-auto space-y-5 w-5/12 pl-9 inline-flex">
             <div class=" relative ">
-              <input type="text"
+              <input type="text" v-model="password.curPw"
                 class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
-                placeholder="Password" />
+                placeholder="Old Password" />
+              <input type="text" v-model="password.newPw"
+                class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
+                placeholder="New Password" />
+              <input type="text" v-model="password.newPwCheck"
+                class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
+                placeholder="New Password Check" />
             </div>
           </div>
           <div class="text-center w-3/12 pl-6">
-            <input type="button" value="Change"
+            <input type="button" value="Change" @click="changePw"
               class="py-2 px-4  bg-pink-600 hover:bg-pink-700 focus:ring-pink-500 focus:ring-offset-pink-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg " />
           </div>
         </div>
@@ -130,8 +136,18 @@ function execDaumPostcode() {
   }
 }
 
-const modifyProfile = function() {
+const modifyProfile = function () {
   profileStore.modifyProfile();
+}
+
+const password = ref({
+  curPw: '',
+  newPw: '',
+  newPwCheck: '',
+})
+
+const changePw = function() {
+  profileStore.changePw(password);
 }
 </script>
 

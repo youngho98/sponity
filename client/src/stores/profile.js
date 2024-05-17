@@ -36,7 +36,7 @@ export const useProfileStore = defineStore('profile', () => {
   }
 
   const modifyProfile = function() {
-    axios.put(`${URL}/modify-profile`, loginUser.value, {
+    axios.put(`${URL}/my-page/modify-profile`, loginUser.value, {
       headers: {
         Authorization: sessionStorage.getItem('access-token')
       }
@@ -49,9 +49,28 @@ export const useProfileStore = defineStore('profile', () => {
     })
   }
 
+  const changePw = function(password) {
+    if (password.value.newPw !== password.value.newPwCheck) {
+      alert("비밀번호 확인을 제대로 입력하세요.");
+      return;
+    }
+    axios.patch(`${URL}/my-page/modify-pw`, password.value, {
+      headers: {
+        Authorization: sessionStorage.getItem('access-token')
+      }
+    })
+    .then(() => {
+      alert("성공적으로 비밀번호가 변경되었습니다.");
+    })
+    .catch(() => {
+      alert("비밀번호 변경 실패");
+    })
+  }
+
   return {
     loginUser,
     getUserInfo,
     modifyProfile,
+    changePw,
   }
 });
