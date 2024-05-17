@@ -9,6 +9,7 @@ import FindIdForm from '@/components/user/FindIdForm.vue';
 import ResetPwForm from '@/components/user/ResetPwForm.vue';
 
 import MyPage from '@/components/myinfo/MyPage.vue';
+import WithdrawPage from '@/components/myinfo/WithdrawPage.vue';
 
 
 const router = createRouter({
@@ -48,6 +49,11 @@ const router = createRouter({
           path: '',
           name: 'myPage',
           component: MyPage,
+        },
+        {
+          path: 'withdraw',
+          name: 'withdrawPage',
+          component: WithdrawPage,
         },
       ],
     },
