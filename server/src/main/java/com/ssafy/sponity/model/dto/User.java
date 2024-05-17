@@ -12,5 +12,4 @@ public class User {
     private String wideArea;
     private String detailArea;
     private String profileImg;
-    private String deleteYN;
 }

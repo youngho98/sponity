@@ -31,21 +31,40 @@ public class MypageServiceImpl implements MypageService {
 
 	// 회원정보 수정
 	@Override
-	public int modifyProfile(User user) {
+	public int modifyProfile(User user, String curNickname, String curEmail) {
 		// 닉네임 중복 검증
-		boolean isNicknameExists = mypageDao.existsByNickname(user.getNickname());
-		if (isNicknameExists) {
-			return -1;
+		// - 단 "토큰에서 추출한 현재 닉네임"과 "입력받은 새로운 닉네임"이 같은 경우, 닉네임을 바꾸지 않겠다는 의미이므로, 중복 검증을 하지 않습니다.
+		String newNickname = user.getNickname();
+		if (!curNickname.equals(newNickname)) {
+			boolean isNicknameExists = mypageDao.isNicknameExists(newNickname);
+			if (isNicknameExists) {
+				return 1;
+			}
 		}
 		
-		return mypageDao.updateUser(user);
+		// 이메일 중복 검증
+		// - 단 "토큰에서 추출한 현재 이메일"과 "입력받은 새로운 이메일"이 같은 경우, 이메일을 바꾸지 않겠다는 의미이므로, 중복 검증을 하지 않습니다.
+		String newEmail = user.getEmail();
+		if (!curEmail.equals(newEmail)) {
+			boolean isEmailExists = mypageDao.isEmailExists(newEmail);
+			if (isEmailExists) {
+				return 2;
+			}
+		}
+		
+		int result = mypageDao.updateUser(user);
+		
+		if (result > 0) {
+			return 3;
+		}
+		
+		return -1;
 	}
 
 
 	// 비밀번호 변경
 	@Override
 	public int modifyPw(String curPw, String newPw, String userId) {
-		
 		// 비밀번호 체크
 		// - bCryptPasswordEncoder의 matches 메서드를 이용해, 현재 비밀번호를 복호화하지 않고도 일치여부 확인이 가능합니다.
 		String encryptedCurPw = mypageDao.getEncryptedCurPw(userId);
@@ -67,7 +86,25 @@ public class MypageServiceImpl implements MypageService {
 		}
 		
 		return -1;
+	}
+
+
+	// 회원 탈퇴
+	@Override
+	public int withdraw(String password, String userId) {
+		// 비밀번호 체크
+		String encryptedPassword = mypageDao.getEncryptedCurPw(userId);
+        if (!bCryptPasswordEncoder.matches(password, encryptedPassword)) {
+            return 1;
+        }
 		
+        int result = mypageDao.withdraw(userId);
+        
+        if (result > 0) {
+        	return 2;
+        }
+        
+		return -1;
 	}
 	
 	

@@ -13,10 +13,17 @@
 	
 	
 	<!-- 닉네임 중복 검증 -->
-	<select id="existsByNickname" resultType="boolean" parameterType="String">
+	<select id="isNicknameExists" resultType="boolean" parameterType="String">
     	SELECT COUNT(*) > 0 
     	FROM user 
     	WHERE nickname = #{nickname}
+	</select>
+	
+	<!-- 이메일 중복 검증 -->
+	<select id="isEmailExists" resultType="boolean" parameterType="String">
+    	SELECT COUNT(*) > 0 
+    	FROM user 
+    	WHERE email = #{email}
 	</select>
 	
 	<!-- 회원정보 수정 -->
@@ -46,5 +53,10 @@
 	</update>
 	
 	
+	<!-- 회원 탈퇴 -->
+	<delete id="withdraw" parameterType="String">
+		DELETE FROM user
+		WHERE user_id = #{userId}
+	</delete>
 	
 </mapper>
