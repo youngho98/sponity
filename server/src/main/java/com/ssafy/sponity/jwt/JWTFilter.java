@@ -16,8 +16,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 /*
- * 스프링 시큐리티 filter chain에 등록되는 커스텀 필터입니다.
- * 요청에 담긴 JWT를 검증합니다.
+ * 이 필터는 요청이 들어올 때마다 JWT를 확인하고 검증합니다. 
+ * - 토큰이 유효한 경우, 해당 사용자의 인증 정보를 SecurityContext에 저장합니다.
+ * - OncePerRequestFilter를 상속하여 구현되었기 때문에 각 요청에 대해 한 번만 실행됩니다.
  */
 public class JWTFilter extends OncePerRequestFilter {
 
@@ -31,42 +32,35 @@ public class JWTFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 				
-		// request에서 Authorization 헤더를 찾음
+		// request의 Authorization 헤더 검증
         String authorization= request.getHeader("Authorization");
- 
-		// Authorization 헤더 검증
         if (authorization == null || !authorization.startsWith("Bearer ")) {
-
-            System.out.println("token null");
-            filterChain.doFilter(request, response);
-						
-			// 조건이 해당되면 메소드 종료 (필수)
+            System.out.println("토큰이 없습니다.");
+            filterChain.doFilter(request, response); // permitAll() 처리된 경로가 아니라면, 다음 절차인 LoginFilter에서 차단됩니다.
             return;
         }
-			
-        System.out.println("authorization now");
         
 		// Bearer 부분 제거 후 순수 토큰만 획득
         String token = authorization.split(" ")[1];
 			
 		// 토큰 소멸 시간 검증
         if (jwtUtil.isExpired(token)) {
-
-            System.out.println("token expired");
-            filterChain.doFilter(request, response);
-
-			// 조건이 해당되면 메소드 종료 (필수)
+            System.out.println("만료된 토큰입니다.");
+            filterChain.doFilter(request, response); // permitAll() 처리된 경로가 아니라면, 다음 절차인 LoginFilter에서 차단됩니다.
             return;
         }
+        
+        
+        System.out.println("토큰이 인증되었습니다.");
 
+        
         // 토큰에서 userId과 role 획득
         String userId = jwtUtil.getUserId(token);
-        String role = jwtUtil.getRole(token);
+//        String role = jwtUtil.getRole(token);
 				
 		// user 객체를 생성하여 값 set
         User user = new User();
         user.setUserId(userId);
-        user.setPassword("temppassword");
 //        user.setRole(role);
 				
         // UserDetails에 회원 정보 객체 담기
@@ -74,7 +68,8 @@ public class JWTFilter extends OncePerRequestFilter {
 
 		// 스프링 시큐리티 인증 토큰 생성
         Authentication authToken = new UsernamePasswordAuthenticationToken(customUserDetails, null, customUserDetails.getAuthorities());
-		// 세션에 사용자 등록
+
+        // SecurityContext에 사용자 등록
         SecurityContextHolder.getContext().setAuthentication(authToken);
 
         filterChain.doFilter(request, response);

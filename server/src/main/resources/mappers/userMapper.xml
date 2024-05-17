@@ -18,7 +18,7 @@
     	WHERE user_id = #{userId}
 	</select>
 	
-	<!-- 별명 중복 검증 -->
+	<!-- 닉네임 중복 검증 -->
 	<select id="existsByNickname" resultType="boolean" parameterType="String">
     	SELECT COUNT(*) > 0 
     	FROM user 

@@ -67,14 +67,25 @@ public class SecurityConfig {
         http
                 .httpBasic((auth) -> auth.disable());
 
-		// 요청 인가
+		/*
+		 * # 요청 인가
+		 * 1. "/join", "/login", "/find-id", "/reset-pw"
+		 *   회원가입, 로그인, 아이디 찾기, 비밀번호 재설정 등은 로그인 하지 않은 상태에서도 접근할 수 있어야 합니다.
+		 *   따라서 JWT 토큰이 없어도 접근할 수 있도록 permitAll()로 설정하였습니다.
+		 * 2. "/admin"
+		 *   관리자 페이지이므로 접근하려면 JWT를 가지고 있어야 하며, 토큰 내의 권한 정보에 ADMIN 역할이 포함되어 있어야 합니다.
+		 * 3. 그 외
+		 *   위 경로 외의 모든 요청은 로그인 인증되어 JWT를 소지한 사용자만 접근할 수 있습니다.
+		 */
+        // 
         http
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/", "/join", "/login", "/find-id", "/reset-pw").permitAll()
+                        .requestMatchers("/join", "/login", "/find-id", "/reset-pw").permitAll()
 						.requestMatchers("/admin").hasRole("ADMIN")
                         .anyRequest().authenticated());
 
-		// JWTFilter 등록
+		// JWT Filter 등록
+        // - LoginFilter 이전에 등록하여 JWT 기반 인증을 처리합니다.
         http
                 .addFilterBefore(new JWTFilter(jwtUtil), LoginFilter.class);
 
@@ -83,7 +94,8 @@ public class SecurityConfig {
         http
                 .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil), UsernamePasswordAuthenticationFilter.class);
         
-		// 세션 설정 - JWT 방식에서는 세션을 stateless로 유지함
+		// 세션 설정 
+        // - JWT 기반 인증에서는 세션을 stateless로 유지합니다.
         http
                 .sessionManagement((session) -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS));

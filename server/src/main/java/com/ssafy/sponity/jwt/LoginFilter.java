@@ -8,6 +8,7 @@ import java.util.Iterator;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -29,10 +30,6 @@ import lombok.Data;
  */
 public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 	
-	// JSON 타입의 요청 데이터를 파싱해 userId를 추출하기 위해 사용하는 객체
-	private final ObjectMapper objectMapper = new ObjectMapper();
-	
-	
 	// DI
 	// - JWT도 함께 주입
     private final AuthenticationManager authenticationManager;
@@ -48,39 +45,24 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         try {
-            InputStream inputStream = request.getInputStream();
-            if (inputStream == null) {
-                System.out.println("InputStream is null");
-                throw new AuthenticationException("Request InputStream is null") {};
-            }
+        	// 사용자 정보 추출을 위해 JSON 형식의 요청을 DTO 형식으로 매핑
+            ObjectMapper objectMapper = new ObjectMapper();
+            LoginDTO loginDTO = objectMapper.readValue(request.getInputStream(), LoginDTO.class);
 
-            // JSON 형식을 LoginRequest 타입으로 파싱 후, userId와 password 추출
-            LoginRequest loginRequest = objectMapper.readValue(inputStream, LoginRequest.class);
-            if (loginRequest == null) {
-                System.out.println("loginRequest is null after parsing");
-                throw new AuthenticationException("Failed to parse authentication request body") {};
-            }
+            String userId = loginDTO.getUserId();
+            String password = loginDTO.getPassword();
 
-            String userId = loginRequest.getUserId();
-            String password = loginRequest.getPassword();
-            
-            
-            // 로그인 인증정보를 토큰에 담기
-            UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userId, password, null);
-            
-            // 로그인 인증을 수행하는 AuthenticationManager로 토큰을 전달
+            UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userId, password);
             return authenticationManager.authenticate(authToken);
         } catch (IOException e) {
-            System.out.println("IOException during authentication attempt: " + e.getMessage());
-            throw new AuthenticationException("Failed to parse authentication request body", e) {};
+            throw new BadCredentialsException("Failed to parse authentication request body", e);
         }
     }
 
     
 	// 로그인 성공 - JWT 발급
     @Override
-    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication) {
-    	
+    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication) {	
     	CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
 
         String userId = customUserDetails.getUsername();
@@ -89,10 +71,9 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         Iterator<? extends GrantedAuthority> iterator = authorities.iterator();
         GrantedAuthority auth = iterator.next();
-
         String role = auth.getAuthority();
 
-        String token = jwtUtil.createJwt(userId, nickname, role, 60*60*1000L); // 유효시간 : 1시간
+        String token = jwtUtil.createJwt(userId, nickname, role, 10*60*60*1000L); // 유효시간 : 10시간
 
         response.addHeader("Authorization", "Bearer " + token);
     }
@@ -101,27 +82,17 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 	// 로그인 실패 - Unauthorized(401) 상태코드 반환
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException {
-        response.setStatus(HttpStatus.UNAUTHORIZED.value());
+    	response.setStatus(HttpStatus.UNAUTHORIZED.value());
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-        objectMapper.writeValue(response.getWriter(), new ErrorResponse("Authentication failed"));
     }
     
     
     // JSON 요청을 담을 클래스
     @Data
-    static class LoginRequest {
+    static class LoginDTO {
         private String userId;
         private String password;
     }
     
-    // 에러 메시지 반환시 사용하는 클래스
-    @Data
-    static class ErrorResponse {
-        private String message;
-
-        public ErrorResponse(String message) {
-            this.message = message;
-        }
-    }
 }
 
