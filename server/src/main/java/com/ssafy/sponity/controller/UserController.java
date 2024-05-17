@@ -13,7 +13,7 @@ import com.ssafy.sponity.model.service.UserService;
 public class UserController {
 	
 	// DI
-	private UserService userService;
+	private final UserService userService;
 	public UserController (UserService userService) {
 		this.userService = userService;
 	}
