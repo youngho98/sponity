@@ -12,7 +12,8 @@
                 class="text-green-500  hover:text-green-800 px-3 py-2 ml-12 rounded-md text-xl font-medium">
                 chatBot
               </a>
-              <RouterLink class="text-green-500  hover:text-green-800 px-3 py-2 rounded-md text-xl font-medium">
+              <RouterLink :to="{ name: 'createClubForm' }"
+                class="text-green-500  hover:text-green-800 px-3 py-2 rounded-md text-xl font-medium">
                 Club
               </RouterLink>
             </div>
