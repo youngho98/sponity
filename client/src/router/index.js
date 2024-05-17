@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 import HomeView from '@/views/HomeView.vue';
 import MyPageView from '@/views/MyPageView.vue';
+import ClubManagerView from '@/views/ClubManagerView.vue';
 
 import RegisterForm from '@/components/user/RegisterForm.vue';
 import LoginForm from '@/components/user/LoginForm.vue';
@@ -10,6 +11,8 @@ import ResetPwForm from '@/components/user/ResetPwForm.vue';
 
 import MyPage from '@/components/myinfo/MyPage.vue';
 import WithdrawPage from '@/components/myinfo/WithdrawPage.vue';
+
+import CreateClubForm from '@/components/clubmanager/CreateClubForm.vue';
 
 
 const router = createRouter({
@@ -54,6 +57,18 @@ const router = createRouter({
           path: 'withdraw',
           name: 'withdrawPage',
           component: WithdrawPage,
+        },
+      ],
+    },
+    {
+      path: '/club-manager',
+      name: 'clubManagerView',
+      component: ClubManagerView,
+      children: [
+        {
+          path: '',
+          name: 'createClubForm',
+          component: CreateClubForm,
         },
       ],
     },

@@ -4,7 +4,7 @@ import axios from 'axios';
 import router from '@/router';
 import { useUserStore } from '@/stores/user';
 
-const URL = "http://localhost:8080";
+const URL = "http://localhost:8080/my-page";
 
 export const useProfileStore = defineStore('profile', () => {
   const loginUser = ref({
@@ -17,7 +17,7 @@ export const useProfileStore = defineStore('profile', () => {
   });
 
   const getUserInfo = function () {
-    axios.get(`${URL}/my-page`, {
+    axios.get(`${URL}`, {
       headers: {
         Authorization: sessionStorage.getItem('access-token')
       }
@@ -37,7 +37,7 @@ export const useProfileStore = defineStore('profile', () => {
   }
 
   const modifyProfile = function () {
-    axios.put(`${URL}/my-page/modify-profile`, loginUser.value, {
+    axios.put(`${URL}/modify-profile`, loginUser.value, {
       headers: {
         Authorization: sessionStorage.getItem('access-token')
       }
@@ -65,10 +65,10 @@ export const useProfileStore = defineStore('profile', () => {
 
   const changePw = function (password) {
     if (password.value.newPw !== password.value.newPwCheck) {
-      alert("비밀번호 확인을 제대로 입력하세요.");
+      alert("비밀번호 확인이 일치하지 않습니다.");
       return;
     }
-    axios.patch(`${URL}/my-page/modify-pw`, password.value, {
+    axios.patch(`${URL}/modify-pw`, password.value, {
       headers: {
         Authorization: sessionStorage.getItem('access-token')
       }
@@ -94,13 +94,14 @@ export const useProfileStore = defineStore('profile', () => {
   }
 
   const withdraw = function (password) {
-    axios.patch(`${URL}/my-page/withdraw`, password.value, {
+    axios.patch(`${URL}/withdraw`, password.value, {
       headers: {
         Authorization: sessionStorage.getItem('access-token')
       }
     })
       .then(() => {
         alert("성공적으로 탈퇴되었습니다.");
+        useUserStore().logout();
         router.replace({ name: 'home' });
       })
       .catch((error) => {

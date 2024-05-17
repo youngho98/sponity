@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col max-w-md bg-white rounded-lg shadow shadow-gray-500 px-8 py-8 mx-auto my-32">
+  <div class="flex flex-col max-w-md bg-white rounded-lg shadow shadow-gray-500 px-8 py-8 mx-auto my-24">
     <div class="self-center mb-2 text-2xl font-light text-gray-500">
       Create a new account
     </div>
@@ -13,6 +13,7 @@
       <form action="#">
         <div class="flex flex-col mb-2">
           <div class=" relative ">
+            <p class="text-xs text-gray-500 mt-3 mx-3">ID</p>
             <input type="text" v-model="userInfo.userId"
               class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
               name="ID" placeholder="ID" />
@@ -20,13 +21,23 @@
         </div>
         <div class="flex flex-col mb-2">
           <div class=" relative ">
-            <input type="text" v-model="userInfo.password"
+            <p class="text-xs text-gray-500 mt-3 mx-3">Password</p>
+            <input type="password" v-model="userInfo.password"
               class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
               name="Password" placeholder="Password" />
           </div>
         </div>
         <div class="flex flex-col mb-2">
           <div class=" relative ">
+            <p class="text-xs text-gray-500 mt-3 mx-3">Password Check</p>
+            <input type="password" v-model="userInfo.passwordCheck"
+              class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
+              name="Password" placeholder="Password Check" />
+          </div>
+        </div>
+        <div class="flex flex-col mb-2">
+          <div class=" relative ">
+            <p class="text-xs text-gray-500 mt-3 mx-3">Name</p>
             <input type="text" v-model="userInfo.userName"
               class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
               name="Name" placeholder="Name" />
@@ -34,6 +45,7 @@
         </div>
         <div class="flex flex-col mb-2">
           <div class=" relative ">
+            <p class="text-xs text-gray-500 mt-3 mx-3">Nickname</p>
             <input type="text" v-model="userInfo.nickname"
               class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
               name="Nickname" placeholder="Nickname" />
@@ -41,12 +53,14 @@
         </div>
         <div class="flex flex-col mb-2">
           <div class=" relative ">
+            <p class="text-xs text-gray-500 mt-3 mx-3">Email</p>
             <input type="text" v-model="userInfo.email"
               class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
               name="email" placeholder="Email Address" />
           </div>
         </div>
         <div class="flex flex-col mb-2">
+          <p class="text-xs text-gray-500 mt-3 mx-3">Address</p>
           <div class=" relative flex">
             <input type="text"
               class="w-5/12 rounded-lg border-transparent appearance-none border border-gray-300 py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
@@ -74,6 +88,7 @@ import { ref, onMounted } from 'vue';
 const userInfo = ref({
   userId: '',
   password: '',
+  passwordCheck: '',
   userName: '',
   nickname: '',
   email: '',

@@ -11,10 +11,16 @@ export const useUserStore = defineStore('user', () => {
   });
 
   const register = function (userInfo) {
-    if (userInfo.value.userId === '' || userInfo.value.password === '' || userInfo.value.userName === '' || userInfo.value.nickname === '' || userInfo.value.email === '' || userInfo.value.wideArea === '' || userInfo.value.detailArea === '') {
+    if (userInfo.value.userId === '' || userInfo.value.password === '' || userInfo.value.passwordCheck === '' || userInfo.value.userName === '' || userInfo.value.nickname === '' || userInfo.value.email === '' || userInfo.value.wideArea === '' || userInfo.value.detailArea === '') {
       alert("빈 칸을 전부 채워야 합니다.");
       return;
     }
+
+    if (userInfo.value.password !== userInfo.value.passwordCheck) {
+      alert("비밀번호 확인이 일치하지 않습니다.");
+      return;
+    }
+
     axios.post(`${URL}/join`, userInfo.value)
       .then(() => {
         router.replace({ name: 'loginForm' });
@@ -60,6 +66,9 @@ export const useUserStore = defineStore('user', () => {
           return new TextDecoder().decode(bytes);
         };
 
+        // base64 디코딩 오류를 방지하기 위해 '-'를 '+'로, '_'를 '/'로 치환
+        token[1] = token[1].replaceAll('-', '+');
+        token[1] = token[1].replaceAll('_', '/');
         // payload 부분 디코딩
         const payload = decodeBase64(token[1]);
         const payloadObj = JSON.parse(payload);
