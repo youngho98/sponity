@@ -62,7 +62,7 @@
           </div>
           <div class="text-center w-3/12 pl-6">
             <input type="button" value="Change" @click="execDaumPostcode" :disabled="!isScriptLoaded"
-              class="py-2 px-4  bg-green-600 hover:bg-green-700 focus:ring-green-500 focus:ring-offset-green-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg " />
+              class="py-2 px-4  bg-sky-600 hover:bg-sky-700 focus:ring-sky-500 focus:ring-offset-sky-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg " />
           </div>
         </div>
         <hr />
@@ -72,26 +72,32 @@
           </h2>
           <div class="max-w-sm mx-auto space-y-5 w-5/12 pl-9 inline-flex">
             <div class=" relative ">
-              <input type="text" v-model="password.curPw"
+              <p class="text-xs text-gray-500 mt-3">Current Password</p>
+              <input type="password" v-model="password.curPw"
                 class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
-                placeholder="Old Password" />
-              <input type="text" v-model="password.newPw"
+                placeholder="Current Password" />
+              <p class="text-xs text-gray-500 mt-3">New Password</p>
+              <input type="password" v-model="password.newPw"
                 class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
                 placeholder="New Password" />
-              <input type="text" v-model="password.newPwCheck"
+              <p class="text-xs text-gray-500 mt-3">New Password Check</p>
+              <input type="password" v-model="password.newPwCheck"
                 class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
                 placeholder="New Password Check" />
             </div>
           </div>
           <div class="text-center w-3/12 pl-6">
             <input type="button" value="Change" @click="changePw"
-              class="py-2 px-4  bg-pink-600 hover:bg-pink-700 focus:ring-pink-500 focus:ring-offset-pink-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg " />
+              class="py-2 px-4  bg-sky-600 hover:bg-sky-700 focus:ring-sky-500 focus:ring-offset-sky-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg " />
           </div>
         </div>
         <hr />
-        <div class="px-4 pb-4 ml-auto text-gray-500 w-1/3">
+
+        <div class="flex justify-between px-4 pb-4 text-gray-500">
+          <input type="button" value="Withdrawal" @click="withdraw"
+            class="py-2 px-4 w-1/3 bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-red-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg " />
           <input type="button" value="Save" @click="modifyProfile"
-            class="py-2 px-4  bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg " />
+            class="py-2 px-4 w-1/3 bg-green-600 hover:bg-green-700 focus:ring-green-500 focus:ring-offset-green-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg " />
         </div>
       </div>
     </form>
@@ -99,6 +105,7 @@
 </template>
 
 <script setup>
+import router from '@/router';
 import { useProfileStore } from '@/stores/profile';
 import { onMounted, ref } from 'vue';
 
@@ -146,8 +153,12 @@ const password = ref({
   newPwCheck: '',
 })
 
-const changePw = function() {
+const changePw = function () {
   profileStore.changePw(password);
+}
+
+const withdraw = function () {
+  router.push({ name: 'withdrawPage' });
 }
 </script>
 

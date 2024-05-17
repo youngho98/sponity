@@ -113,39 +113,9 @@ export const useUserStore = defineStore('user', () => {
     router.replace({ name: 'home' });
   }
 
-  // const getUserInfo = function() {
-  //   axios.post(`${URL}/my-page`, loginUser.value, {
-  //     headers: {
-  //       Authorization: sessionStorage.getItem('access-token')
-  //     }
-  //   })
-  //   .then((response) => {
-  //     loginUser.value.userId = response.data.userId;
-  //     loginUser.value.userName = response.data.userName;
-  //     loginUser.value.email = response.data.email;
-  //     loginUser.value.wideArea = response.data.wideArea;
-  //     loginUser.value.detailArea = response.data.detailArea;
-  //   })
-  //   .catch(() => {
-  //     alert("다시 로그인 해주세요.");
-  //     router.replace({ name: 'loginForm' });
-  //   });
-  // }
-
-  // const modifyProfile = function() {
-  //   axios.put(`${URL}/modify-profile`, loginUser.value, {
-  //     headers: {
-  //       Authorization: sessionStorage.getItem('access-token')
-  //     }
-  //   })
-  //   .then(() => {
-  //     alert("성공적으로 회원정보가 변경되었습니다.");
-  //     router.go(0);
-  //   })
-  //   .catch(() => {
-  //     alert("정보 변경 실패");
-  //   })
-  // }
+  const changeNickname = function(nickname) {
+    loginUser.value.nickname = nickname;
+  }
 
   return {
     loginUser,
@@ -154,8 +124,7 @@ export const useUserStore = defineStore('user', () => {
     findId,
     resetPw,
     logout,
-    // getUserInfo,
-    // modifyProfile,
+    changeNickname,
   }
 }, {
   persist: {
