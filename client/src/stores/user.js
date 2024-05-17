@@ -11,10 +11,16 @@ export const useUserStore = defineStore('user', () => {
   });
 
   const register = function (userInfo) {
-    if (userInfo.value.userId === '' || userInfo.value.password === '' || userInfo.value.userName === '' || userInfo.value.nickname === '' || userInfo.value.email === '' || userInfo.value.wideArea === '' || userInfo.value.detailArea === '') {
+    if (userInfo.value.userId === '' || userInfo.value.password === '' || userInfo.value.passwordCheck === '' || userInfo.value.userName === '' || userInfo.value.nickname === '' || userInfo.value.email === '' || userInfo.value.wideArea === '' || userInfo.value.detailArea === '') {
       alert("빈 칸을 전부 채워야 합니다.");
       return;
     }
+
+    if (userInfo.value.password !== userInfo.value.passwordCheck) {
+      alert("비밀번호 확인이 일치하지 않습니다.");
+      return;
+    }
+    
     axios.post(`${URL}/join`, userInfo.value)
       .then(() => {
         router.replace({ name: 'loginForm' });
@@ -67,7 +73,7 @@ export const useUserStore = defineStore('user', () => {
         // 한글 닉네임 가져오기
         let nickname = payloadObj.nickname;
         loginUser.value.nickname = nickname;
-        
+
         router.replace({ name: 'home' });
       })
       .catch(() => {

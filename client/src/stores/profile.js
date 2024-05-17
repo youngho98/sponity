@@ -65,7 +65,7 @@ export const useProfileStore = defineStore('profile', () => {
 
   const changePw = function (password) {
     if (password.value.newPw !== password.value.newPwCheck) {
-      alert("비밀번호 확인을 제대로 입력하세요.");
+      alert("비밀번호 확인이 일치하지 않습니다.");
       return;
     }
     axios.patch(`${URL}/my-page/modify-pw`, password.value, {

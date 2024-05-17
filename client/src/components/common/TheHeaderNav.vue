@@ -8,10 +8,10 @@
               <a class="flex-shrink-0" href="/">
                 <img class="w-40 h-12" src="@/assets/sponity-logo.png" alt="sponity" />
               </a>
-              <RouterLink to="/"
+              <a href="https://chatgpt.com/?oai-dm=1"
                 class="text-green-500  hover:text-green-800 px-3 py-2 ml-12 rounded-md text-xl font-medium">
                 chatBot
-              </RouterLink>
+              </a>
               <RouterLink class="text-green-500  hover:text-green-800 px-3 py-2 rounded-md text-xl font-medium">
                 Club
               </RouterLink>
