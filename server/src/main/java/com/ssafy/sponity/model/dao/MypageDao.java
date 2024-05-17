@@ -8,12 +8,16 @@ public interface MypageDao {
 
 	User selectByUserId(String userId);
 	
-	boolean existsByNickname(String nickname);
+	boolean isNicknameExists(String nickname);
+
+	boolean isEmailExists(String newEmail);
 
 	int updateUser(User user);
 
 	String getEncryptedCurPw(String userId);
 
 	int updatePw(@Param("encryptedNewPw") String encryptedNewPw, @Param("userId") String userId);
-	
+
+	int withdraw(String userId);
+
 }
