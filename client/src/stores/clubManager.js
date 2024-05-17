@@ -3,13 +3,13 @@ import { defineStore } from 'pinia'
 import axios from 'axios';
 import router from '@/router';
 
-const URL = "http://localhost:8080";
+const URL = "http://localhost:8080/club-manager";
 
 export const useClubManagerStore = defineStore('clubManager', () => {
   
   const create = function(clubInfo) {
     console.log(clubInfo.value);
-    axios.post(`${URL}/club-manager`, clubInfo.value, {
+    axios.post(`${URL}`, clubInfo.value, {
       headers: {
         Authorization: sessionStorage.getItem('access-token')
       }
