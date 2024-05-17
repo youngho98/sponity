@@ -67,7 +67,7 @@ export const useUserStore = defineStore('user', () => {
         // 한글 닉네임 가져오기
         let nickname = payloadObj.nickname;
         loginUser.value.nickname = nickname;
-
+        
         router.replace({ name: 'home' });
       })
       .catch(() => {

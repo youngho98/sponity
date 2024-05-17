@@ -101,6 +101,7 @@ export const useProfileStore = defineStore('profile', () => {
     })
       .then(() => {
         alert("성공적으로 탈퇴되었습니다.");
+        useUserStore().logout();
         router.replace({ name: 'home' });
       })
       .catch((error) => {
