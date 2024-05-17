@@ -78,10 +78,10 @@ const userInfo = ref({
   email: ''
 });
 
-const store = useUserStore();
+const userStore = useUserStore();
 
 const resetPw = function () {
-  store.resetPw(userInfo);
+  userStore.resetPw(userInfo);
 }
 </script>
 

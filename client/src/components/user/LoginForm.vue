@@ -79,10 +79,10 @@ const loginInfo = ref({
   password: ''
 });
 
-const store = useUserStore();
+const userStore = useUserStore();
 
 const login = function () {
-  store.login(loginInfo);
+  userStore.login(loginInfo);
 }
 </script>
 

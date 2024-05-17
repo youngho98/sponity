@@ -79,10 +79,10 @@ const userInfo = ref({
   email: ''
 });
 
-const store = useUserStore();
+const userStore = useUserStore();
 
 const findId = function () {
-  store.findId(userInfo);
+  userStore.findId(userInfo);
 }
 </script>
 
