@@ -81,10 +81,10 @@ const userInfo = ref({
   detailArea: ''
 });
 
-const store = useUserStore();
+const userStore = useUserStore();
 
 const register = function () {
-  store.register(userInfo);
+  userStore.register(userInfo);
 }
 
 const isScriptLoaded = ref(false);
