@@ -13,7 +13,7 @@ import com.ssafy.sponity.model.dto.User;
 public class UserServiceImpl implements UserService {
 	
 	// DI
-	private UserDao userDao;
+	private final UserDao userDao;
 	public UserServiceImpl (UserDao userDao) {
 		this.userDao = userDao;
 	}
