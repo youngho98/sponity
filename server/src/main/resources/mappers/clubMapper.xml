@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.sponity.model.dao.ClubDao">
+
+	<!-- 모임 검색 -->
+	<select id="selectClub" resultType="Club" parameterType="Map">
+		SELECT * FROM club
+		WHERE category = #{category}
+			AND wide_area = #{wideArea} 
+			AND detail_area = #{detailArea} 
+			AND club_name LIKE "%${keyword}%"
+	</select>
+	
+	<!-- 멤버 수 계산 -->
+	<select id="countMember" resultType="int" parameterType="int">
+		SELECT COUNT(*)
+		FROM member
+		WHERE club_id = #{clubId}
+	</select>
+		
+	<!-- 좋아요 수 계산 -->
+	<select id="countLike" resultType="int" parameterType="int">
+		SELECT COUNT(*)
+		FROM club_like
+		WHERE club_id = #{clubId}
+	</select>
+	
+</mapper>
