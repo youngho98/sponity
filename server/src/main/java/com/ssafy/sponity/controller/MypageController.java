@@ -1,18 +1,25 @@
 package com.ssafy.sponity.controller;
 
+import java.io.IOException;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ssafy.sponity.jwt.JWTUtil;
 import com.ssafy.sponity.model.dto.User;
 import com.ssafy.sponity.model.service.MypageService;
+import com.ssafy.sponity.model.service.S3Service;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.Data;
@@ -24,9 +31,11 @@ public class MypageController {
 	// DI
 	private final MypageService mypageService;
 	private final JWTUtil jwtUtil;
-	public MypageController(MypageService mypageService, JWTUtil jwtUtil) {
+	private final S3Service s3Service;
+	public MypageController(MypageService mypageService, JWTUtil jwtUtil, S3Service s3Service) {
 		this.mypageService = mypageService;
 		this.jwtUtil = jwtUtil;
+		this.s3Service = s3Service;
 	}
 	
 	
@@ -123,4 +132,26 @@ public class MypageController {
 	    private String curPw;
 	    private String newPw;
 	}
+	
+	
+	// 프로필 이미지 업로드
+	@PostMapping("/profile-img")
+	public ResponseEntity<String> upload (@RequestParam("img") MultipartFile file) throws IOException {
+
+		String url = s3Service.upload(file);
+		
+		if (url != null) {
+			return new ResponseEntity<>(url, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	
+	// 프로필 이미지 삭제
+	@DeleteMapping("/profile-img/{file-name}")
+	public void delete (@PathVariable("file-name") String fileName) {
+		s3Service.delete(fileName);
+	}
+	
 }
