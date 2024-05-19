@@ -2,7 +2,8 @@
 
   <div class="p-4 bg-white shadow-lg rounded-2xl max-w-xl mx-auto my-40">
     <div class="flex flex-row items-start gap-4">
-      <img :src="imgUrl" class="rounded-lg w-40 h-40" />
+      <img v-if="imgUrl !== ''" :src="imgUrl" class="rounded-lg w-40 h-40" />
+      <img v-else src="@/assets/avatar.png" class="rounded-lg w-40 h-40" />
       <div class="flex flex-col justify-evenly w-full h-40">
         <div>
           <p class="text-2xl font-medium text-gray-800 dark:text-white">
@@ -29,12 +30,6 @@
         Upload
       </button>
     </div>
-  </div>
-
-
-  <div>
-    <input type="file" @change="handleFileChange" />
-    <button @click="uploadFile">Upload</button>
   </div>
 </template>
 
@@ -72,7 +67,7 @@ const uploadFile = async () => {
         'Content-Type': 'multipart/form-data'
       }
     });
-
+    userStore.loginUser.profileImg = response.data;
     console.log('File uploaded successfully:', response.data);
   } catch (error) {
     console.error('Error uploading file:', error);
@@ -89,7 +84,8 @@ const deleteFile = async function () {
         Authorization: sessionStorage.getItem('access-token')
       }
     });
-
+    userStore.loginUser.profileImg = '';
+    imgUrl.value = '';
     console.log('File deleted successfully', response.data);
   } catch (error) {
     console.error('Error deleting file:', error);

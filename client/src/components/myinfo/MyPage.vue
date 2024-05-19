@@ -4,12 +4,12 @@
       <div class="p-4 border-t-2 border-green-400 rounded-lg bg-gray-100/5 ">
         <div class="max-w-sm mx-auto md:w-full md:mx-0">
           <div class="inline-flex items-center space-x-4">
-            <RouterLink :to="{name: 'profileImgForm'}" class="relative block">
-              <img alt="profile" :src="profileStore.loginUser.profileImg" class="mx-auto object-cover rounded-full h-16 w-16 " />
-            </RouterLink>
+            <img v-if="useUserStore().loginUser.profileImg !== ''" :src="useUserStore().loginUser.profileImg" class="rounded-lg w-16 h-16" />
+            <img v-else src="@/assets/avatar.png" class="rounded-lg w-16 h-16" />
             <h1 class="text-gray-600 ml-3 font-bold">
               {{ profileStore.loginUser.userId }} 님의 유저 정보
             </h1>
+            <RouterLink :to="{ name: 'profileImgForm' }" class="relative block text-sky-600"> 이미지 변경 </RouterLink>
           </div>
         </div>
       </div>
@@ -107,6 +107,7 @@
 <script setup>
 import router from '@/router';
 import { useProfileStore } from '@/stores/profile';
+import { useUserStore } from '@/stores/user';
 import { onMounted, ref } from 'vue';
 
 const profileStore = useProfileStore();

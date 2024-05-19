@@ -22,7 +22,7 @@
               </RouterLink>
             </div>
             <div class="flex">
-              <div class="flex items-baseline ml-10 space-x-4">
+              <div class="flex items-center ml-10 space-x-4">
                 <template v-if="userStore.loginUser.nickname === ''">
                   <RouterLink :to="{ name: 'loginForm' }"
                     class="text-green-500  hover:text-green-800 px-3 py-2 rounded-md text-xl font-medium">
@@ -34,7 +34,9 @@
                   </RouterLink>
                 </template>
                 <template v-else>
-                  <span class="text-green-800 pl-3 py-2 rounded-md text-xl font-medium">
+                  <span class="text-green-800 pl-3 py-2 rounded-md text-xl font-medium flex items-center">
+                    <img v-if="useUserStore().loginUser.profileImg !== ''" :src="useUserStore().loginUser.profileImg" class="mx-3 rounded-lg w-12 h-12" />
+                    <img v-else src="@/assets/avatar.png" class="mx-3 rounded-lg w-12 h-12" />
                     {{ userStore.loginUser.nickname }}
                   </span>
                   <span class="text-green-500 pr-3 py-2 rounded-md text-xl font-medium">
