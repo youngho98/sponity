@@ -7,16 +7,18 @@ const URL = "http://localhost:8080/club";
 
 export const useClubStore = defineStore('club', () => {
   
+  const clubList = ref([]);
+
   const search = function(clubInfo) {
-    console.log(clubInfo.value);
     axios.post(`${URL}/search`, clubInfo.value, {
       headers: {
         Authorization: sessionStorage.getItem('access-token')
       }
     })
     .then((response) => {
+      clubList.value = response.data;
       console.log(response.data);
-      alert("검색에 성공했습니다.");
+      router.push({ name: 'searchClubResult' });
     })
     .catch(() => {
       alert("검색에 실패했습니다.")
@@ -24,6 +26,11 @@ export const useClubStore = defineStore('club', () => {
   }
 
   return {
+    clubList,
     search,
+  }
+}, {
+  persist: {
+    storage: sessionStorage
   }
 });
