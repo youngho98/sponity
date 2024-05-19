@@ -6,7 +6,7 @@
 
 	<!-- 내 정보 조회 -->
 	<select id="selectByUserId" resultType="User" parameterType="String">
-    	SELECT user_id, user_name, nickname, email, wide_area, detail_area
+    	SELECT user_id, user_name, nickname, email, wide_area, detail_area, profile_img
     	FROM user
     	WHERE user_id = #{userId}
 	</select>
