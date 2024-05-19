@@ -40,7 +40,7 @@ public class S3ServiceImpl implements S3Service {
         // 파일을 다른 것과 식별할 key 생성
         // - 파일을 저장할 버킷 내의 폴더명과 파일명을 붙여 생성합니다.
 		// - 파일명이 중복될 경우를 대비해 파일명에 현재 시간을 덧붙여줍니다.
-		String fileName = file.getOriginalFilename() + "_" + System.currentTimeMillis();
+		String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename() ;
         String key = "profile-picture/" + fileName;
         
         // 메타데이터 생성
