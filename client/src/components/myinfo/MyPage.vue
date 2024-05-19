@@ -4,9 +4,9 @@
       <div class="p-4 border-t-2 border-green-400 rounded-lg bg-gray-100/5 ">
         <div class="max-w-sm mx-auto md:w-full md:mx-0">
           <div class="inline-flex items-center space-x-4">
-            <!-- <a href="#" class="relative block">
-              <img alt="profil" src="/images/person/1.jpg" class="mx-auto object-cover rounded-full h-16 w-16 " />
-            </a> -->
+            <RouterLink :to="{name: 'profileImgForm'}" class="relative block">
+              <img alt="profile" :src="profileStore.loginUser.profileImg" class="mx-auto object-cover rounded-full h-16 w-16 " />
+            </RouterLink>
             <h1 class="text-gray-600 ml-3 font-bold">
               {{ profileStore.loginUser.userId }} 님의 유저 정보
             </h1>

@@ -14,6 +14,7 @@ export const useProfileStore = defineStore('profile', () => {
     email: '',
     wideArea: '',
     detailArea: '',
+    profileImg: '',
   });
 
   const getUserInfo = function () {
@@ -29,6 +30,7 @@ export const useProfileStore = defineStore('profile', () => {
         loginUser.value.email = response.data.email;
         loginUser.value.wideArea = response.data.wideArea;
         loginUser.value.detailArea = response.data.detailArea;
+        loginUser.value.profileImg = response.data.profileImg;
       })
       .catch(() => {
         alert("다시 로그인 해주세요.");

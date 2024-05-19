@@ -8,6 +8,7 @@ const URL = "http://localhost:8080";
 export const useUserStore = defineStore('user', () => {
   const loginUser = ref({
     nickname: '',
+    profileImg: '',
   });
 
   const register = function (userInfo) {
@@ -73,9 +74,12 @@ export const useUserStore = defineStore('user', () => {
         const payload = decodeBase64(token[1]);
         const payloadObj = JSON.parse(payload);
 
-        // 한글 닉네임 가져오기
+        // 닉네임 가져오기
         let nickname = payloadObj.nickname;
         loginUser.value.nickname = nickname;
+        // 이미지 가져오기
+        let profileImg = payloadObj.profileImg;
+        loginUser.value.profileImg = profileImg;
 
         router.replace({ name: 'home' });
       })
@@ -119,6 +123,7 @@ export const useUserStore = defineStore('user', () => {
   const logout = function () {
     sessionStorage.removeItem('access-token');
     loginUser.value.nickname = '';
+    loginUser.value.profileImg = '';
     router.replace({ name: 'home' });
   }
 

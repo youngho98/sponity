@@ -12,6 +12,7 @@ import ResetPwForm from '@/components/user/ResetPwForm.vue';
 
 import MyPage from '@/components/myinfo/MyPage.vue';
 import WithdrawPage from '@/components/myinfo/WithdrawPage.vue';
+import ProfileImgForm from '@/components/myinfo/ProfileImgForm.vue';
 
 import CreateClubForm from '@/components/clubmanager/CreateClubForm.vue';
 
@@ -60,6 +61,11 @@ const router = createRouter({
           path: 'withdraw',
           name: 'withdrawPage',
           component: WithdrawPage,
+        },
+        {
+          path: 'profile-img',
+          name: 'profileImgForm',
+          component: ProfileImgForm,
         },
       ],
     },
