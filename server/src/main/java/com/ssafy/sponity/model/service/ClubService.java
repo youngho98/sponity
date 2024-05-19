@@ -9,4 +9,6 @@ public interface ClubService {
 
 	List<Club> searchClub(Map<String, String> map);
 
+	Club detailClub(int clubId);
+
 }

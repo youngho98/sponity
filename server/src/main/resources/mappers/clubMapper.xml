@@ -5,7 +5,7 @@
 <mapper namespace="com.ssafy.sponity.model.dao.ClubDao">
 
 	<!-- 모임 검색 -->
-	<select id="selectClub" resultType="Club" parameterType="Map">
+	<select id="selectClubList" resultType="Club" parameterType="Map">
 		SELECT * FROM club
 		WHERE category = #{category}
 			AND wide_area = #{wideArea} 
@@ -24,6 +24,13 @@
 	<select id="countLike" resultType="int" parameterType="int">
 		SELECT COUNT(*)
 		FROM club_like
+		WHERE club_id = #{clubId}
+	</select>
+	
+	
+	<!-- 모임 상세조회 -->
+	<select id="selectClub" resultType="Club" parameterType="int">
+		SELECT * FROM club
 		WHERE club_id = #{clubId}
 	</select>
 	

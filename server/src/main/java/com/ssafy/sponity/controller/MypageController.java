@@ -127,18 +127,14 @@ public class MypageController {
 		return new ResponseEntity<>(3, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
-	@Data
-	public static class PwDTO {
-	    private String curPw;
-	    private String newPw;
-	}
-	
 	
 	// 프로필 이미지 업로드
 	@PostMapping("/profile-img")
-	public ResponseEntity<String> upload (@RequestParam("img") MultipartFile file) throws IOException {
+	public ResponseEntity<String> upload (@RequestParam("img") MultipartFile file, HttpServletRequest request) throws IOException {
+		String token = request.getHeader("Authorization").split(" ")[1];
+		String userId = jwtUtil.getUserId(token);
 
-		String url = s3Service.upload(file);
+		String url = s3Service.upload(file, userId);
 		
 		if (url != null) {
 			return new ResponseEntity<>(url, HttpStatus.OK);
@@ -150,8 +146,18 @@ public class MypageController {
 	
 	// 프로필 이미지 삭제
 	@DeleteMapping("/profile-img/{file-name}")
-	public void delete (@PathVariable("file-name") String fileName) {
-		s3Service.delete(fileName);
+	public void delete (@PathVariable("file-name") String fileName, HttpServletRequest request) {
+		String token = request.getHeader("Authorization").split(" ")[1];
+		String userId = jwtUtil.getUserId(token);
+		
+		s3Service.delete(fileName, userId);
+	}
+	
+	
+	@Data
+	public static class PwDTO {
+	    private String curPw;
+	    private String newPw;
 	}
 	
 }

@@ -45,11 +45,12 @@ public class JWTUtil {
     
     // JWT 발급
     // - 토큰의 payload 부분에 claim을 저장하고, 발급 및 만료 시간을 설정합니다.
-    public String createJwt(String userId, String nickname, String email, String role, Long expiredMs) {
+    public String createJwt(String userId, String nickname, String email, String profileImgUrl, String role, Long expiredMs) {
         return Jwts.builder()
                 .claim("userId", userId)
                 .claim("nickname", nickname)
                 .claim("email", email)
+                .claim("profileImgUrl", profileImgUrl)
                 .claim("role", role)
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis() + expiredMs))

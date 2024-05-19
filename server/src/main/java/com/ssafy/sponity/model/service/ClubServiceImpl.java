@@ -23,7 +23,7 @@ public class ClubServiceImpl implements ClubService {
 	// 모임 검색
 	@Override
 	public List<Club> searchClub(Map<String, String> map) {
-		List<Club> result = clubDao.selectClub(map);
+		List<Club> result = clubDao.selectClubList(map);
 		
 		if (result == null) {
 			return null;
@@ -51,6 +51,13 @@ public class ClubServiceImpl implements ClubService {
         });
 		
 		return result;
+	}
+
+
+	// 모임 상세조회
+	@Override
+	public Club detailClub(int clubId) {
+		return clubDao.selectClub(clubId);
 	}
 	
 	

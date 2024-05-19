@@ -6,6 +6,8 @@ import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,6 +46,15 @@ public class ClubController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		
+	}
+	
+	
+	// 모임 상세조회
+	@GetMapping("/{clubId}")
+	public ResponseEntity<Club> detailClub(@PathVariable("clubId") int clubId) {
+		Club club = clubService.detailClub(clubId);
+		
+		return new ResponseEntity<>(club, HttpStatus.OK);
 	}
 	
 	
