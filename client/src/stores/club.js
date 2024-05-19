@@ -14,7 +14,8 @@ export const useClubStore = defineStore('club', () => {
         Authorization: sessionStorage.getItem('access-token')
       }
     })
-    .then(() => {
+    .then((response) => {
+      console.log(response.data);
       alert("검색에 성공했습니다.");
     })
     .catch(() => {
