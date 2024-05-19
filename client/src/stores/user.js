@@ -78,8 +78,12 @@ export const useUserStore = defineStore('user', () => {
         let nickname = payloadObj.nickname;
         loginUser.value.nickname = nickname;
         // 이미지 가져오기
-        let profileImg = payloadObj.profileImg;
-        loginUser.value.profileImg = profileImg;
+        let profileImg = payloadObj.profileImgUrl;
+        if (profileImg !== undefined) {
+          loginUser.value.profileImg = profileImg;
+        } else {
+          loginUser.value.profileImg = '';
+        }
 
         router.replace({ name: 'home' });
       })
