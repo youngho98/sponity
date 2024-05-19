@@ -84,8 +84,8 @@ function execDaumPostcode() {
         // Handling logic after postcode search completion
         const address = data.roadAddress;
         const arr = address.split(" ");
-        clubInfo.value.wideArea = arr[0];
-        clubInfo.value.detailArea = arr[1];
+        searchInfo.value.wideArea = arr[0];
+        searchInfo.value.detailArea = arr[1];
       }
     }).open();
   } else {
