@@ -10,11 +10,15 @@
               </a>
               <a href="https://chatgpt.com/?oai-dm=1"
                 class="text-green-500  hover:text-green-800 px-3 py-2 ml-12 rounded-md text-xl font-medium">
-                chatBot
+                챗봇
               </a>
+              <RouterLink :to="{ name: 'searchClubForm' }"
+                class="text-green-500  hover:text-green-800 px-3 py-2 rounded-md text-xl font-medium">
+                클럽검색
+              </RouterLink>
               <RouterLink :to="{ name: 'createClubForm' }"
                 class="text-green-500  hover:text-green-800 px-3 py-2 rounded-md text-xl font-medium">
-                Club
+                클럽생성
               </RouterLink>
             </div>
             <div class="flex">
