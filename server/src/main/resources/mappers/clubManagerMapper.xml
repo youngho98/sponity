@@ -24,4 +24,31 @@
 	    VALUES (#{userId}, #{clubId}, #{leader})
 	</insert>
 	
+	
+	<!-- 모임장인지 여부 확인 -->
+	<select id="isLeader" resultType="boolean" parameterType="Map">
+	    SELECT COUNT(*) > 0
+	    FROM member
+	    WHERE user_id = #{userId} AND club_id = #{clubId} AND leader = 'Y'
+	</select>
+	
+	<!-- 모임 수정 -->
+	<update id="updateClub" parameterType="Club">
+		UPDATE club
+		SET
+			club_name = #{clubName},
+			category = #{category},
+			wide_area = #{wideArea},
+			detail_area = #{detailArea},
+			introduction = #{introduction}
+		WHERE club_id = #{clubId}
+	</update>
+	
+	
+	<!-- 모임 삭제 -->
+	<delete id="deleteClub" parameterType="int">
+		DELETE FROM club
+		WHERE club_id = #{clubId}
+	</delete>
+	
 </mapper>

@@ -12,5 +12,11 @@ public interface ClubManagerDao {
 
 	int insertMember(Map<String, Object> map);
 
+	boolean isLeader(Map<String, Object> map);
+
+	int updateClub(Club club);
+
+	int deleteClub(int clubId);
+
 
 }

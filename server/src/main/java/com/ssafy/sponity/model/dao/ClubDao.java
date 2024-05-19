@@ -7,10 +7,12 @@ import com.ssafy.sponity.model.dto.Club;
 
 public interface ClubDao {
 
-	List<Club> selectClub(Map<String, String> map);
+	List<Club> selectClubList(Map<String, String> map);
 
 	int countMember(int clubId);
 
 	int countLike(int clubId);
+
+	Club selectClub(int clubId);
 
 }
