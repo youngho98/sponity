@@ -34,4 +34,25 @@
 		WHERE club_id = #{clubId}
 	</select>
 	
+	
+	<!-- 기존 가입여부 확인 -->
+	<select id="isJoined" resultType="boolean" parameterType="Map">
+		SELECT COUNT(*) > 0
+		FROM member
+		WHERE user_id = #{userId} AND club_id = #{clubId}
+	</select>
+	
+	<!-- 모임 가입 -->
+	<insert id="insertMember" parameterType="Map">
+		INSERT INTO member(user_id, club_id)
+		VALUES (#{userId}, #{clubId})
+ 	</insert>
+	
+	<!-- 모임 탈퇴 -->
+	<delete id="deleteMember" parameterType="Map">
+		DELETE FROM member
+		WHERE user_id = #{userId} AND club_id = #{clubId}
+	</delete>
+	
+	
 </mapper>

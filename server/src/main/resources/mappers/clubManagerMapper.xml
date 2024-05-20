@@ -51,4 +51,36 @@
 		WHERE club_id = #{clubId}
 	</delete>
 	
+	
+	<!-- 모임 회원 조회 -->
+	<select id="selectMember" resultType="User" parameterType="int">
+		SELECT user_id, user_name, nickname, email, profile_img
+		FROM user
+		INNER JOIN member
+		USING (user_id)
+		WHERE club_id = #{clubId}
+	</select>
+	
+	
+	<!-- 이전 모임장 권한 해제 -->
+	<update id="cancelLeader" parameterType="int">
+		UPDATE member
+		SET leader = 'N'
+		WHERE club_id = #{clubId} AND leader = 'Y'
+	</update>
+	
+	<!-- 새로운 모임장 권한 부여 -->
+	<update id="grantLeader" parameterType="int">
+		UPDATE member
+		SET leader = 'Y'
+		WHERE member_id = #{newLeaderId}
+	</update>
+	
+	
+	<!-- 회원 강퇴 -->
+	<delete id="deleteMember" parameterType="int">
+		DELETE FROM member
+		WHERE member_id = #{memberId}
+	</delete>
+	
 </mapper>

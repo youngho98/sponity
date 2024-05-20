@@ -15,4 +15,11 @@ public interface ClubDao {
 
 	Club selectClub(int clubId);
 
+	boolean isJoined(Map<String, Object> map);
+
+	int insertMember(Map<String, Object> map);
+
+	int deleteMember(Map<String, Object> map);
+
+
 }

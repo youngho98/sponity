@@ -59,6 +59,45 @@ public class ClubServiceImpl implements ClubService {
 	public Club detailClub(int clubId) {
 		return clubDao.selectClub(clubId);
 	}
+
+
+	// 모임 가입
+	@Override
+	public int clubIn(Map<String, Object> map) {
+		// 기존 가입여부 확인
+		boolean isJoined = clubDao.isJoined(map);
+		if(isJoined) {
+			return 1;
+		}
+		
+		int result = clubDao.insertMember(map);
+		
+		if(result > 0) {
+			return 2;
+		}
+		
+		return -1;
+	}
+
+
+	// 모임 탈퇴
+	@Override
+	public int clubOut(Map<String, Object> map) {
+		// 기존 가입여부 확인
+		boolean isJoined = clubDao.isJoined(map);
+		if(!isJoined) {
+			return 1;
+		}
+		
+		int result = clubDao.deleteMember(map);
+		
+		if(result > 0) {
+			return 2;
+		}
+		
+		return -1;
+	}
+	
 	
 	
 	
