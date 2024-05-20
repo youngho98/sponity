@@ -11,7 +11,6 @@ public class Club {
     private String detailArea;
     private String introduction;
     private String clubImg;
-    private String deleteYN;
     private int memberNum;
     private int likeNum;
 }

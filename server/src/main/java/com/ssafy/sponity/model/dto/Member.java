@@ -8,6 +8,5 @@ public class Member {
     private String userId;
     private int clubId;
     private String leader;
-    private String deleteYN;
     private String fullMember;
 }

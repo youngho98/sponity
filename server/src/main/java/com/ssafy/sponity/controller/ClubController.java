@@ -19,6 +19,7 @@ import com.ssafy.sponity.model.dto.Club;
 import com.ssafy.sponity.model.service.ClubService;
 
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @RestController
@@ -32,6 +33,14 @@ public class ClubController {
 		this.clubService = clubService;
 		this.jwtUtil = jwtUtil;
 	}
+	
+	
+	// 로그인 사용자의 ID 추출하기
+	public String getLoginId(HttpServletRequest request) {
+		String token = request.getHeader("Authorization").split(" ")[1];
+    	return jwtUtil.getUserId(token);
+	}
+	
 	
 	// 모임 검색
 	@PostMapping("/search")
@@ -54,23 +63,45 @@ public class ClubController {
 	}
 	
 	
-	// 모임 상세조회
+	// 모임 상세조회 
 	@GetMapping("/{clubId}")
-	public ResponseEntity<Club> detailClub(@PathVariable("clubId") int clubId) {
+	public ResponseEntity<ClubDetailDTO> detailClub(@PathVariable("clubId") int clubId, HttpServletRequest request) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("userId", getLoginId(request));
+		map.put("clubId", clubId);
+		
 		Club club = clubService.detailClub(clubId);
 		
-		return new ResponseEntity<>(club, HttpStatus.OK);
+		/*
+		 * 해당 모임에 대한 사용자의 지위
+		 * 1: 미가입자 (member 테이블에 포함 X)
+		 * 2: 일반 멤버 (leader: 'N')
+		 * 3: 모임장 (leader: 'Y')
+		 */
+		int userStatus = clubService.userStatus(map);
+		
+		/*
+		 * 해당 모임에 대한 사용자의 좋아요 여부
+		 * 0: 좋아요 X
+		 * 1: 좋아요 O
+		 */
+		int isLike = clubService.isLike(map);
+		
+		// 기존 Club DTO에 userStatus,isLike을 추가한 DTO
+		ClubDetailDTO clubDetailDTO = new ClubDetailDTO(club.getClubId(), club.getClubName(), club.getCategory(), 
+				club.getWideArea(), club.getDetailArea(), club.getIntroduction(), club.getClubImg(), 
+				club.getMemberNum(), club.getLikeNum(), 
+				userStatus, isLike);
+		
+		return new ResponseEntity<>(clubDetailDTO, HttpStatus.OK);
 	}
 	
 	
 	// 모임 가입
 	@PostMapping("/{clubId}")
 	public ResponseEntity<Integer> clubIn(@PathVariable("clubId") int clubId, HttpServletRequest request) {
-		String token = request.getHeader("Authorization").split(" ")[1];
-		String userId = jwtUtil.getUserId(token);
-		
 		Map<String, Object> map = new HashMap<>();
-		map.put("userId", userId);
+		map.put("userId", getLoginId(request));
 		map.put("clubId", clubId);
 		
 		int result = clubService.clubIn(map);
@@ -93,11 +124,8 @@ public class ClubController {
 	// 모임 탈퇴
 	@DeleteMapping("/{clubId}")
 	public ResponseEntity<Integer> clubOut(@PathVariable("clubId") int clubId, HttpServletRequest request) {
-		String token = request.getHeader("Authorization").split(" ")[1];
-		String userId = jwtUtil.getUserId(token);
-		
 		Map<String, Object> map = new HashMap<>();
-		map.put("userId", userId);
+		map.put("userId", getLoginId(request));
 		map.put("clubId", clubId);
 		
 		int result = clubService.clubOut(map);
@@ -125,5 +153,21 @@ public class ClubController {
 		private String detailArea;
 		private String category;
 		private String keyword;
+	}
+	
+	@Data
+	@AllArgsConstructor
+	public static class ClubDetailDTO {
+	    private int clubId;
+	    private String clubName;
+	    private String category;
+	    private String wideArea;
+	    private String detailArea;
+	    private String introduction;
+	    private String clubImg;
+	    private int memberNum;
+	    private int likeNum;
+		private int userStatus;
+		private int isLike;
 	}
 }

@@ -1,8 +1,6 @@
 package com.ssafy.sponity.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -58,7 +56,7 @@ public class ClubManagerController {
 	
     
 	// 모임 수정
-    @PutMapping("")
+    @PutMapping("/{clubId}")
     public ResponseEntity<Integer> modifyClub(@RequestBody Club club, HttpServletRequest request) {
     	int result = clubManagerService.modifyClub(club, getLoginId(request));
     	

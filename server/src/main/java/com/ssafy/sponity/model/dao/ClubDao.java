@@ -13,6 +13,10 @@ public interface ClubDao {
 
 	int countLike(int clubId);
 
+	String userStatus(Map<String, Object> map);
+
+	boolean isLike(Map<String, Object> map);
+
 	Club selectClub(int clubId);
 
 	boolean isJoined(Map<String, Object> map);
@@ -20,6 +24,8 @@ public interface ClubDao {
 	int insertMember(Map<String, Object> map);
 
 	int deleteMember(Map<String, Object> map);
+
+
 
 
 }
