@@ -7,19 +7,26 @@
       </a>
     </div>
     <div class="hidden w-full navbar-menu lg:order-1 lg:block lg:w-2/5">
-      <a class="block mt-4 mr-10 text-green-600 lg:inline-block lg:mt-0 hover:text-green-800" @click="$router.go(-1)">
-        Back
+      <a @click="$router.go(-1)" class="block mt-4 mr-10 text-green-600 lg:inline-block lg:mt-0 hover:text-green-800">
+        뒤로가기
       </a>
-      <a class="block mt-4 mr-10 text-green-600 lg:inline-block lg:mt-0 hover:text-green-800" href="#">
-        Board
+      <a class="block mt-4 mr-10 text-green-600 lg:inline-block lg:mt-0 hover:text-green-800">
+        게시판
       </a>
     </div>
     <div class="hidden w-full navbar-menu lg:order-3 lg:block lg:w-2/5 lg:text-right">
-      <RouterLink :to="{ name: 'clubManageForm', params: { clubId: clubStore.clubInfo.clubId } }" class="block mt-4 mr-10 text-green-600 lg:inline-block lg:mt-0 hover:text-green-800" href="#">
-        Manage
+      <RouterLink :to="{ name: 'clubManageForm', params: { clubId: clubStore.clubInfo.clubId } }"
+        v-if="userStore.loginUser.userStatus === 3"
+        class="block mt-4 mr-10 text-green-600 lg:inline-block lg:mt-0 hover:text-green-800">
+        클럽 관리
       </RouterLink>
-      <a class="block mt-4 mr-10 text-green-600 lg:inline-block lg:mt-0 hover:text-green-800" href="#">
-        Register
+      <a v-if="userStore.loginUser.userStatus === 1" @click="register"
+        class="block mt-4 mr-10 text-green-600 lg:inline-block lg:mt-0 hover:text-green-800">
+        클럽 가입
+      </a>
+      <a v-if="userStore.loginUser.userStatus === 2" @click="unregister"
+        class="block mt-4 mr-10 text-green-600 lg:inline-block lg:mt-0 hover:text-green-800">
+        클럽 탈퇴
       </a>
     </div>
   </nav>
@@ -28,12 +35,19 @@
 </template>
 
 <script setup>
+import { useUserStore } from '@/stores/user';
 import { useClubStore } from '@/stores/club';
-import { useRoute } from 'vue-router';
 
+const userStore = useUserStore();
 const clubStore = useClubStore();
 
-const route = useRoute();
+const register = function () {
+  clubStore.register();
+}
+
+const unregister = function () {
+  clubStore.unregister();
+}
 </script>
 
 <style scoped></style>

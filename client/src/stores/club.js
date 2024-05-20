@@ -47,7 +47,7 @@ export const useClubStore = defineStore('club', () => {
   }
 
   const like = function() {
-    axios.get(`${URL}/${route.params.clubId}/like`, {
+    axios.post(`${URL}/${route.params.clubId}/like`, null, {
       headers: {
         Authorization: sessionStorage.getItem('access-token')
       }
@@ -76,6 +76,54 @@ export const useClubStore = defineStore('club', () => {
     })
   }
 
+  const register = function() {
+    axios.post(`${URL}/${route.params.clubId}`, null, {
+      headers: {
+        Authorization: sessionStorage.getItem('access-token')
+      }
+    })
+    .then(() => {
+      // useUserStore().loginUser.userStatus = 2;
+      router.go(0);
+    })
+    .catch((error) => {
+      let num = error.response.data;
+        let message = "";
+        switch (num) {
+          case 1:
+            message = "이미 가입된 회원입니다.";
+            break;
+          default:
+            message = "server error";
+        }
+        alert(message);
+    })
+  }
+
+  const unregister = function() {
+    axios.delete(`${URL}/${route.params.clubId}`, {
+      headers: {
+        Authorization: sessionStorage.getItem('access-token')
+      }
+    })
+    .then(() => {
+      useUserStore().loginUser.userStatus = 1;
+      router.go(0);
+    })
+    .catch((error) => {
+      let num = error.response.data;
+        let message = "";
+        switch (num) {
+          case 1:
+            message = "가입된 회원이 아닙니다.";
+            break;
+          default:
+            message = "server error";
+        }
+        alert(message);
+    })
+  }
+
   return {
     clubList,
     clubInfo,
@@ -83,6 +131,8 @@ export const useClubStore = defineStore('club', () => {
     getClubInfo,
     like,
     unlike,
+    register,
+    unregister,
   }
 }, {
   persist: {
