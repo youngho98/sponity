@@ -80,8 +80,8 @@
 	
 	<!-- 클럽 좋아요 취소 -->
 	<delete id="clubDislike" parameterType="Map">
-		DELETE FROM club_like(user_id, club_id)
-		WHERE user_id = #{userId}, club_id = #{clubId}
+		DELETE FROM club_like
+		WHERE user_id = #{userId} AND club_id = #{clubId}
 	</delete>
 	
 	
