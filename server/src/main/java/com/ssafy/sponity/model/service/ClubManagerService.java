@@ -14,8 +14,6 @@ public interface ClubManagerService {
 
 	int removeClub(int clubId, String loginId);
 
-	List<User> searchMember(int clubId);
-
 	int leaderChange(int clubId, int newLeaderId);
 
 	int expelMember(int memberId);

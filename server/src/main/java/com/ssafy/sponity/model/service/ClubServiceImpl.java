@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.ssafy.sponity.model.dao.ClubDao;
 import com.ssafy.sponity.model.dto.Board;
 import com.ssafy.sponity.model.dto.Club;
+import com.ssafy.sponity.model.dto.User;
 
 @Service
 public class ClubServiceImpl implements ClubService {
@@ -99,6 +100,14 @@ public class ClubServiceImpl implements ClubService {
 			return 0;
 		}
 	}
+	
+	
+	// 모임 회원 조회
+	@Override
+	public List<User> searchMember(int clubId) {
+		return clubDao.selectMember(clubId);
+	}
+	
 
 	// 클럽 가입
 	@Override

@@ -20,8 +20,6 @@ public interface ClubManagerDao {
 
 	int deleteClub(int clubId);
 
-	List<User> selectMember(int clubId);
-
 	int cancelLeader(int clubId);
 
 	int grantLeader(int newLeaderId);

@@ -49,6 +49,16 @@
 	</select>
 	
 	
+	<!-- 모임 회원 조회 -->
+	<select id="selectMember" resultType="User" parameterType="int">
+		SELECT user_id, user_name, nickname, email, profile_img
+		FROM user
+		INNER JOIN member
+		USING (user_id)
+		WHERE club_id = #{clubId}
+	</select>
+	
+	
 	<!-- 기존 가입여부 확인 -->
 	<select id="isJoined" resultType="boolean" parameterType="Map">
 		SELECT COUNT(*) > 0

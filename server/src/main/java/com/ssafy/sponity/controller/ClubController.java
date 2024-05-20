@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ssafy.sponity.jwt.JWTUtil;
 import com.ssafy.sponity.model.dto.Board;
 import com.ssafy.sponity.model.dto.Club;
+import com.ssafy.sponity.model.dto.User;
 import com.ssafy.sponity.model.service.ClubService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -99,6 +100,15 @@ public class ClubController {
 				userStatus, isLike);
 		
 		return new ResponseEntity<>(clubDetailDTO, HttpStatus.OK);
+	}
+	
+	
+	// 모임 회원 조회
+	@GetMapping("/{clubId}/member-list")
+	public ResponseEntity<List<User>> searchMember(@PathVariable("clubId") int clubId) {
+		List<User> userList = clubService.searchMember(clubId);
+		
+		return new ResponseEntity<>(userList, HttpStatus.OK);
 	}
 	
 	
@@ -221,29 +231,29 @@ public class ClubController {
 	
 	
 	// 게시글 작성
-//	@Mapping("/{clubId}/board")
-//	public ResponseEntity<> (@PathVariable("clubId") int clubId, HttpServletRequest request) {
-//		
+//	@PostMapping("/{clubId}/board")
+//	public ResponseEntity<?> createBoard(@PathVariable("clubId") int clubId, HttpServletRequest request) {
+//		Board board = clubService.
 //	}
 	
 	
 	// 게시글 조회
 //	@Mapping("/{clubId}/board/{boardId}")
-//	public ResponseEntity<> (@PathVariable("clubId") int clubId, HttpServletRequest request) {
+//	public ResponseEntity<Board> getBoard(@PathVariable("clubId") int clubId, HttpServletRequest request) {
 //		
 //	}	
 	
 	
 	// 게시글 수정
 //	@Mapping("/{clubId}/board/{boardId}")
-//	public ResponseEntity<> (@PathVariable("clubId") int clubId, HttpServletRequest request) {
+//	public ResponseEntity<?> modifyBoard(@PathVariable("clubId") int clubId, HttpServletRequest request) {
 //		
 //	}
 	
 	
 	// 게시글 삭제
 //	@Mapping("/{clubId}/board/{boardId}")
-//	public ResponseEntity<> (@PathVariable("clubId") int clubId, HttpServletRequest request) {
+//	public ResponseEntity<?> removeBoard(@PathVariable("clubId") int clubId, HttpServletRequest request) {
 //		
 //	}
 	
