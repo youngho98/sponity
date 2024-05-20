@@ -16,6 +16,7 @@ import WithdrawPage from '@/components/myinfo/WithdrawPage.vue';
 import ProfileImgForm from '@/components/myinfo/ProfileImgForm.vue';
 
 import CreateClubForm from '@/components/clubmanager/CreateClubForm.vue';
+import ClubManageForm from '@/components/clubmanager/ClubManageForm.vue';
 
 import SearchClubForm from '@/components/club/SearchClubForm.vue';
 import SearchClubResult from '@/components/club/SearchClubResult.vue';
@@ -82,6 +83,11 @@ const router = createRouter({
           name: 'createClubForm',
           component: CreateClubForm,
         },
+        {
+          path: ':clubId',
+          name: 'clubManageForm',
+          component: ClubManageForm,
+        }
       ],
     },
     {
