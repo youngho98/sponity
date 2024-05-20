@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '@/views/HomeView.vue';
 import MyPageView from '@/views/MyPageView.vue';
 import ClubManagerView from '@/views/ClubManagerView.vue';
+import ClubPageView from '@/views/ClubPageView.vue';
 import ClubView from '@/views/ClubView.vue';
 
 import RegisterForm from '@/components/user/RegisterForm.vue';
@@ -85,8 +86,8 @@ const router = createRouter({
     },
     {
       path: '/club',
-      name: 'clubView',
-      component: ClubView,
+      name: 'clubPageView',
+      component: ClubPageView,
       children: [
         {
           path: 'search',
@@ -99,9 +100,16 @@ const router = createRouter({
           component: SearchClubResult,
         },
         {
-          path: ':clubid',
-          name: 'clubDetail',
-          component: ClubDetail,
+          path: ':clubId',
+          name: 'clubView',
+          component: ClubView,
+          children: [
+            {
+              path: '',
+              name: 'ClubDetail',
+              component: ClubDetail,
+            },
+          ],
         },
       ],
     },
