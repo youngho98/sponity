@@ -106,7 +106,7 @@ const router = createRouter({
           children: [
             {
               path: '',
-              name: 'ClubDetail',
+              name: 'clubDetail',
               component: ClubDetail,
             },
           ],

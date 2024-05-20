@@ -19,7 +19,6 @@ export const useClubStore = defineStore('club', () => {
     })
       .then((response) => {
         clubList.value = response.data;
-        console.log(response.data);
         router.push({ name: 'searchClubResult' });
       })
       .catch(() => {
@@ -36,13 +35,14 @@ export const useClubStore = defineStore('club', () => {
       .then((response) => {
         clubInfo.value = response.data;
       })
-      .then(() => {
+      .catch(() => {
         alert("클럽 조회에 실패했습니다.");
       })
   }
 
   return {
     clubList,
+    clubInfo,
     search,
     getClubInfo,
   }
