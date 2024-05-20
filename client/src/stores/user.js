@@ -9,6 +9,8 @@ export const useUserStore = defineStore('user', () => {
   const loginUser = ref({
     nickname: '',
     profileImg: '',
+    userStatus: '',
+    isLike: '',
   });
 
   const register = function (userInfo) {

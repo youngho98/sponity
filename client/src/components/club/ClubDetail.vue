@@ -13,13 +13,16 @@
           clubStore.clubInfo.detailArea }}</p>
         <p class="mb-8 text-sm leading-relaxed">{{ clubStore.clubInfo.introduction }}</p>
 
-        <div class="flex justify-center">
-          <button
+        <div class="flex justify-between">
+          <button @click="like" v-if="userStore.loginUser.isLike === 0"
             class="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">❤️
-            3</button>
+            {{ clubStore.clubInfo.likeNum }}</button>
+          <button @click="unlike" v-else
+            class="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">🤍
+            {{ clubStore.clubInfo.likeNum }}</button>
           <button
             class="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">👤
-            3</button>
+            {{ clubStore.clubInfo.memberNum }}</button>
         </div>
       </div>
     </div>
@@ -29,15 +32,25 @@
 
 <script setup>
 import { useClubStore } from '@/stores/club';
+import { useUserStore } from '@/stores/user';
 import { onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 
+const userStore = useUserStore();
 const clubStore = useClubStore();
 const route = useRoute();
 
 onMounted(() => {
   clubStore.getClubInfo(route.params.clubId);
 })
+
+const like = function () {
+  clubStore.like();
+}
+
+const unlike = function () {
+  clubStore.unlike();
+}
 </script>
 
 <style scoped></style>
