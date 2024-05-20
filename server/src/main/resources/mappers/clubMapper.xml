@@ -34,6 +34,20 @@
 		WHERE club_id = #{clubId}
 	</select>
 	
+	<!-- 모임 상세조회 - 해당 모임에 대한 사용자의 지위 -->
+	<select id="userStatus" resultType="String" parameterType="Map">
+		SELECT leader
+		FROM member
+		WHERE user_id = #{userId} AND club_id = #{clubId}
+	</select>
+	
+	<!-- 모임 상세조회 - 해당 모임에 대한 사용자의 좋아요 여부 -->
+	<select id="isLike" resultType="boolean" parameterType="Map">
+		SELECT COUNT(*) > 0
+		FROM club_like
+		WHERE user_id = #{userId} AND club_id = #{clubId}
+	</select>
+	
 	
 	<!-- 기존 가입여부 확인 -->
 	<select id="isJoined" resultType="boolean" parameterType="Map">

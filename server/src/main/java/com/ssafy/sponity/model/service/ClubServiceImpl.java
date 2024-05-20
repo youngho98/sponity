@@ -52,14 +52,43 @@ public class ClubServiceImpl implements ClubService {
 		
 		return result;
 	}
-
+	
 
 	// 모임 상세조회
 	@Override
 	public Club detailClub(int clubId) {
 		return clubDao.selectClub(clubId);
 	}
-
+	
+	// 모임 상세조회 - 해당 모임에 대한 사용자의 지위
+	@Override
+	public int userStatus(Map<String, Object> map) {
+		// 가입여부 확인
+		boolean isJoined = clubDao.isJoined(map);
+		if(!isJoined) {
+			return 1;  // 모임 미가입자
+		}
+		
+		String status = clubDao.userStatus(map);
+		
+		if (status == "N") {
+			return 2;  // 일반 회원
+		} else {
+			return 3;  // 모임장
+		}
+	}
+	
+	// 모임 상세조회 - 해당 모임에 대한 사용자의 좋아요 여부
+	@Override
+	public int isLike(Map<String, Object> map) {
+		boolean isLike = clubDao.isLike(map);
+		
+		if(isLike) {
+			return 1;
+		} else {
+			return 0;
+		}
+	}
 
 	// 모임 가입
 	@Override
@@ -97,6 +126,12 @@ public class ClubServiceImpl implements ClubService {
 		
 		return -1;
 	}
+
+
+
+
+
+
 	
 	
 	

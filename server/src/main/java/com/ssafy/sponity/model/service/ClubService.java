@@ -11,8 +11,14 @@ public interface ClubService {
 
 	Club detailClub(int clubId);
 
+	int userStatus(Map<String, Object> map);
+	
+	int isLike(Map<String, Object> map);
+	
 	int clubIn(Map<String, Object> map);
 
 	int clubOut(Map<String, Object> map);
+
+
 
 }
