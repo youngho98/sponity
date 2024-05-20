@@ -11,5 +11,7 @@ public interface S3Service {
 	void deleteProfilePicture(String fileName, String userId);
 	
 	String uploadBoardPicture(String colName, MultipartFile file) throws IOException;
+
+	String modifyBoardPicture(MultipartFile file) throws IOException;
 	
 }

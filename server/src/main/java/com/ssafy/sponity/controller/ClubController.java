@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -243,7 +244,7 @@ public class ClubController {
 	public ResponseEntity<?> createBoard(
 			@PathVariable("clubId") int clubId, HttpServletRequest request,
 			@RequestParam("title") String title, @RequestParam("content") String content,
-			@RequestParam("img1") MultipartFile img1, @RequestParam("img2") MultipartFile img2, @RequestParam("img3") MultipartFile img3) throws IOException {
+			@RequestParam("img1") @Nullable MultipartFile img1, @RequestParam("img2") @Nullable MultipartFile img2, @RequestParam("img3") @Nullable MultipartFile img3) throws IOException {
 
 		/*
 		 * 반환하는 숫자 또는 객체의 의미
@@ -329,63 +330,88 @@ public class ClubController {
 	
 	
 	// 게시글 수정
-//	@PutMapping("/{clubId}/board/{boardId}")
-//	public ResponseEntity<?> modifyBoard(
-//			@PathVariable("boardId") int boardId, 
-//			@RequestParam("title") String title, @RequestParam("content") String content,
-//			@RequestParam("img1") MultipartFile img1, @RequestParam("img2") MultipartFile img2, @RequestParam("img3") MultipartFile img3) throws IOException {
-//		
-//		// board 객체 세팅
-//		Board board = new Board();
-//		board.setBoardId(boardId);
-//		board.setTitle(title);
-//		board.setContent(content);
-//		
-//		
-//		// 첨부한 이미지를 s3 서버에 업로드
-//		String folderName = "board-picture";
-//		
-//		if (img1 != null && !img1.isEmpty()) {
-//			String url1 = s3Service.uploadBoardPicture(img1);
-//			if (url1 == null) {
-//				return new ResponseEntity<>(3, HttpStatus.INTERNAL_SERVER_ERROR);
-//			} else {
-//				board.setImg1(url1);
-//			}
-//		}
-//		if (img2 != null && !img2.isEmpty()) {
-//			String url2 = s3Service.uploadBoardPicture(img2);
-//			if (url2 == null) {
-//				return new ResponseEntity<>(3, HttpStatus.INTERNAL_SERVER_ERROR);
-//			} else {
-//				board.setImg2(url2);
-//			}
-//		}
-//		if (img3 != null && !img3.isEmpty()) {
-//			String url3 = s3Service.uploadBoardPicture(img3);			
-//			if (url3 == null) {
-//				return new ResponseEntity<>(3, HttpStatus.INTERNAL_SERVER_ERROR);
-//			} else {
-//				board.setImg3(url3);
-//			}
-//		}
-//		
-//		
-//		int result = clubService.modifyBoard(board);
-//		
-//		if (result > 0) {
-//			return new ResponseEntity<>(HttpStatus.OK);
-//		} else {
-//			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-//		}
-//	}
+	@PutMapping("/{clubId}/board/{boardId}")
+	public ResponseEntity<?> modifyBoard(
+			@PathVariable("boardId") int boardId, 
+			@RequestParam("title") String title, @RequestParam("content") String content,
+			@RequestParam("img1") @Nullable MultipartFile img1, @RequestParam("img2") @Nullable MultipartFile img2, @RequestParam("img3") @Nullable MultipartFile img3) throws IOException {
+		
+		/*
+		 * 반환하는 숫자 또는 객체의 의미
+		 * 1: 제목이 비어 있음
+		 * 2: 내용이 비어 있음
+		 * 3: 이미지 관련 s3 서버 오류
+		 * 4: 기타 내부 서버 오류
+		 * List<String>을 반환: 게시글 작성 성공해, 이미지들의 S3 서버 URL을 반환
+		 */
+		
+		// board 객체 세팅
+		Board board = new Board();
+		board.setBoardId(boardId);
+		
+		if (title == null || title.trim().isEmpty()) {
+			return new ResponseEntity<>(1, HttpStatus.BAD_REQUEST);
+		} else {
+			board.setTitle(title);
+		}
+		if (content == null || content.trim().isEmpty()) {
+			return new ResponseEntity<>(2, HttpStatus.BAD_REQUEST);
+		} else {
+			board.setContent(content);
+		}
+		
+		
+		// 첨부한 이미지를 s3 서버에 업로드
+		List<String> urlList = new ArrayList<>();
+		
+		if (img1 != null && !img1.isEmpty()) {
+			String url1 = s3Service.modifyBoardPicture(img1);
+			if (url1 == null) {
+				return new ResponseEntity<>(3, HttpStatus.INTERNAL_SERVER_ERROR);
+			} else {
+				board.setImg1(url1);
+				urlList.add(url1);
+			}
+		}
+		if (img2 != null && !img2.isEmpty()) {
+			String url2 = s3Service.modifyBoardPicture(img2);
+			if (url2 == null) {
+				return new ResponseEntity<>(3, HttpStatus.INTERNAL_SERVER_ERROR);
+			} else {
+				board.setImg2(url2);
+				urlList.add(url2);
+			}
+		}
+		if (img3 != null && !img3.isEmpty()) {
+			String url3 = s3Service.modifyBoardPicture(img3);	
+			if (url3 == null) {
+				return new ResponseEntity<>(3, HttpStatus.INTERNAL_SERVER_ERROR);
+			} else {
+				board.setImg3(url3);
+				urlList.add(url3);
+			}
+		}
+		
+		
+		int modifyResult = clubService.modifyBoard(board);
+		
+		if (modifyResult > 0) {
+			return new ResponseEntity<>(urlList, HttpStatus.OK);
+		}
+		return new ResponseEntity<>(4, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
 	
 	
 	// 게시글 삭제
-//	@Mapping("/{clubId}/board/{boardId}")
-//	public ResponseEntity<?> removeBoard(@PathVariable("clubId") int clubId, HttpServletRequest request) {
-//		
-//	}
+	@DeleteMapping("/{clubId}/board/{boardId}")
+	public ResponseEntity<?> removeBoard(@PathVariable("boardId") int boardId) {
+		int result = clubService.removeBoard(boardId);
+		
+		if (result > 0) {
+			return new ResponseEntity<>(HttpStatus.OK);
+		}
+		return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+	}
 	
 	
 	// ----- 클럽 게시판 내 댓글 기능 -------------------------------------------------------------------------------------------------------

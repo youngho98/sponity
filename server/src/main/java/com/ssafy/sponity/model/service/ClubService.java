@@ -33,6 +33,10 @@ public interface ClubService {
 
 	Board getBoard(int boardId);
 
+	int modifyBoard(Board board);
+
+	int removeBoard(int boardId);
+
 
 
 }

@@ -191,6 +191,20 @@ public class ClubServiceImpl implements ClubService {
 	}
 
 
+	// 게시글 수정
+	@Override
+	public int modifyBoard(Board board) {
+		return clubDao.updateBoard(board);
+	}
+
+
+	// 게시글 삭제
+	@Override
+	public int removeBoard(int boardId) {
+		return clubDao.deleteBoard(boardId);
+	}
+
+
 
 
 
