@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.sponity.jwt.JWTUtil;
+import com.ssafy.sponity.model.dto.Board;
 import com.ssafy.sponity.model.dto.Club;
 import com.ssafy.sponity.model.service.ClubService;
 
@@ -35,14 +36,20 @@ public class ClubController {
 	}
 	
 	
-	// 로그인 사용자의 ID 추출하기
-	public String getLoginId(HttpServletRequest request) {
+	// 도메인에서 clubId를, request에서 로그인 사용자의 ID를 추출해 map으로 반환하기
+	public Map<String, Object> getIdMap(@PathVariable("clubId") int clubId, HttpServletRequest request) {
 		String token = request.getHeader("Authorization").split(" ")[1];
-    	return jwtUtil.getUserId(token);
+		String userId = jwtUtil.getUserId(token);
+		
+		Map<String, Object> idMap = new HashMap<>();
+		idMap.put("userId", userId);
+		idMap.put("clubId", clubId);
+		
+    	return idMap;
 	}
 	
 	
-	// 모임 검색
+	// 클럽 검색
 	@PostMapping("/search")
 	public ResponseEntity<List<Club>> searchClub(@RequestBody SearchDTO searchDTO) {
 		Map<String, String> map = new HashMap<>();
@@ -63,29 +70,27 @@ public class ClubController {
 	}
 	
 	
-	// 모임 상세조회 
+	// 클럽 상세조회 
 	@GetMapping("/{clubId}")
 	public ResponseEntity<ClubDetailDTO> detailClub(@PathVariable("clubId") int clubId, HttpServletRequest request) {
-		Map<String, Object> map = new HashMap<>();
-		map.put("userId", getLoginId(request));
-		map.put("clubId", clubId);
+		Map<String, Object> idMap = getIdMap(clubId, request);
 		
 		Club club = clubService.detailClub(clubId);
 		
 		/*
-		 * 해당 모임에 대한 사용자의 지위
+		 * 해당 클럽에 대한 사용자의 지위
 		 * 1: 미가입자 (member 테이블에 포함 X)
 		 * 2: 일반 멤버 (leader: 'N')
 		 * 3: 모임장 (leader: 'Y')
 		 */
-		int userStatus = clubService.userStatus(map);
+		int userStatus = clubService.userStatus(idMap);
 		
 		/*
-		 * 해당 모임에 대한 사용자의 좋아요 여부
+		 * 해당 클럽에 대한 사용자의 좋아요 여부
 		 * 0: 좋아요 X
 		 * 1: 좋아요 O
 		 */
-		int isLike = clubService.isLike(map);
+		int isLike = clubService.isLike(idMap);
 		
 		// 기존 Club DTO에 userStatus,isLike을 추가한 DTO
 		ClubDetailDTO clubDetailDTO = new ClubDetailDTO(club.getClubId(), club.getClubName(), club.getCategory(), 
@@ -97,19 +102,17 @@ public class ClubController {
 	}
 	
 	
-	// 모임 가입
+	// 클럽 가입
 	@PostMapping("/{clubId}")
 	public ResponseEntity<Integer> clubIn(@PathVariable("clubId") int clubId, HttpServletRequest request) {
-		Map<String, Object> map = new HashMap<>();
-		map.put("userId", getLoginId(request));
-		map.put("clubId", clubId);
+		Map<String, Object> idMap = getIdMap(clubId, request);
 		
-		int result = clubService.clubIn(map);
+		int result = clubService.clubIn(idMap);
 		
 		/*
 		 * 반환하는 숫자의 의미
 		 * 1: 이미 가입된 회원
-		 * 2: 모임 가입 완료
+		 * 2: 클럽 가입 완료
 		 * 3: 기타 서버 오류
 		 */
 		switch (result) {
@@ -121,19 +124,17 @@ public class ClubController {
 	}
 	
 	
-	// 모임 탈퇴
+	// 클럽 탈퇴
 	@DeleteMapping("/{clubId}")
 	public ResponseEntity<Integer> clubOut(@PathVariable("clubId") int clubId, HttpServletRequest request) {
-		Map<String, Object> map = new HashMap<>();
-		map.put("userId", getLoginId(request));
-		map.put("clubId", clubId);
+		Map<String, Object> idMap = getIdMap(clubId, request);
 		
-		int result = clubService.clubOut(map);
+		int result = clubService.clubOut(idMap);
 		
 		/*
 		 * 반환하는 숫자의 의미
 		 * 1: 가입된 회원이 아님
-		 * 2: 모임 탈퇴 완료
+		 * 2: 클럽 탈퇴 완료
 		 * 3: 기타 서버 오류
 		 */
 		switch (result) {
@@ -143,8 +144,6 @@ public class ClubController {
 		
 		return new ResponseEntity<>(3, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
-	
-	
 	
 	
 	@Data
@@ -170,4 +169,107 @@ public class ClubController {
 		private int userStatus;
 		private int isLike;
 	}
+	
+	
+	// ----- 클럽 좋아요 기능 -------------------------------------------------------------------------------------------------------
+	
+	
+	// 클럽 좋아요
+	@PostMapping("/{clubId}/like")
+	public ResponseEntity<?> clubLike(@PathVariable("clubId") int clubId, HttpServletRequest request) {
+		Map<String, Object> idMap = getIdMap(clubId, request);
+		
+		int result = clubService.clubLike(idMap);
+		
+		if(result > 0) {
+			return new ResponseEntity<>(HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+		
+	
+	// 클럽 좋아요 취소
+	@DeleteMapping("/{clubId}/like")
+	public ResponseEntity<?> clubDislike(@PathVariable("clubId") int clubId, HttpServletRequest request) {
+		Map<String, Object> idMap = getIdMap(clubId, request);
+		
+		int result = clubService.clubDislike(idMap);
+		
+		if(result > 0) {
+			return new ResponseEntity<>(HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+		
+
+	// ----- 클럽 게시판 기능 -------------------------------------------------------------------------------------------------------
+
+	
+	// 클럽 내 게시판 조회
+	@GetMapping("/{clubId}/board")
+	public ResponseEntity<List<Board>> boardList(@PathVariable("clubId") int clubId) {
+		List<Board> boardList = clubService.boardList(clubId);
+		
+		if (boardList != null) {
+			return new ResponseEntity<>(boardList, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	
+	// 게시글 작성
+//	@Mapping("/{clubId}/board")
+//	public ResponseEntity<> (@PathVariable("clubId") int clubId, HttpServletRequest request) {
+//		
+//	}
+	
+	
+	// 게시글 조회
+//	@Mapping("/{clubId}/board/{boardId}")
+//	public ResponseEntity<> (@PathVariable("clubId") int clubId, HttpServletRequest request) {
+//		
+//	}	
+	
+	
+	// 게시글 수정
+//	@Mapping("/{clubId}/board/{boardId}")
+//	public ResponseEntity<> (@PathVariable("clubId") int clubId, HttpServletRequest request) {
+//		
+//	}
+	
+	
+	// 게시글 삭제
+//	@Mapping("/{clubId}/board/{boardId}")
+//	public ResponseEntity<> (@PathVariable("clubId") int clubId, HttpServletRequest request) {
+//		
+//	}
+	
+	
+	// ----- 클럽 게시판 내 댓글 기능 -------------------------------------------------------------------------------------------------------
+	
+	
+	// 댓글 작성
+//	@Mapping("/{clubId}/board/{boardId}")
+//	public ResponseEntity<> (@PathVariable("clubId") int clubId, HttpServletRequest request) {
+//		
+//	}
+	
+	
+	// 댓글 수정
+//	@Mapping("/{clubId}/board/{boardId}/{reviewId}")
+//	public ResponseEntity<> (@PathVariable("clubId") int clubId, HttpServletRequest request) {
+//		
+//	}
+	
+	
+	// 댓글 삭제
+//	@Mapping("/{clubId}/board/{boardId}/{reviewId}")
+//	public ResponseEntity<> (@PathVariable("clubId") int clubId, HttpServletRequest request) {
+//		
+//	}
+	
+	
 }

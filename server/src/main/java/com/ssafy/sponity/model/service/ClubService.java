@@ -3,6 +3,7 @@ package com.ssafy.sponity.model.service;
 import java.util.List;
 import java.util.Map;
 
+import com.ssafy.sponity.model.dto.Board;
 import com.ssafy.sponity.model.dto.Club;
 
 public interface ClubService {
@@ -11,13 +12,19 @@ public interface ClubService {
 
 	Club detailClub(int clubId);
 
-	int userStatus(Map<String, Object> map);
+	int userStatus(Map<String, Object> idMap);
 	
-	int isLike(Map<String, Object> map);
+	int isLike(Map<String, Object> idMap);
 	
-	int clubIn(Map<String, Object> map);
+	int clubIn(Map<String, Object> idMap);
 
-	int clubOut(Map<String, Object> map);
+	int clubOut(Map<String, Object> idMap);
+
+	int clubLike(Map<String, Object> idMap);
+
+	int clubDislike(Map<String, Object> idMap);
+
+	List<Board> boardList(int clubId);
 
 
 
