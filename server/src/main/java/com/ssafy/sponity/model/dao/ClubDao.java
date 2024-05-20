@@ -35,6 +35,8 @@ public interface ClubDao {
 
 	List<Board> selectBoardList(int clubId);
 
+	int insertBoard(Board board);
+
 
 
 

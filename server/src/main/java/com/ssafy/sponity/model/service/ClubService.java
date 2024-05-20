@@ -29,6 +29,8 @@ public interface ClubService {
 
 	List<Board> boardList(int clubId);
 
+	int createBoard(Board board);
+
 
 
 }

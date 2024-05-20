@@ -174,6 +174,13 @@ public class ClubServiceImpl implements ClubService {
 	}
 
 
+	// 게시글 생성
+	@Override
+	public int createBoard(Board board) {
+		return clubDao.insertBoard(board);
+	}
+
+
 
 
 
