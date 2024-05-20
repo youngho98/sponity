@@ -37,6 +37,10 @@ public interface ClubDao {
 
 	int insertBoard(Board board);
 
+	Board selectBoard(int boardId);
+
+	void increaseViewCnt(int boardId);
+
 
 
 

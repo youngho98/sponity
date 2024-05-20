@@ -140,11 +140,11 @@ public class MypageController {
 	
 	// 프로필 이미지 업로드
 	@PostMapping("/profile-img")
-	public ResponseEntity<String> profilePictureUpload(@RequestParam("img") MultipartFile file, HttpServletRequest request) throws IOException {
+	public ResponseEntity<String> uploadProfilePicture(@RequestParam("img") MultipartFile file, HttpServletRequest request) throws IOException {
 		String token = request.getHeader("Authorization").split(" ")[1];
 		String userId = jwtUtil.getUserId(token);
 
-		String url = s3Service.profilePictureUpload(file, userId);
+		String url = s3Service.uploadProfilePicture(file, userId);
 		
 		if (url != null) {
 			return new ResponseEntity<>(url, HttpStatus.OK);
@@ -156,11 +156,11 @@ public class MypageController {
 	
 	// 프로필 이미지 삭제
 	@DeleteMapping("/profile-img/{file-name}")
-	public void profilePictureDelete(@PathVariable("file-name") String fileName, HttpServletRequest request) {
+	public void deleteProfilePicture(@PathVariable("file-name") String fileName, HttpServletRequest request) {
 		String token = request.getHeader("Authorization").split(" ")[1];
 		String userId = jwtUtil.getUserId(token);
 		
-		s3Service.profilePictureDelete(fileName, userId);
+		s3Service.deleteProfilePicture(fileName, userId);
 	}
 	
 }

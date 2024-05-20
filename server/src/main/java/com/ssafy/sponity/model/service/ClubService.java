@@ -31,6 +31,8 @@ public interface ClubService {
 
 	int createBoard(Board board);
 
+	Board getBoard(int boardId);
+
 
 
 }

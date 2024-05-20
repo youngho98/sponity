@@ -35,7 +35,7 @@ public class S3ServiceImpl implements S3Service {
     
 	// 프로필 이미지 파일 업로드
 	@Override
-	public String profilePictureUpload(MultipartFile file, String userId) throws IOException {
+	public String uploadProfilePicture(MultipartFile file, String userId) throws IOException {
 		
         // 파일을 다른 것과 식별할 key 생성
         // - 파일을 저장할 버킷 내의 폴더명과 파일명을 붙여 생성합니다.
@@ -71,7 +71,7 @@ public class S3ServiceImpl implements S3Service {
 	
 	// 프로필 이미지 파일 삭제
 	@Override
-	public void profilePictureDelete(String fileName, String userId) {
+	public void deleteProfilePicture(String fileName, String userId) {
 		try {
 			String folderName = "profile-picture";
 			String key = folderName + "/" + fileName;
@@ -90,6 +90,46 @@ public class S3ServiceImpl implements S3Service {
 	// ----- 게시판 이미지 ---------------------------------------------------------------------------------------------------------
 	
 	
+	@Override
+	public String uploadBoardPicture(String colName, MultipartFile file) throws IOException {
+		
+        // 파일을 다른 것과 식별할 key 생성
+		String folderName = "board-picture";
+		String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename() ;
+        String key = folderName + "/" + fileName;
+        
+        // 메타데이터 생성
+        ObjectMetadata objMeta = new ObjectMetadata();
+        objMeta.setContentLength(file.getInputStream().available());
+        
+		// putObject(버킷명, 키, 파일데이터, 메타데이터)로 S3에 객체 등록
+        amazonS3.putObject(bucket, key, file.getInputStream(), objMeta);
+        
+        // 등록된 객체의 URL (decoder: URL 안의 한글or특수문자 깨짐 방지)
+        String url = URLDecoder.decode(amazonS3.getUrl(bucket, key).toString(), "utf-8");
+        
+        /*
+         *  boardId 가져오기
+         *  = 방금 만들어진 board 레코드의 board_id 값 
+         *  = board 레코드들의 board_id 값 중 가장 큰 것
+         */
+        int boardId = s3Dao.selectMaxBoardId();
+        
+        
+        // 파일이 저장된 S3 서버의 URL을 DB에 저장
+        Map<String, Object> map = new HashMap<>();
+        map.put("colName", colName);
+        map.put("url", url);
+        map.put("boardId", boardId);
+        int result = s3Dao.updateBoardPictureUrl(map);
+        
+        if (result > 0) {
+        	return url;        	
+        } else {
+        	return null;
+        }
+        
+	}
 	
 	
 	// ----- 클럽 대표 이미지 ---------------------------------------------------------------------------------------------------------

@@ -181,6 +181,16 @@ public class ClubServiceImpl implements ClubService {
 	}
 
 
+	// 게시글 조회
+	@Override
+	public Board getBoard(int boardId) {
+		// 조회수 1 증가시키기
+		clubDao.increaseViewCnt(boardId);
+		
+		return clubDao.selectBoard(boardId);
+	}
+
+
 
 
 

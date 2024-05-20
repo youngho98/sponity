@@ -22,6 +22,20 @@
 	<!-- _____게시판 이미지________________________________________________________________________________________________ -->
 	
 	
+	<!-- 방금 만들어진 board 레코드의 board_id 값 가져오기 -->
+	<select id="selectMaxBoardId" resultType="Integer">
+		SELECT board_id
+		FROM board
+		ORDER BY board_id DESC
+		LIMIT 1
+	</select>
+	
+	<!-- 게시판 이미지 파일의 S3 서버 URL 추가 -->
+	<update id="updateBoardPictureUrl" parameterType="Map">
+		UPDATE board
+		SET ${colName} = #{url}
+		WHERE board_id = #{boardId}
+	</update>
 	
 	
 	<!-- _____클럽 대표 이미지________________________________________________________________________________________________ -->

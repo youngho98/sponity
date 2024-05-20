@@ -6,8 +6,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface S3Service {
 	
-	String profilePictureUpload(MultipartFile file, String userId) throws IOException;
+	String uploadProfilePicture(MultipartFile file, String userId) throws IOException;
 	
-	void profilePictureDelete(String fileName, String userId);
+	void deleteProfilePicture(String fileName, String userId);
+	
+	String uploadBoardPicture(String colName, MultipartFile file) throws IOException;
 	
 }
