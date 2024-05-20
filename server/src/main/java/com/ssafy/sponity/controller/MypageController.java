@@ -134,7 +134,8 @@ public class MypageController {
 		String token = request.getHeader("Authorization").split(" ")[1];
 		String userId = jwtUtil.getUserId(token);
 
-		String url = s3Service.upload(file, userId);
+		String folderName = "profile-picture";
+		String url = s3Service.upload(folderName, file, userId);
 		
 		if (url != null) {
 			return new ResponseEntity<>(url, HttpStatus.OK);
@@ -150,7 +151,8 @@ public class MypageController {
 		String token = request.getHeader("Authorization").split(" ")[1];
 		String userId = jwtUtil.getUserId(token);
 		
-		s3Service.delete(fileName, userId);
+		String folderName = "profile-picture";
+		s3Service.delete(folderName, fileName, userId);
 	}
 	
 	
