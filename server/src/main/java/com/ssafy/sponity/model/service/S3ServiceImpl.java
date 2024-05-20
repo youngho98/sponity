@@ -33,13 +33,14 @@ public class S3ServiceImpl implements S3Service {
 
 	
     
-	// 파일 업로드
+	// 프로필 이미지 파일 업로드
 	@Override
-	public String upload(String folderName, MultipartFile file, String userId) throws IOException {
+	public String profilePictureUpload(MultipartFile file, String userId) throws IOException {
 		
         // 파일을 다른 것과 식별할 key 생성
         // - 파일을 저장할 버킷 내의 폴더명과 파일명을 붙여 생성합니다.
 		// - 파일명이 중복될 경우를 대비해 파일명에 현재 시간을 덧붙여줍니다.
+		String folderName = "profile-picture";
 		String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename() ;
         String key = folderName + "/" + fileName;
         
@@ -57,7 +58,7 @@ public class S3ServiceImpl implements S3Service {
         Map<String, String> map = new HashMap<>();
         map.put("url", url);
         map.put("userId", userId);
-        int result = s3Dao.updateImgUrl(map);
+        int result = s3Dao.updateprofilePictureUrl(map);
         
         if (result > 0) {
         	return url;        	
@@ -68,20 +69,35 @@ public class S3ServiceImpl implements S3Service {
 	}
 
 	
-	// 파일 삭제
+	// 프로필 이미지 파일 삭제
 	@Override
-	public void delete(String folderName, String fileName, String userId) {
+	public void profilePictureDelete(String fileName, String userId) {
 		try {
+			String folderName = "profile-picture";
 			String key = folderName + "/" + fileName;
 			
         	// deleteObject(버킷명, 키값)으로 객체 삭제
             amazonS3.deleteObject(bucket, key);
             
             // DB에 저장된 이미지 파일 URL 삭제
-            s3Dao.deleteImgUrl(userId);
+            s3Dao.deleteprofilePictureUrl(userId);
         } catch (AmazonServiceException e) {
             log.error(e.toString());
         }
 	}
+	
+	
+	// ----- 게시판 이미지 ---------------------------------------------------------------------------------------------------------
+	
+	
+	
+	
+	// ----- 클럽 대표 이미지 ---------------------------------------------------------------------------------------------------------
+	
+	
+	
+	// ----- 클럽 배너 이미지 ---------------------------------------------------------------------------------------------------------
+		
+	
 
 }
