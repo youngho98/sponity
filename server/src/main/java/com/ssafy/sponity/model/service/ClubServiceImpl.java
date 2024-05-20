@@ -58,7 +58,16 @@ public class ClubServiceImpl implements ClubService {
 	// 클럽 상세조회
 	@Override
 	public Club detailClub(int clubId) {
-		return clubDao.selectClub(clubId);
+		// 해당 클럽의 회원수 및 좋아요수 세팅
+		int memberNum = clubDao.countMember(clubId);
+		int likeNum = clubDao.countLike(clubId);
+		
+		Club club = clubDao.selectClub(clubId);
+		
+		club.setMemberNum(memberNum);
+		club.setLikeNum(likeNum);
+		
+		return club;
 	}
 	
 	// 클럽 상세조회 - 해당 클럽에 대한 사용자의 지위
