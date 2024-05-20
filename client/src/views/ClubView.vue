@@ -7,8 +7,8 @@
       </a>
     </div>
     <div class="hidden w-full navbar-menu lg:order-1 lg:block lg:w-2/5">
-      <a class="block mt-4 mr-10 text-green-600 lg:inline-block lg:mt-0 hover:text-green-800" href="#">
-        Notice
+      <a class="block mt-4 mr-10 text-green-600 lg:inline-block lg:mt-0 hover:text-green-800" @click="$router.go(-1)">
+        Back
       </a>
       <a class="block mt-4 mr-10 text-green-600 lg:inline-block lg:mt-0 hover:text-green-800" href="#">
         Board

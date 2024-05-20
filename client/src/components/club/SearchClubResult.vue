@@ -10,7 +10,7 @@
           Join a club and find friends to work out with
         </p>
       </div>
-      <div class="text-end">
+      <!-- <div class="text-end">
         <form
           class="flex flex-col justify-center w-3/4 max-w-sm space-y-3 md:flex-row md:w-full md:space-x-3 md:space-y-0">
           <div class=" relative ">
@@ -24,7 +24,7 @@
             Search
           </button>
         </form>
-      </div>
+      </div> -->
     </div>
     <div class="grid grid-cols-1 gap-12 md:grid-cols-2 xl:grid-cols-3">
       <ClubItem v-for="club in clubStore.clubList" :key="club.clubId" :club="club"/>
