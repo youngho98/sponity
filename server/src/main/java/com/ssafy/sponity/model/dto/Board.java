@@ -1,5 +1,7 @@
 package com.ssafy.sponity.model.dto;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -15,4 +17,5 @@ public class Board {
     private String img1;
     private String img2;
     private String img3;
+    private List<Review> reviewList;
 }

@@ -205,6 +205,10 @@ public class ClubServiceImpl implements ClubService {
 		String nickname = clubDao.selectNickname(board.getUserId());
 		board.setNickname(nickname);
 		
+		// board 객체에 댓글 리스트 추가
+		List<Review> reviewList = clubDao.selectReview(boardId);
+		board.setReviewList(reviewList);
+		
 		return board;
 	}
 

@@ -44,6 +44,8 @@ public interface ClubDao {
 
 	String selectNickname(String userId);
 
+	List<Review> selectReview(int boardId);
+
 	int updateBoard(Board board);
 
 	int deleteBoard(int boardId);
@@ -53,6 +55,7 @@ public interface ClubDao {
 	int updateReview(Map<String, Object> map);
 
 	int deleteReview(int reviewId);
+
 
 
 

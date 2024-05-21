@@ -132,6 +132,12 @@
 		WHERE user_id = #{userId}
 	</select>
 	
+	<!-- 게시글에 딸린 댓글 조회 -->
+	<select id="selectReview" resultType="Review" parameterType="int">
+		SELECT * FROM review
+		WHERE board_id = #{boardId}
+	</select>
+	
 	
 	<!-- 게시글 수정 -->
 	<update id="updateBoard" parameterType="Board">
