@@ -23,6 +23,8 @@ import ClubList from '@/components/club/ClubList.vue';
 import ClubDetail from '@/components/club/ClubDetail.vue';
 import MemberList from '@/components/club/MemberList.vue';
 
+import BoardList from '@/components/board/BoardList.vue';
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -120,6 +122,11 @@ const router = createRouter({
               path: 'manage',
               name: 'clubManageForm',
               component: ClubManageForm,
+            },
+            {
+              path: 'board',
+              name: 'boardList',
+              component: BoardList,
             },
           ],
         },
