@@ -14,13 +14,13 @@
         <p class="mb-8 text-sm leading-relaxed">{{ clubStore.clubInfo.introduction }}</p>
 
         <div class="flex justify-between">
-          <button @click="like" v-if="userStore.loginUser.isLike === 0"
+          <button @click="unlike" v-if="userStore.loginUser.isLike === 1"
             class="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">❤️
             {{ clubStore.clubInfo.likeNum }}</button>
-          <button @click="unlike" v-else
+          <button @click="like" v-else
             class="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">🤍
             {{ clubStore.clubInfo.likeNum }}</button>
-          <button
+          <button @click="$router.push({ name: 'memberList' })"
             class="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">👤
             {{ clubStore.clubInfo.memberNum }}</button>
         </div>

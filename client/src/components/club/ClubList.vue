@@ -4,10 +4,10 @@
     <div class="flex items-end justify-between mb-12 header">
       <div class="title">
         <p class="mb-4 text-4xl font-bold text-gray-800">
-          Club List
+          클럽 목록
         </p>
-        <p class="text-2xl font-light text-gray-400">
-          Join a club and find friends to work out with
+        <p class="text-xl font-light text-gray-400">
+          클럽에 가입하고 함께 운동할 친구를 찾아보세요
         </p>
       </div>
       <!-- <div class="text-end">

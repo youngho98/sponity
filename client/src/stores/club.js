@@ -23,7 +23,7 @@ export const useClubStore = defineStore('club', () => {
     })
       .then((response) => {
         clubList.value = response.data;
-        router.push({ name: 'searchClubResult' });
+        router.push({ name: 'clubList' });
       })
       .catch(() => {
         alert("검색에 실패했습니다.")
@@ -53,7 +53,6 @@ export const useClubStore = defineStore('club', () => {
       }
     })
     .then(() => {
-      useUserStore().loginUser.isLike = 1;
       router.go(0);
     })
     .catch(() => {
@@ -68,7 +67,6 @@ export const useClubStore = defineStore('club', () => {
       }
     })
     .then(() => {
-      useUserStore().loginUser.isLike = 0;
       router.go(0);
     })
     .catch(() => {
@@ -83,7 +81,6 @@ export const useClubStore = defineStore('club', () => {
       }
     })
     .then(() => {
-      // useUserStore().loginUser.userStatus = 2;
       router.go(0);
     })
     .catch((error) => {
@@ -107,7 +104,6 @@ export const useClubStore = defineStore('club', () => {
       }
     })
     .then(() => {
-      useUserStore().loginUser.userStatus = 1;
       router.go(0);
     })
     .catch((error) => {
