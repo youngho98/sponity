@@ -65,9 +65,39 @@ export const useClubManagerStore = defineStore('clubManager', () => {
       })
   }
 
+  const changeLeader = function(clubId, userId) {
+    axios.patch(`${URL}/${clubId}/member-list/${userId}/leader`, null, {
+      headers: {
+        Authorization: sessionStorage.getItem('access-token')
+      }
+    })
+    .then(() => {
+      alert("클럽장이 정상적으로 변경되었습니다.");
+    })
+    .catch(() => {
+      alert("클럽장 위임에 실패했습니다.");
+    })
+  }
+
+  const deleteMember = function(clubId, userId) {
+    axios.delete(`${URL}/${clubId}/member-list/${userId}`, {
+      headers: {
+        Authorization: sessionStorage.getItem('access-token')
+      }
+    })
+    .then(() => {
+      alert("회원 삭제에 성공했습니다.");
+    })
+    .catch(() => {
+      alert("회원 삭제에 실패했습니다.");
+    })
+  }
+
   return {
     create,
     change,
     remove,
+    changeLeader,
+    deleteMember,
   }
 });
