@@ -7,10 +7,10 @@
       </a>
     </div>
     <div class="hidden w-full navbar-menu lg:order-1 lg:block lg:w-2/5">
-      <a @click="$router.go(-1)" class="block mt-4 mr-10 text-green-600 lg:inline-block lg:mt-0 hover:text-green-800">
-        뒤로가기
-      </a>
-      <a class="block mt-4 mr-10 text-green-600 lg:inline-block lg:mt-0 hover:text-green-800">
+      <RouterLink :to="{ name: 'clubList' }" class="block mt-4 mr-10 text-green-600 lg:inline-block lg:mt-0 hover:text-green-800" href="#">
+        클럽 목록
+      </RouterLink>
+      <a class="block mt-4 mr-10 text-green-600 lg:inline-block lg:mt-0 hover:text-green-800" href="#">
         게시판
       </a>
     </div>
@@ -21,11 +21,11 @@
         클럽 관리
       </RouterLink>
       <a v-if="userStore.loginUser.userStatus === 1" @click="register"
-        class="block mt-4 mr-10 text-green-600 lg:inline-block lg:mt-0 hover:text-green-800">
+        class="block mt-4 mr-10 text-green-600 lg:inline-block lg:mt-0 hover:text-green-800" href="#">
         클럽 가입
       </a>
       <a v-if="userStore.loginUser.userStatus === 2" @click="unregister"
-        class="block mt-4 mr-10 text-green-600 lg:inline-block lg:mt-0 hover:text-green-800">
+        class="block mt-4 mr-10 text-green-600 lg:inline-block lg:mt-0 hover:text-green-800" href="#">
         클럽 탈퇴
       </a>
     </div>

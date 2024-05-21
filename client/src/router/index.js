@@ -19,8 +19,9 @@ import CreateClubForm from '@/components/clubmanager/CreateClubForm.vue';
 import ClubManageForm from '@/components/clubmanager/ClubManageForm.vue';
 
 import SearchClubForm from '@/components/club/SearchClubForm.vue';
-import SearchClubResult from '@/components/club/SearchClubResult.vue';
+import ClubList from '@/components/club/ClubList.vue';
 import ClubDetail from '@/components/club/ClubDetail.vue';
+import MemberList from '@/components/club/MemberList.vue';
 
 
 const router = createRouter({
@@ -102,8 +103,8 @@ const router = createRouter({
         },
         {
           path: '',
-          name: 'searchClubResult',
-          component: SearchClubResult,
+          name: 'clubList',
+          component: ClubList,
         },
         {
           path: ':clubId',
@@ -115,6 +116,11 @@ const router = createRouter({
               name: 'clubDetail',
               component: ClubDetail,
             },
+            {
+              path: 'member-list',
+              name: 'memberList',
+              component: MemberList,
+            }
           ],
         },
       ],
