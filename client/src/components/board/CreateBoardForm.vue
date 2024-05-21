@@ -91,6 +91,22 @@ const uploadFile = async () => {
     });
     console.log('File uploaded successfully:', response.data);
   } catch (error) {
+    let num = error.response.data;
+    let message = "";
+    switch (num) {
+      case 1:
+        message = "제목을 입력하세요.";
+        break;
+      case 2:
+        message = "내용을 입력하세요.";
+        break;
+      case 3:
+        message = "AWS s3 server error.";
+        break;
+      default:
+        message = "server error";
+    }
+    alert(message);
     console.error('Error uploading file:', error);
   }
 };

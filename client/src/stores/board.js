@@ -11,15 +11,16 @@ export const useBoardStore = defineStore('board', () => {
 
   const boardList = ref([]);
 
-  const clubInfo = ref({});
+  const boardInfo = ref({});
 
-  const getBoardList = function (clubId) {
+  const getBoardList = function(clubId) {
     axios.get(`${URL}/${clubId}/board`, {
       headers: {
         Authorization: sessionStorage.getItem('access-token')
       }
     })
       .then((response) => {
+        console.log(response.data);
         boardList.value = response.data;
       })
       .catch(() => {
@@ -27,8 +28,25 @@ export const useBoardStore = defineStore('board', () => {
       })
   }
 
+  const getBoardInfo = function(clubId, boardId) {
+    axios.get(`${URL}/${clubId}/board/${boardId}`, {
+      headers: {
+        Authorization: sessionStorage.getItem('access-token')
+      }
+    })
+    .then((response) => {
+      console.log(response.data);
+      boardInfo.value = response.data;
+    })
+    .catch(() => {
+      alert("게시글 로딩에 실패했습니다.")
+    })
+  }
+
   return {
     boardList,
+    boardInfo,
     getBoardList,
+    getBoardInfo,
   }
 });
