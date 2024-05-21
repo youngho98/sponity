@@ -1,14 +1,12 @@
 package com.ssafy.sponity.model.service;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
 import com.ssafy.sponity.model.dao.ClubManagerDao;
 import com.ssafy.sponity.model.dto.Club;
-import com.ssafy.sponity.model.dto.User;
 
 @Service
 public class ClubManagerServiceImpl implements ClubManagerService {
@@ -92,12 +90,12 @@ public class ClubManagerServiceImpl implements ClubManagerService {
 
 	// 모임장 권한 이전
 	@Override
-	public int leaderChange(int clubId, int newLeaderId) {
+	public int leaderChange(Map<String, Integer> map) {
 		// 이전 모임장 권한 해제
-		int cancelResult = clubManagerDao.cancelLeader(clubId);
+		int cancelResult = clubManagerDao.cancelLeader(map.get("clubId"));
 		
 		// 새로운 모임장 권한 부여
-		int grantResult = clubManagerDao.grantLeader(newLeaderId);
+		int grantResult = clubManagerDao.grantLeader(map);
 		
 		if(cancelResult > 0 && grantResult > 0) {
 			return 1;			
@@ -109,8 +107,8 @@ public class ClubManagerServiceImpl implements ClubManagerService {
 
 	// 회원 강퇴
 	@Override
-	public int expelMember(int memberId) {
-		return clubManagerDao.deleteMember(memberId);
+	public int expelMember(Map<String, Integer> map) {
+		return clubManagerDao.deleteMember(map);
 	}
 	
 }

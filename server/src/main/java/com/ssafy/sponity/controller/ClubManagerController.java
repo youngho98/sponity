@@ -1,11 +1,11 @@
 package com.ssafy.sponity.controller;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.sponity.jwt.JWTUtil;
 import com.ssafy.sponity.model.dto.Club;
-import com.ssafy.sponity.model.dto.User;
 import com.ssafy.sponity.model.service.ClubManagerService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -95,9 +94,13 @@ public class ClubManagerController {
 	
 	
 	// 모임장 권한 이전
-	@PatchMapping("/{clubId}/member-list/{memberId}/leader")
-	public ResponseEntity<?> leaderChange(@PathVariable("clubId") int clubId, @PathVariable("memberId") int newLeaderId) {
-		int result = clubManagerService.leaderChange(clubId, newLeaderId);
+	@PatchMapping("/{clubId}/member-list/{userId}/leader")
+	public ResponseEntity<?> leaderChange(@PathVariable("clubId") int clubId, @PathVariable("userId") int newLeaderId) {
+		Map<String, Integer> map = new HashMap<>();
+		map.put("clubId", clubId);
+		map.put("newLeaderId", newLeaderId);
+		
+		int result = clubManagerService.leaderChange(map);
 		
     	if (result > 0) {
     		return new ResponseEntity<>(HttpStatus.OK);
@@ -107,9 +110,13 @@ public class ClubManagerController {
 	}
 	
 	// 회원 강퇴
-	@DeleteMapping("/{clubId}/member-list/{memberId}")
-	public ResponseEntity<?> expelMember(@PathVariable("memberId") int memberId) {
-		int result = clubManagerService.expelMember(memberId);
+	@DeleteMapping("/{clubId}/member-list/{userId}")
+	public ResponseEntity<?> expelMember(@PathVariable("clubId") int clubId, @PathVariable("userId") int expelId) {
+		Map<String, Integer> map = new HashMap<>();
+		map.put("clubId", clubId);
+		map.put("expelId", expelId);
+		
+		int result = clubManagerService.expelMember(map);
 		
     	if (result > 0) {
     		return new ResponseEntity<>(HttpStatus.OK);

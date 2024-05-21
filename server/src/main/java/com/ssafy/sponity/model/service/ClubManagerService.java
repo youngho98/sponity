@@ -1,10 +1,8 @@
 package com.ssafy.sponity.model.service;
 
-import java.util.List;
 import java.util.Map;
 
 import com.ssafy.sponity.model.dto.Club;
-import com.ssafy.sponity.model.dto.User;
 
 public interface ClubManagerService {
 
@@ -14,7 +12,7 @@ public interface ClubManagerService {
 
 	int removeClub(int clubId, String loginId);
 
-	int leaderChange(int clubId, int newLeaderId);
+	int leaderChange(Map<String, Integer> map);
 
-	int expelMember(int memberId);
+	int expelMember(Map<String, Integer> map);
 }
