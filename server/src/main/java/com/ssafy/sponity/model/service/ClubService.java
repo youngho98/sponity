@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.ssafy.sponity.model.dto.Board;
 import com.ssafy.sponity.model.dto.Club;
+import com.ssafy.sponity.model.dto.User;
 
 public interface ClubService {
 
@@ -16,6 +17,8 @@ public interface ClubService {
 	
 	int isLike(Map<String, Object> idMap);
 	
+	List<User> searchMember(int clubId);
+	
 	int clubIn(Map<String, Object> idMap);
 
 	int clubOut(Map<String, Object> idMap);
@@ -25,6 +28,14 @@ public interface ClubService {
 	int clubDislike(Map<String, Object> idMap);
 
 	List<Board> boardList(int clubId);
+
+	int createBoard(Board board);
+
+	Board getBoard(int boardId);
+
+	int modifyBoard(Board board);
+
+	int removeBoard(int boardId);
 
 
 

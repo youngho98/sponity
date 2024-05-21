@@ -9,7 +9,7 @@ CREATE TABLE board
   club_id  INT           NOT NULL,
   user_id  VARCHAR(40)   NOT NULL,
   title    VARCHAR(40)   NOT NULL,
-  content  VARCHAR(4000) NULL    ,
+  content  VARCHAR(4000) NOT NULL,
   view_cnt INT           NOT NULL DEFAULT 0,
   reg_date TIMESTAMP     NOT NULL DEFAULT now(),
   img_1    VARCHAR(400)  NULL    ,
@@ -58,24 +58,6 @@ CREATE TABLE member
 
 ALTER TABLE member
   ADD CONSTRAINT UQ_member_id UNIQUE (member_id);
-
-CREATE TABLE notice
-(
-  notice_id INT           NOT NULL AUTO_INCREMENT,
-  club_id   INT           NOT NULL,
-  user_id   VARCHAR(40)   NOT NULL,
-  title     VARCHAR(40)   NOT NULL,
-  content   VARCHAR(4000) NULL    ,
-  view_cnt  INT           NOT NULL DEFAULT 0,
-  reg_date  TIMESTAMP     NOT NULL DEFAULT now(),
-  img_1     VARCHAR(400)  NULL    ,
-  img_2     VARCHAR(400)  NULL    ,
-  img_3     VARCHAR(400)  NULL    ,
-  PRIMARY KEY (notice_id)
-);
-
-ALTER TABLE notice
-  ADD CONSTRAINT UQ_notice_id UNIQUE (notice_id);
 
 CREATE TABLE review
 (
@@ -141,16 +123,6 @@ ALTER TABLE review
   ADD CONSTRAINT FK_board_TO_review
     FOREIGN KEY (board_id)
     REFERENCES board (board_id) ON DELETE CASCADE;
-
-ALTER TABLE notice
-  ADD CONSTRAINT FK_club_TO_notice
-    FOREIGN KEY (club_id)
-    REFERENCES club (club_id) ON DELETE CASCADE;
-
-ALTER TABLE notice
-  ADD CONSTRAINT FK_user_TO_notice
-    FOREIGN KEY (user_id)
-    REFERENCES user (user_id) ON DELETE CASCADE;
 
 ALTER TABLE club_like
   ADD CONSTRAINT FK_club_TO_club_like

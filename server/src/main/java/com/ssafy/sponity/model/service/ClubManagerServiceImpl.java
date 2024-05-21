@@ -90,13 +90,6 @@ public class ClubManagerServiceImpl implements ClubManagerService {
 	}
 
 
-	// 모임 회원 조회
-	@Override
-	public List<User> searchMember(int clubId) {
-		return clubManagerDao.selectMember(clubId);
-	}
-
-
 	// 모임장 권한 이전
 	@Override
 	public int leaderChange(int clubId, int newLeaderId) {

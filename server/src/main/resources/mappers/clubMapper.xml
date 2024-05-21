@@ -49,6 +49,16 @@
 	</select>
 	
 	
+	<!-- 모임 회원 조회 -->
+	<select id="selectMember" resultType="User" parameterType="int">
+		SELECT user_id, user_name, nickname, email, profile_img
+		FROM user
+		INNER JOIN member
+		USING (user_id)
+		WHERE club_id = #{clubId}
+	</select>
+	
+	
 	<!-- 기존 가입여부 확인 -->
 	<select id="isJoined" resultType="boolean" parameterType="Map">
 		SELECT COUNT(*) > 0
@@ -69,7 +79,7 @@
 	</delete>
 	
 	
-	<!-- _____클럽 게시판 기능________________________________________________________________________________________ -->
+	<!-- _____클럽 좋아요 기능________________________________________________________________________________________ -->
 	
 	
 	<!-- 클럽 좋아요 -->
@@ -80,12 +90,12 @@
 	
 	<!-- 클럽 좋아요 취소 -->
 	<delete id="clubDislike" parameterType="Map">
-		DELETE FROM club_like(user_id, club_id)
-		WHERE user_id = #{userId}, club_id = #{clubId}
+		DELETE FROM club_like
+		WHERE user_id = #{userId} AND club_id = #{clubId}
 	</delete>
 	
 	
-	<!-- _____클럽 게시판 내 댓글 기능________________________________________________________________________________________ -->
+	<!-- _____클럽 게시판 기능________________________________________________________________________________________ -->
 	
 	
 	<!-- 클럽 내 게시판 조회 -->
@@ -93,5 +103,50 @@
 		SELECT * FROM board
 		WHERE club_id = #{clubId}
 	</select>
+	
+	
+	<!-- 게시글 작성 -->
+	<insert id="insertBoard" parameterType="Board">
+		INSERT INTO board(club_id, user_id, title, content, img_1, img_2, img_3)
+		VALUES (#{clubId}, #{userId}, #{title}, #{content}, #{img1}, #{img2}, #{img3})
+	</insert>
+	
+	
+	<!-- 게시글 조회 -->
+	<select id="selectBoard" resultType="Board" parameterType="int">
+		SELECT * FROM board
+		WHERE board_id = #{boardId}
+	</select>
+	
+	<!-- 조회수 1 증가시키기 -->
+	<update id="increaseViewCnt" parameterType="int">
+		UPDATE board
+		SET view_cnt = view_cnt + 1
+		WHERE board_id = #{boardId}
+	</update>
+	
+	
+	<!-- 게시글 수정 -->
+	<update id="updateBoard" parameterType="Board">
+		UPDATE board
+		SET 
+			title = #{title}, 
+			content = #{content},
+			img_1 = #{img1},
+			img_2 = #{img2},
+			img_3 = #{img3}
+		WHERE board_id = #{boardId}
+	</update>
+	
+	
+	<!-- 게시글 삭제 -->
+	<delete id="deleteBoard" parameterType="int">
+		DELETE FROM board
+		WHERE board_id = #{boardId}
+	</delete>
+	
+	
+	<!-- _____클럽 게시판 내 댓글 기능________________________________________________________________________________________ -->
+	
 	
 </mapper>

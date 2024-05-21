@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.ssafy.sponity.model.dto.Board;
 import com.ssafy.sponity.model.dto.Club;
+import com.ssafy.sponity.model.dto.User;
 
 public interface ClubDao {
 
@@ -17,6 +18,8 @@ public interface ClubDao {
 	String userStatus(Map<String, Object> idMap);
 
 	boolean isLike(Map<String, Object> idMap);
+	
+	List<User> selectMember(int clubId);
 
 	Club selectClub(int clubId);
 
@@ -31,6 +34,16 @@ public interface ClubDao {
 	int clubDislike(Map<String, Object> idMap);
 
 	List<Board> selectBoardList(int clubId);
+
+	int insertBoard(Board board);
+
+	Board selectBoard(int boardId);
+
+	void increaseViewCnt(int boardId);
+
+	int updateBoard(Board board);
+
+	int deleteBoard(int boardId);
 
 
 

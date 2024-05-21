@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.ssafy.sponity.model.dao.ClubDao;
 import com.ssafy.sponity.model.dto.Board;
 import com.ssafy.sponity.model.dto.Club;
+import com.ssafy.sponity.model.dto.User;
 
 @Service
 public class ClubServiceImpl implements ClubService {
@@ -99,6 +100,14 @@ public class ClubServiceImpl implements ClubService {
 			return 0;
 		}
 	}
+	
+	
+	// 모임 회원 조회
+	@Override
+	public List<User> searchMember(int clubId) {
+		return clubDao.selectMember(clubId);
+	}
+	
 
 	// 클럽 가입
 	@Override
@@ -162,6 +171,37 @@ public class ClubServiceImpl implements ClubService {
 	@Override
 	public List<Board> boardList(int clubId) {
 		return clubDao.selectBoardList(clubId);
+	}
+
+
+	// 게시글 생성
+	@Override
+	public int createBoard(Board board) {
+		return clubDao.insertBoard(board);
+	}
+
+
+	// 게시글 조회
+	@Override
+	public Board getBoard(int boardId) {
+		// 조회수 1 증가시키기
+		clubDao.increaseViewCnt(boardId);
+		
+		return clubDao.selectBoard(boardId);
+	}
+
+
+	// 게시글 수정
+	@Override
+	public int modifyBoard(Board board) {
+		return clubDao.updateBoard(board);
+	}
+
+
+	// 게시글 삭제
+	@Override
+	public int removeBoard(int boardId) {
+		return clubDao.deleteBoard(boardId);
 	}
 
 

@@ -94,15 +94,6 @@ public class ClubManagerController {
     }
 	
 	
-	// 모임 회원 조회
-	@GetMapping("/{clubId}/member-list")
-	public ResponseEntity<List<User>> searchMember(@PathVariable("clubId") int clubId) {
-		List<User> userList = clubManagerService.searchMember(clubId);
-		
-		return new ResponseEntity<>(userList, HttpStatus.OK);
-	}
-	
-	
 	// 모임장 권한 이전
 	@PatchMapping("/{clubId}/member-list/{memberId}/leader")
 	public ResponseEntity<?> leaderChange(@PathVariable("clubId") int clubId, @PathVariable("memberId") int newLeaderId) {

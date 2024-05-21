@@ -4,8 +4,12 @@ import java.util.Map;
 
 public interface S3Dao {
 
-	int updateImgUrl(Map<String, String> map);
+	int updateprofilePictureUrl(Map<String, String> map);
 
-	void deleteImgUrl(String userId);
+	void deleteprofilePictureUrl(String userId);
+
+	int selectMaxBoardId();
+
+	int updateBoardPictureUrl(Map<String, Object> map);
 	
 }
