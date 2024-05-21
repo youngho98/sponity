@@ -1,12 +1,15 @@
 <template>
 
-  <div class="w-3/4 mx-auto my-10 p-12 bg-white">
-    <div class="flex items-end justify-between mb-12 header">
+  <div class="w-2/3 mx-auto my-10 p-12 bg-white">
+    <div class="items-end mb-12 header">
       <div class="title">
-        <p class="mb-4 text-4xl font-bold text-gray-800">
-          게시판
-        </p>
-        <p class="text-xl font-light text-gray-400">
+        <div class="flex text-center items-center justify-between">
+          <div class="text-4xl font-bold text-gray-800">
+            게시판
+          </div>
+          <RouterLink :to="{ name: 'createBoardForm' }" class="text-right text-sky-600 hover:text-sky-700">게시글 작성</RouterLink>
+        </div>
+        <p class="text-xl font-light text-gray-400 mt-6">
           {{ clubStore.clubInfo.introduction }}
         </p>
       </div>
@@ -27,18 +30,25 @@
       </div> -->
     </div>
     <div class="grid grid-cols-1 gap-12 md:grid-cols-2 xl:grid-cols-3">
-      <ClubItem v-for="club in clubStore.clubList" :key="club.clubId" :club="club"/>
+      <BoardItem v-for="board in boardStore.boardList" :key="board.boardId" :board="board" />
     </div>
   </div>
 
 </template>
 
 <script setup>
-import ClubItem from '@/components/club/ClubItem.vue';
+import BoardItem from '@/components/board/BoardItem.vue';
 
+import { useBoardStore } from '@/stores/board';
 import { useClubStore } from '@/stores/club';
+import { onMounted } from 'vue';
 
 const clubStore = useClubStore();
+const boardStore = useBoardStore();
+
+onMounted(() => {
+  boardStore.getBoardList(clubStore.clubInfo.clubId);
+})
 </script>
 
 

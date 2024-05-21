@@ -11,6 +11,10 @@
         class="innline-block mt-0 mr-10 text-green-600 hover:text-green-800" href="#">
         클럽 목록
       </RouterLink>
+      <RouterLink :to="{ name: 'boardList' }"
+        class="innline-block mt-0 mr-10 text-green-600 hover:text-green-800" href="#">
+        게시판
+      </RouterLink>
     </div>
     <div class="block w-2/5 navbar-menu order-3 text-right">
       <RouterLink :to="{ name: 'clubManageForm', params: { clubId: clubStore.clubInfo.clubId } }"

@@ -2,7 +2,7 @@
 
   <div class="m-auto overflow-hidden rounded-lg shadow-lg cursor-pointer w-80">
     <RouterLink :to="{name: 'clubDetail', params: { clubId: club.clubId }}" class="block w-full h-full">
-      <img v-if="club.clubImg !== null" :src="club.clubImg" class="object-cover w-full max-h-50" />
+      <img v-if="club.clubImg !== null" :src="club.clubImg" class="object-cover w-80 h-60" />
       <img v-else src="@/assets/no-image.png" class="object-cover w-80 h-60" />
       <div class="w-full p-4 bg-white">
         <p class="font-medium text-green-500 text-md">
