@@ -24,5 +24,7 @@ public interface ClubManagerDao {
 
 	int deleteMember(Map<String, Object> map);
 
+	String selectClubPictureUrl(int clubId);
+
 
 }

@@ -4,12 +4,16 @@ import java.util.Map;
 
 public interface S3Dao {
 
-	int updateprofilePictureUrl(Map<String, String> map);
+	int updateProfilePictureUrl(Map<String, String> map);
 
-	void deleteprofilePictureUrl(String userId);
+	void deleteProfilePictureUrl(String userId);
 
 	int selectMaxBoardId();
 
 	int updateBoardPictureUrl(Map<String, Object> map);
+
+	int updateClubPictureUrl(Map<String, Object> map);
+
+	void deleteClubPictureUrl(int clubId);
 	
 }

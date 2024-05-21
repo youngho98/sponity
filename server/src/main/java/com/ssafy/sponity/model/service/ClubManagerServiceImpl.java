@@ -110,5 +110,15 @@ public class ClubManagerServiceImpl implements ClubManagerService {
 	public int expelMember(Map<String, Object> map) {
 		return clubManagerDao.deleteMember(map);
 	}
+
+	
+	// ----- 클럽 이미지 기능 ----------------------------------------------------------------------------------------
+
+	
+	// 클럽 이미지 조회
+	@Override
+	public String getClubPicture(int clubId) {
+		return clubManagerDao.selectClubPictureUrl(clubId);
+	}
 	
 }
