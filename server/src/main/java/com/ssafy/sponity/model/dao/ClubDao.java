@@ -42,6 +42,8 @@ public interface ClubDao {
 
 	void increaseViewCnt(int boardId);
 
+	String selectNickname(String userId);
+
 	int updateBoard(Board board);
 
 	int deleteBoard(int boardId);
@@ -51,6 +53,7 @@ public interface ClubDao {
 	int updateReview(Map<String, Object> map);
 
 	int deleteReview(int reviewId);
+
 
 
 

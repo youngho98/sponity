@@ -171,7 +171,17 @@ public class ClubServiceImpl implements ClubService {
 	// 클럽 내 게시판 조회
 	@Override
 	public List<Board> boardList(int clubId) {
-		return clubDao.selectBoardList(clubId);
+		// 게시글 목록 조회
+		List<Board> boardList = clubDao.selectBoardList(clubId);
+		
+		// nickname 속성값 추가
+		for (int i = 0; i < boardList.size(); i++) {
+			Board board = boardList.get(i);
+			String nickname = clubDao.selectNickname(board.getUserId());
+			board.setNickname(nickname);			
+		}
+		
+		return boardList;
 	}
 
 
@@ -188,7 +198,14 @@ public class ClubServiceImpl implements ClubService {
 		// 조회수 1 증가시키기
 		clubDao.increaseViewCnt(boardId);
 		
-		return clubDao.selectBoard(boardId);
+		// 게시글 조회
+		Board board = clubDao.selectBoard(boardId);
+		
+		// nickname 속성값 추가
+		String nickname = clubDao.selectNickname(board.getUserId());
+		board.setNickname(nickname);
+		
+		return board;
 	}
 
 
@@ -229,17 +246,4 @@ public class ClubServiceImpl implements ClubService {
 		return clubDao.deleteReview(reviewId);
 	}
 
-
-	
-	
-	
-
-
-	
-	
-	
-	
-	
-	
-	
 }
