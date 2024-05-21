@@ -201,9 +201,24 @@ public class ClubServiceImpl implements ClubService {
 		// 게시글 조회
 		Board board = clubDao.selectBoard(boardId);
 		
-		// nickname 속성값 추가
+		// nickname 세팅
 		String nickname = clubDao.selectNickname(board.getUserId());
 		board.setNickname(nickname);
+		
+		// 해당 게시글의 댓글 리스트 생성
+		List<Review> reviewList = clubDao.selectReviewList(boardId);
+		
+		// 댓글 리스트에도 nickname 세팅
+		for (int i = 0; i < reviewList.size(); i++) {
+			Review review = reviewList.get(i);
+			String reviewUserId = review.getUserId();
+			String reviewNickname = clubDao.selectNickname(reviewUserId);
+			
+			review.setNickname(reviewNickname);
+		}
+
+		// board 객체에 댓글 리스트 추가
+		board.setReviewList(reviewList);
 		
 		return board;
 	}
@@ -224,6 +239,20 @@ public class ClubServiceImpl implements ClubService {
 
 
 	// ------ 클럽 게시판 내 댓글 기능 ---------------------------------------------------------------------------------------------------
+	
+	
+	// 댓글 조회
+	@Override
+	public Review getReview(int reviewId) {
+		Review review = clubDao.selectReview(reviewId);
+		
+		String userId = review.getUserId();
+		String nickname = clubDao.selectNickname(userId);
+		
+		review.setNickname(nickname);
+		
+		return review;
+	}
 	
 	
 	// 댓글 작성

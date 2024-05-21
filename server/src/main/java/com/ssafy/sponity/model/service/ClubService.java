@@ -38,11 +38,14 @@ public interface ClubService {
 
 	int removeBoard(int boardId);
 
+	Review getReview(int reviewId);
+
 	int createReview(Review review);
 
 	int modifyReview(Map<String, Object> map);
 
 	int removeReview(int reviewId);
+
 
 
 
