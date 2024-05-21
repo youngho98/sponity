@@ -26,6 +26,7 @@ import MemberList from '@/components/club/MemberList.vue';
 import BoardList from '@/components/board/BoardList.vue';
 import BoardDetail from '@/components/board/BoardDetail.vue';
 import CreateBoardForm from '@/components/board/CreateBoardForm.vue';
+import ModifyBoardForm from '@/components/board/ModifyBoardForm.vue';
 
 
 const router = createRouter({
@@ -139,6 +140,11 @@ const router = createRouter({
               path: 'board/:boardId',
               name: 'boardDetail',
               component: BoardDetail,
+            },
+            {
+              path: 'board/:boardId/modify',
+              name: 'modifyBoardForm',
+              component: ModifyBoardForm,
             },
           ],
         },

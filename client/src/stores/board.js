@@ -43,10 +43,26 @@ export const useBoardStore = defineStore('board', () => {
     })
   }
 
+  const removeBoard = function(clubId, boardId) {
+    axios.delete(`${URL}/${clubId}/board/${boardId}`, {
+      headers: {
+        Authorization: sessionStorage.getItem('access-token')
+      }
+    })
+    .then(() => {
+      alert("게시글이 삭제되었습니다.");
+      router.replace({name: 'boardList'});
+    })
+    .catch(() => {
+      alert("게시글 삭제에 실패했습니다.")
+    })
+  }
+
   return {
     boardList,
     boardInfo,
     getBoardList,
     getBoardInfo,
+    removeBoard,
   }
 });

@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col max-w-3xl bg-white rounded-lg shadow shadow-gray-500 px-8 py-8 mx-auto my-24">
     <div class="self-center mb-2 text-2xl font-light text-gray-500">
-      게시글 작성
+      게시글 수정
     </div>
     <div class="p-6 mt-8">
       <form action="#">
@@ -38,7 +38,7 @@
           </div>
         </div>
         <div class="flex w-full my-4">
-          <input type="button" @click="uploadFile" value="Create"
+          <input type="button" @click="uploadFile" value="Save"
             class="py-2 px-4 bg-green-600 hover:bg-green-700 focus:ring-green-500 focus:ring-offset-green-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg" />
         </div>
       </form>
@@ -47,9 +47,10 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import axios from 'axios';
+import { useBoardStore } from '@/stores/board';
 import router from '@/router';
 
 const route = useRoute();
@@ -59,6 +60,15 @@ const boardInfo = ref({
   content: '',
 });
 
+const boardStore = useBoardStore();
+
+onMounted(() => {
+  boardStore.getBoardInfo(route.params.clubId, route.params.boardId);
+  boardInfo.value.title = boardStore.boardInfo.title;
+  boardInfo.value.content = boardStore.boardInfo.content;
+})
+
+// 파일 등록
 const file1 = ref(null);
 const file2 = ref(null);
 const file3 = ref(null);
@@ -84,15 +94,15 @@ const uploadFile = async () => {
   if (file3.value) formData.append('img3', file3.value);
 
   try {
-    const response = await axios.post(`http://localhost:8080/club/${route.params.clubId}/board`, formData, {
+    const response = await axios.put(`http://localhost:8080/club/${route.params.clubId}/board/${route.params.boardId}`, formData, {
       headers: {
         Authorization: sessionStorage.getItem('access-token'),
         'Content-Type': 'multipart/form-data'
       }
     });
     console.log('File uploaded successfully:', response.data);
-    alert("게시글이 등록되었습니다.");
-    router.replace({name: 'boardList'});
+    alert("게시글이 수정되었습니다.");
+    router.replace({name: 'boardDetail'});
   } catch (error) {
     let num = error.response.data;
     let message = "";
