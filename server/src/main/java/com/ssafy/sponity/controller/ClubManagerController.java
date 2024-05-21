@@ -95,8 +95,8 @@ public class ClubManagerController {
 	
 	// 모임장 권한 이전
 	@PatchMapping("/{clubId}/member-list/{userId}/leader")
-	public ResponseEntity<?> leaderChange(@PathVariable("clubId") int clubId, @PathVariable("userId") int newLeaderId) {
-		Map<String, Integer> map = new HashMap<>();
+	public ResponseEntity<?> leaderChange(@PathVariable("clubId") int clubId, @PathVariable("userId") String newLeaderId) {
+		Map<String, Object> map = new HashMap<>();
 		map.put("clubId", clubId);
 		map.put("newLeaderId", newLeaderId);
 		
@@ -111,8 +111,8 @@ public class ClubManagerController {
 	
 	// 회원 강퇴
 	@DeleteMapping("/{clubId}/member-list/{userId}")
-	public ResponseEntity<?> expelMember(@PathVariable("clubId") int clubId, @PathVariable("userId") int expelId) {
-		Map<String, Integer> map = new HashMap<>();
+	public ResponseEntity<?> expelMember(@PathVariable("clubId") int clubId, @PathVariable("userId") String expelId) {
+		Map<String, Object> map = new HashMap<>();
 		map.put("clubId", clubId);
 		map.put("expelId", expelId);
 		

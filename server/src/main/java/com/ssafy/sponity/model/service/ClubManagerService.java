@@ -12,7 +12,7 @@ public interface ClubManagerService {
 
 	int removeClub(int clubId, String loginId);
 
-	int leaderChange(Map<String, Integer> map);
+	int leaderChange(Map<String, Object> map);
 
-	int expelMember(Map<String, Integer> map);
+	int expelMember(Map<String, Object> map);
 }

@@ -90,9 +90,9 @@ public class ClubManagerServiceImpl implements ClubManagerService {
 
 	// 모임장 권한 이전
 	@Override
-	public int leaderChange(Map<String, Integer> map) {
+	public int leaderChange(Map<String, Object> map) {
 		// 이전 모임장 권한 해제
-		int cancelResult = clubManagerDao.cancelLeader(map.get("clubId"));
+		int cancelResult = clubManagerDao.cancelLeader((int) map.get("clubId"));
 		
 		// 새로운 모임장 권한 부여
 		int grantResult = clubManagerDao.grantLeader(map);
@@ -107,7 +107,7 @@ public class ClubManagerServiceImpl implements ClubManagerService {
 
 	// 회원 강퇴
 	@Override
-	public int expelMember(Map<String, Integer> map) {
+	public int expelMember(Map<String, Object> map) {
 		return clubManagerDao.deleteMember(map);
 	}
 	
