@@ -16,7 +16,15 @@
           {{ member.email }}
         </div>
       </div>
-      <button v-if="userStore.loginUser.userStatus === 3" @click="dropdown" class="flex justify-end w-24 text-right">
+      <button v-if="userStore.loginUser.userStatus === 3 && userStore.loginUser.nickname !== member.nickname" @click="dropdown" class="flex justify-end w-24 text-right">
+        <svg width="12" fill="currentColor" height="12" class="text-gray-500 hover:text-gray-800"
+          viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M1363 877l-742 742q-19 19-45 19t-45-19l-166-166q-19-19-19-45t19-45l531-531-531-531q-19-19-19-45t19-45l166-166q19-19 45-19t45 19l742 742q19 19 19 45t-19 45z">
+          </path>
+        </svg>
+      </button>
+      <button v-else @click="dropdown" class="flex justify-end w-24 text-right" style="visibility: hidden;">
         <svg width="12" fill="currentColor" height="12" class="text-gray-500 hover:text-gray-800"
           viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
           <path
@@ -66,7 +74,7 @@ const changeLeader = function () {
 }
 
 const deleteMember = function() {
-  clubManagerStore.deleteMember((route.params.clubId, props.member.userId));
+  clubManagerStore.deleteMember(route.params.clubId, props.member.userId);
 }
 </script>
 
