@@ -421,6 +421,20 @@ public class ClubController {
 	// ----- 클럽 게시판 내 댓글 기능 -------------------------------------------------------------------------------------------------------
 	
 	
+	// 댓글 조회
+	@GetMapping("/{clubId}/board/{boardId}/{reviewId}")
+	public ResponseEntity<Review> getReview(@PathVariable("reviewId") int reviewId) {
+		Review review = clubService.getReview(reviewId);
+		
+		if (review != null) {
+			return new ResponseEntity<>(review, HttpStatus.OK);
+		} 
+		return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+	
+	
+	
+	
 	// 댓글 작성
 	@PostMapping("/{clubId}/board/{boardId}")
 	public ResponseEntity<?> createReview(@PathVariable("boardId") int boardId, @RequestBody String content, HttpServletRequest request) {

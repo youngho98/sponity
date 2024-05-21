@@ -44,21 +44,18 @@ public interface ClubDao {
 
 	String selectNickname(String userId);
 
-	List<Review> selectReview(int boardId);
+	List<Review> selectReviewList(int boardId);
 
 	int updateBoard(Board board);
 
 	int deleteBoard(int boardId);
+
+	Review selectReview(int reviewId);
 
 	int insertReview(Review review);
 
 	int updateReview(Map<String, Object> map);
 
 	int deleteReview(int reviewId);
-
-
-
-
-
 
 }
