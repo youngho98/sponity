@@ -7,6 +7,7 @@ public class Board {
     private int boardId;
     private int clubId;
     private String userId;
+    private String nickname;
     private String title;
     private String content;
     private int viewCnt;

@@ -125,6 +125,13 @@
 		WHERE board_id = #{boardId}
 	</update>
 	
+	<!-- 게시글 작성자의 닉네임 조회 -->
+	<select id="selectNickname" resultType="String" parameterType="String">
+		SELECT nickname
+		FROM user
+		WHERE user_id = #{userId}
+	</select>
+	
 	
 	<!-- 게시글 수정 -->
 	<update id="updateBoard" parameterType="Board">
