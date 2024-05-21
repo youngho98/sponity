@@ -17,6 +17,7 @@ import ProfileImgForm from '@/components/myinfo/ProfileImgForm.vue';
 
 import CreateClubForm from '@/components/clubmanager/CreateClubForm.vue';
 import ClubManageForm from '@/components/clubmanager/ClubManageForm.vue';
+import ClubImgForm from '@/components/clubmanager/ClubImgForm.vue';
 
 import SearchClubForm from '@/components/club/SearchClubForm.vue';
 import ClubList from '@/components/club/ClubList.vue';
@@ -26,6 +27,7 @@ import MemberList from '@/components/club/MemberList.vue';
 import BoardList from '@/components/board/BoardList.vue';
 import BoardDetail from '@/components/board/BoardDetail.vue';
 import CreateBoardForm from '@/components/board/CreateBoardForm.vue';
+import ModifyBoardForm from '@/components/board/ModifyBoardForm.vue';
 
 
 const router = createRouter({
@@ -126,6 +128,11 @@ const router = createRouter({
               component: ClubManageForm,
             },
             {
+              path: 'profile-img',
+              name: 'clubImgForm',
+              component: ClubImgForm,
+            },
+            {
               path: 'board',
               name: 'boardList',
               component: BoardList,
@@ -139,6 +146,11 @@ const router = createRouter({
               path: 'board/:boardId',
               name: 'boardDetail',
               component: BoardDetail,
+            },
+            {
+              path: 'board/:boardId/modify',
+              name: 'modifyBoardForm',
+              component: ModifyBoardForm,
             },
           ],
         },

@@ -1,8 +1,12 @@
 <template>
   <section class="text-gray-600 body-font overflow-hidden">
-    <div class="container py-16 mx-auto">
+    <div class="container py-12 mx-auto">
       <div class="w-3/5 mx-auto flex flex-wrap">
-        <div class="w-full py-6 mb-0">
+        <div class="flex flex-row-reverse ml-auto">
+          <a href="#" @click="removeBoard" class="mx-2">삭제</a>
+          <RouterLink :to="{ name: 'modifyBoardForm', params: { boardId: boardStore.boardInfo.boardId }}" class="mx-2">수정</RouterLink>
+        </div>
+        <div class="w-full pb-6 my-0">
           <h1 class="text-gray-900 text-3xl title-font font-medium mb-4">{{ boardStore.boardInfo.title }}</h1>
           <h2 class="text-sm title-font text-gray-500 tracking-widest">{{ boardStore.boardInfo.nickname }}</h2>
           <p class="leading-relaxed mb-4 mt-10">{{ boardStore.boardInfo.content }}</p>
@@ -36,6 +40,10 @@ const boardStore = useBoardStore();
 onMounted(() => {
   boardStore.getBoardInfo(route.params.clubId, route.params.boardId);
 })
+
+const removeBoard = function() {
+  boardStore.removeBoard(route.params.clubId, route.params.boardId);
+}
 </script>
 
 <style scoped></style>
