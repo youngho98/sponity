@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.ssafy.sponity.model.dao.ClubDao;
 import com.ssafy.sponity.model.dto.Board;
 import com.ssafy.sponity.model.dto.Club;
+import com.ssafy.sponity.model.dto.Review;
 import com.ssafy.sponity.model.dto.User;
 
 @Service
@@ -147,7 +148,7 @@ public class ClubServiceImpl implements ClubService {
 	}
 
 	
-	// ----- 클럽 게시판 기능 ----------------------------------------------------------------------------------------------------
+	// ----- 클럽 좋아요 기능 ----------------------------------------------------------------------------------------------------
 	
 	
 	// 클럽 좋아요
@@ -164,7 +165,7 @@ public class ClubServiceImpl implements ClubService {
 	}
 
 
-	// ------ 클럽 게시판 내 댓글 기능 ---------------------------------------------------------------------------------------------------
+	// ------ 클럽 게시판 기능 ---------------------------------------------------------------------------------------------------
 
 	
 	// 클럽 내 게시판 조회
@@ -205,7 +206,33 @@ public class ClubServiceImpl implements ClubService {
 	}
 
 
+	// ------ 클럽 게시판 내 댓글 기능 ---------------------------------------------------------------------------------------------------
+	
+	
+	// 댓글 작성
+	@Override
+	public int createReview(Review review) {
+		return clubDao.insertReview(review);
+	}
 
+
+	// 댓글 수정
+	@Override
+	public int modifyReview(Map<String, Object> map) {
+		return clubDao.updateReview(map);
+	}
+
+
+	// 댓글 삭제
+	@Override
+	public int removeReview(int reviewId) {
+		return clubDao.deleteReview(reviewId);
+	}
+
+
+	
+	
+	
 
 
 	

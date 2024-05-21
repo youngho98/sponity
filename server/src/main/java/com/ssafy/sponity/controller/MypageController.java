@@ -1,6 +1,7 @@
 package com.ssafy.sponity.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ssafy.sponity.jwt.JWTUtil;
+import com.ssafy.sponity.model.dto.Club;
 import com.ssafy.sponity.model.dto.User;
 import com.ssafy.sponity.model.service.MypageService;
 import com.ssafy.sponity.model.service.S3Service;
@@ -161,6 +163,24 @@ public class MypageController {
 		String userId = jwtUtil.getUserId(token);
 		
 		s3Service.deleteProfilePicture(fileName, userId);
+	}
+	
+	
+	// ----- 내가 가입한 클럽 목록 확인 -----------------------------------------------------------------------------------------------
+	
+	
+	@GetMapping("/club-list")
+	public ResponseEntity<List<Club>> getMyClubList(HttpServletRequest request) {
+		String token = request.getHeader("Authorization").split(" ")[1];
+		String userId = jwtUtil.getUserId(token);
+		
+		List<Club> clubList = mypageService.getMyClubList(userId);
+		
+		if (clubList != null) {
+			return new ResponseEntity<>(clubList, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
 	
 }

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.ssafy.sponity.model.dto.Board;
 import com.ssafy.sponity.model.dto.Club;
+import com.ssafy.sponity.model.dto.Review;
 import com.ssafy.sponity.model.dto.User;
 
 public interface ClubService {
@@ -36,6 +37,12 @@ public interface ClubService {
 	int modifyBoard(Board board);
 
 	int removeBoard(int boardId);
+
+	int createReview(Review review);
+
+	int modifyReview(Map<String, Object> map);
+
+	int removeReview(int reviewId);
 
 
 

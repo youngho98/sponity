@@ -1,10 +1,14 @@
 package com.ssafy.sponity.model.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.ssafy.sponity.model.dao.MypageDao;
+import com.ssafy.sponity.model.dto.Club;
 import com.ssafy.sponity.model.dto.User;
 
 @Service
@@ -106,8 +110,27 @@ public class MypageServiceImpl implements MypageService {
         
 		return -1;
 	}
+
+
+	// ----- 내가 가입한 클럽 목록 확인 -----------------------------------------------------------------------------------------------
+
 	
-	
-	
+	@Override
+	public List<Club> getMyClubList(String userId) {
+		// member 테이블에서 userId로 가입된 clubId 검색
+		List<Integer> clubIdList = mypageDao.selectMyClubId(userId);
+		
+		// club 테이블에서 clubId에 해당하는 클럽 검색
+		List<Club> myClubList = new ArrayList<>();
+		
+		for (int i = 0; i < clubIdList.size(); i++) {
+			int clubId = clubIdList.get(i);
+			Club club = mypageDao.selectMyClub(clubId);
+			
+			myClubList.add(club);
+		}
+		
+		return myClubList;
+	}
 
 }

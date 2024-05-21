@@ -149,4 +149,25 @@
 	<!-- _____클럽 게시판 내 댓글 기능________________________________________________________________________________________ -->
 	
 	
+	<!-- 댓글 작성 -->
+	<insert id="insertReview" parameterType="Review">
+		INSERT INTO review (board_id, user_id, content)
+		VALUES (#{boardId}, #{userId}, #{content})
+	</insert>
+	
+	
+	<!-- 댓글 수정 -->
+	<update id="updateReview" >
+		UPDATE review
+		SET content = #{content}
+		WHERE review_id = #{reviewId}
+	</update>
+	
+	
+	<!-- 댓글 삭제 -->
+	<delete id="deleteReview" parameterType="int">
+		DELETE FROM review
+		WHERE review_id = #{reviewId}
+	</delete>
+	
 </mapper>

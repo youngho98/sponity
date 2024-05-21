@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.ssafy.sponity.jwt.JWTUtil;
 import com.ssafy.sponity.model.dto.Board;
 import com.ssafy.sponity.model.dto.Club;
+import com.ssafy.sponity.model.dto.Review;
 import com.ssafy.sponity.model.dto.User;
 import com.ssafy.sponity.model.service.ClubService;
 import com.ssafy.sponity.model.service.S3Service;
@@ -57,6 +58,9 @@ public class ClubController {
 		
     	return idMap;
 	}
+	
+	
+	// ---------------------------------------------------------------------------------------------------
 	
 	
 	// 클럽 검색
@@ -418,24 +422,56 @@ public class ClubController {
 	
 	
 	// 댓글 작성
-//	@Mapping("/{clubId}/board/{boardId}")
-//	public ResponseEntity<> (@PathVariable("clubId") int clubId, HttpServletRequest request) {
-//		
-//	}
+	@PostMapping("/{clubId}/board/{boardId}")
+	public ResponseEntity<?> createReview(@PathVariable("boardId") int boardId, @RequestBody String content, HttpServletRequest request) {
+		Review review = new Review();
+
+		// boardId 세팅
+		review.setBoardId(boardId);
+		
+		// userId 세팅
+		String token = request.getHeader("Authorization").split(" ")[1];
+		String userId = jwtUtil.getUserId(token);
+		review.setUserId(userId);
+		
+		// content 세팅
+		review.setContent(content);
+		
+		int result = clubService.createReview(review);
+		
+		if (result > 0) {
+			return new ResponseEntity<>(HttpStatus.OK);
+		}
+		return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+	}
 	
 	
 	// 댓글 수정
-//	@Mapping("/{clubId}/board/{boardId}/{reviewId}")
-//	public ResponseEntity<> (@PathVariable("clubId") int clubId, HttpServletRequest request) {
-//		
-//	}
+	@PutMapping("/{clubId}/board/{boardId}/{reviewId}")
+	public ResponseEntity<?> modifyReview(@PathVariable("reviewId") int reviewId, @RequestBody String content) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("reviewId", reviewId);
+		map.put("content", content);
+		
+		int result = clubService.modifyReview(map);
+		
+		if (result > 0) {
+			return new ResponseEntity<>(HttpStatus.OK);
+		}
+		return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+	}
 	
 	
 	// 댓글 삭제
-//	@Mapping("/{clubId}/board/{boardId}/{reviewId}")
-//	public ResponseEntity<> (@PathVariable("clubId") int clubId, HttpServletRequest request) {
-//		
-//	}
+	@DeleteMapping("/{clubId}/board/{boardId}/{reviewId}")
+	public ResponseEntity<?> removeReview(@PathVariable("reviewId") int reviewId) {
+		int result = clubService.removeReview(reviewId);
+		
+		if (result > 0) {
+			return new ResponseEntity<>(HttpStatus.OK);
+		}
+		return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+	}
 	
 	
 }
