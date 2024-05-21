@@ -60,17 +60,17 @@
 	</update>
 	
 	<!-- 새로운 모임장 권한 부여 -->
-	<update id="grantLeader" parameterType="int">
+	<update id="grantLeader" parameterType="Map">
 		UPDATE member
 		SET leader = 'Y'
-		WHERE member_id = #{newLeaderId}
+		WHERE club_id = #{clubId} AND user_id = #{newLeaderId}
 	</update>
 	
 	
 	<!-- 회원 강퇴 -->
-	<delete id="deleteMember" parameterType="int">
+	<delete id="deleteMember" parameterType="Map">
 		DELETE FROM member
-		WHERE member_id = #{memberId}
+		WHERE club_id = #{clubId} AND user_id = #{expelId}
 	</delete>
 	
 </mapper>
