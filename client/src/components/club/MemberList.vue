@@ -2,16 +2,16 @@
 
   <div class="container flex flex-col items-center justify-center w-3/5 mx-auto">
     <div class="w-full px-4 py-5 mb-2 bg-white border rounded-md shadow sm:px-6 dark:bg-gray-800">
-      <h3 class="text-lg font-medium leading-6 text-gray-900 dark:text-white">
+      <h3 class="text-xl font-medium leading-6 text-gray-900 dark:text-white">
         User database
       </h3>
       <p class="max-w-2xl mt-1 text-sm text-gray-500 dark:text-gray-200">
         Details and informations about user.
       </p>
     </div>
-    <ul class="flex flex-wrap">
+    <div class="grid grid-cols-2">
       <MemberItem v-for="member in memberList" :key="member.userId" :member="member"/>
-    </ul>
+    </div>
   </div>
 
 </template>
@@ -36,7 +36,7 @@ const getMemberList = function() {
       }
     })
     .then((response) => {
-      memberList = response.data;
+      memberList.value = response.data;
     })
     .catch(() => {
       alert("회원 조회에 실패했습니다.");
