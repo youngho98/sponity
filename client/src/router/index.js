@@ -84,11 +84,6 @@ const router = createRouter({
           name: 'createClubForm',
           component: CreateClubForm,
         },
-        {
-          path: ':clubId',
-          name: 'clubManageForm',
-          component: ClubManageForm,
-        }
       ],
     },
     {
@@ -120,7 +115,12 @@ const router = createRouter({
               path: 'member-list',
               name: 'memberList',
               component: MemberList,
-            }
+            },
+            {
+              path: 'manage',
+              name: 'clubManageForm',
+              component: ClubManageForm,
+            },
           ],
         },
       ],
