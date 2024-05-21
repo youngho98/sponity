@@ -58,7 +58,7 @@ public class S3ServiceImpl implements S3Service {
         Map<String, String> map = new HashMap<>();
         map.put("url", url);
         map.put("userId", userId);
-        int result = s3Dao.updateprofilePictureUrl(map);
+        int result = s3Dao.updateProfilePictureUrl(map);
         
         if (result > 0) {
         	return url;        	
@@ -80,7 +80,7 @@ public class S3ServiceImpl implements S3Service {
             amazonS3.deleteObject(bucket, key);
             
             // DB에 저장된 이미지 파일 URL 삭제
-            s3Dao.deleteprofilePictureUrl(userId);
+            s3Dao.deleteProfilePictureUrl(userId);
         } catch (AmazonServiceException e) {
             log.error(e.toString());
         }
@@ -90,7 +90,7 @@ public class S3ServiceImpl implements S3Service {
 	// ----- 게시판 이미지 ---------------------------------------------------------------------------------------------------------
 	
 	
-	// 게시판 이미지 업로드
+	// 게시판 이미지 추가
 	@Override
 	public String uploadBoardPicture(String colName, MultipartFile file) throws IOException {
 		
@@ -157,14 +157,61 @@ public class S3ServiceImpl implements S3Service {
         // - 따라서 여기서는 DB를 수정하지 않습니다.
         return url;    
 	}
-	
-	
-	// ----- 클럽 대표 이미지 ---------------------------------------------------------------------------------------------------------
-	
-	
-	
-	// ----- 클럽 배너 이미지 ---------------------------------------------------------------------------------------------------------
-		
-	
 
+
+	// ----- 클럽 이미지 ---------------------------------------------------------------------------------------------------------
+
+	
+	// 클럽 이미지 추가
+	@Override
+	public String uploadClubPicture(MultipartFile file, int clubId) throws IOException {
+		
+		// 파일을 다른 것과 식별할 key 생성
+		String folderName = "club-picture";
+		String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename() ;
+        String key = folderName + "/" + fileName;
+        
+        // 메타데이터 생성
+        ObjectMetadata objMeta = new ObjectMetadata();
+        objMeta.setContentLength(file.getInputStream().available());
+        
+		// putObject(버킷명, 키, 파일데이터, 메타데이터)로 S3에 객체 등록
+        amazonS3.putObject(bucket, key, file.getInputStream(), objMeta);
+        
+        // 등록된 객체의 URL (decoder: URL 안의 한글or특수문자 깨짐 방지)
+        String url = URLDecoder.decode(amazonS3.getUrl(bucket, key).toString(), "utf-8");
+        
+        // 파일이 저장된 S3 서버의 URL을 DB에 저장
+        Map<String, Object> map = new HashMap<>();
+        map.put("url", url);
+        map.put("clubId", clubId);
+        int result = s3Dao.updateClubPictureUrl(map);
+        
+        if (result > 0) {
+        	return url;        	
+        } else {
+        	return null;
+        }
+	}
+
+	
+	// 클럽 이미지 삭제
+	@Override
+	public void deleteClubPicture(String fileName, int clubId) {
+		
+		try {
+			String folderName = "club-picture";
+			String key = folderName + "/" + fileName;
+			
+        	// deleteObject(버킷명, 키값)으로 객체 삭제
+            amazonS3.deleteObject(bucket, key);
+            
+            // DB에 저장된 이미지 파일 URL 삭제
+            s3Dao.deleteClubPictureUrl(clubId);
+        } catch (AmazonServiceException e) {
+            log.error(e.toString());
+        }
+		
+	}
+	
 }

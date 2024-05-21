@@ -4,15 +4,15 @@
 
 <mapper namespace="com.ssafy.sponity.model.dao.S3Dao">
 
-	<!-- 프로필 이미지 파일의 S3 서버 URL 추가 -->
-	<update id="updateprofilePictureUrl" parameterType="Map">
+	<!-- 프로필 이미지 URL 추가 -->
+	<update id="updateProfilePictureUrl" parameterType="Map">
 		UPDATE user
 		SET profile_img = #{url}
 		WHERE user_id = #{userId}
 	</update>
 	
-	<!-- 프로필 이미지 파일의 S3 서버 URL 삭제 -->
-	<update id="deleteprofilePictureUrl" parameterType="String">
+	<!-- 프로필 이미지 URL 삭제 -->
+	<update id="deleteProfilePictureUrl" parameterType="String">
 		UPDATE user
 		SET profile_img = null
 		WHERE user_id = #{userId}
@@ -38,11 +38,22 @@
 	</update>
 	
 	
-	<!-- _____클럽 대표 이미지________________________________________________________________________________________________ -->
+	<!-- _____클럽 이미지________________________________________________________________________________________________ -->
 	
 	
+	<!-- 클럽 이미지 URL 추가 -->
+	<update id="updateClubPictureUrl" parameterType="Map">
+		UPDATE club
+		SET club_img = #{url}
+		WHERE club_id = #{clubId}
+	</update>
 	
-	<!-- _____클럽 배너 이미지________________________________________________________________________________________________ -->
 	
+	<!-- 클럽 이미지 URL 삭제 -->
+	<update id="deleteClubPictureUrl" parameterType="int">
+		UPDATE club
+		SET club_img = null
+		WHERE club_id = #{clubId}
+	</update>
 	
 </mapper>

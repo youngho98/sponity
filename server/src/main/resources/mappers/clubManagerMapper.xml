@@ -73,4 +73,23 @@
 		WHERE club_id = #{clubId} AND user_id = #{expelId}
 	</delete>
 	
+	
+	<!-- _____클럽 이미지 기능___________________________________________________________________ -->
+	
+	
+	<!-- 클럽 이미지 조회 -->
+	<select id="selectClubPictureUrl">
+		SELECT club_img
+		FROM club
+		WHERE club_id = #{clubId}
+	</select>
+	
+	
+	<!-- 클럽 이미지 추가 -->
+	
+	
+	
+	<!-- 클럽 이미지 삭제 -->
+	
+	
 </mapper>

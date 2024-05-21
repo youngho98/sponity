@@ -15,4 +15,6 @@ public interface ClubManagerService {
 	int leaderChange(Map<String, Object> map);
 
 	int expelMember(Map<String, Object> map);
+
+	String getClubPicture(int clubId);
 }
