@@ -20,9 +20,9 @@ public interface ClubManagerDao {
 
 	int cancelLeader(int clubId);
 
-	int grantLeader(Map<String, Integer> map);
+	int grantLeader(Map<String, Object> map);
 
-	int deleteMember(Map<String, Integer> map);
+	int deleteMember(Map<String, Object> map);
 
 
 }
