@@ -59,4 +59,21 @@
 		WHERE user_id = #{userId}
 	</delete>
 	
+	
+	<!-- _____내가 가입한 클럽 목록 확인__________________________________________________________________ -->
+	
+	
+	<!-- 내가 가입한 클럽들의 clubId 조회 -->
+	<select id="selectMyClubId" resultType="int" parameterType="String">
+		SELECT club_id
+		FROM member
+		WHERE user_id = #{userId}
+	</select>
+	
+	<!-- 찾은 clubId를 기반으로 가입한 클럽들 정보 조회 -->
+	<select id="selectMyClub" resultType="Club" parameterType="int">
+		SELECT * FROM club
+		WHERE club_id = #{clubId}
+	</select>
+	
 </mapper>
