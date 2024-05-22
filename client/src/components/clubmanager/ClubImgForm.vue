@@ -47,6 +47,8 @@ const url = `http://localhost:8080/club-manager/${route.params.clubId}/profile-i
 
 const imgUrl = ref('');
 
+const originFile = ref('');
+
 onMounted(() => {
   axios.get(`${url}`, {
     headers: {
@@ -55,9 +57,10 @@ onMounted(() => {
   })
     .then((response) => {
       imgUrl.value = response.data;
+      originFile.value = response.data;
     })
     .catch(() => {
-      alert("현재 프로필 이미지를 불러오는데 실패했습니다.");
+      console.log("이미지가 없습니다.");
     })
 })
 
@@ -86,6 +89,7 @@ const uploadFile = async () => {
       }
     });
     imgUrl.value = response.data;
+    originFile.value = response.data;
     console.log('File uploaded successfully:', response.data);
   } catch (error) {
     console.error('Error uploading file:', error);
@@ -93,10 +97,9 @@ const uploadFile = async () => {
 };
 
 // 기존 이미지 삭제
-const fileName = imgUrl.value.split("/")[4];
-
 const deleteFile = async function () {
   try {
+    const fileName = originFile.value.split("/")[4];
     const response = await axios.delete(`${url}/${fileName}`, {
       headers: {
         Authorization: sessionStorage.getItem('access-token')
