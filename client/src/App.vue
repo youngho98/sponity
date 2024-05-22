@@ -10,6 +10,8 @@ import TheFooterNav from '@/components/common/TheFooterNav.vue'
   <TheFooterNav />
 </template>
 
-<style scoped>
-
+<style>
+.back-black {
+  background-color: #171819;
+}
 </style>
