@@ -37,8 +37,13 @@
 import ClubItem from '@/components/club/ClubItem.vue';
 
 import { useClubStore } from '@/stores/club';
+import { onMounted } from 'vue';
 
 const clubStore = useClubStore();
+
+onMounted(() => {
+  clubStore.searchClub(clubStore.searchInfo);
+})
 </script>
 
 

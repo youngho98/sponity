@@ -37,7 +37,7 @@
           </div>
         </div>
         <div class="flex w-full my-4">
-          <input type="button" @click="search" value="Search"
+          <input type="button" @click="insertSearch" value="Search"
             class="py-2 px-4  bg-green-600 hover:bg-green-700 focus:ring-green-500 focus:ring-offset-green-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg " />
         </div>
       </form>
@@ -46,6 +46,7 @@
 </template>
 
 <script setup>
+import router from '@/router';
 import { useClubStore } from '@/stores/club';
 import { ref, onMounted } from 'vue';
 
@@ -58,8 +59,8 @@ const searchInfo = ref({
 
 const clubStore = useClubStore();
 
-const search = function () {
-  clubStore.search(searchInfo);
+const insertSearch = function () {
+  clubStore.insertSearch(searchInfo);
 }
 
 const isScriptLoaded = ref(false);

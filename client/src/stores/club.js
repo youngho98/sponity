@@ -15,15 +15,29 @@ export const useClubStore = defineStore('club', () => {
 
   const clubInfo = ref({});
 
-  const search = function (clubInfo) {
-    axios.post(`${URL}/search`, clubInfo.value, {
+  const searchInfo = ref({
+    category: '',
+    wideArea: '',
+    detailArea: '',
+    keyword: '',
+  });
+
+  const insertSearch = function (searchForm) {
+    searchInfo.value.category = searchForm.value.category;
+    searchInfo.value.wideArea = searchForm.value.wideArea;
+    searchInfo.value.detailArea = searchForm.value.detailArea;
+    searchInfo.value.keyword = searchForm.value.keyword;
+    router.push({ name: 'clubList' });
+  }
+
+  const searchClub = function (searchForm) {
+    axios.post(`${URL}/search`, searchForm, {
       headers: {
         Authorization: sessionStorage.getItem('access-token')
       }
     })
       .then((response) => {
         clubList.value = response.data;
-        router.push({ name: 'clubList' });
       })
       .catch(() => {
         alert("검색에 실패했습니다.")
@@ -46,45 +60,45 @@ export const useClubStore = defineStore('club', () => {
       })
   }
 
-  const like = function() {
+  const like = function () {
     axios.post(`${URL}/${route.params.clubId}/like`, null, {
       headers: {
         Authorization: sessionStorage.getItem('access-token')
       }
     })
-    .then(() => {
-      router.go(0);
-    })
-    .catch(() => {
-      alert("server error");
-    })
+      .then(() => {
+        router.go(0);
+      })
+      .catch(() => {
+        alert("server error");
+      })
   }
 
-  const unlike = function() {
+  const unlike = function () {
     axios.delete(`${URL}/${route.params.clubId}/like`, {
       headers: {
         Authorization: sessionStorage.getItem('access-token')
       }
     })
-    .then(() => {
-      router.go(0);
-    })
-    .catch(() => {
-      alert("server error");
-    })
+      .then(() => {
+        router.go(0);
+      })
+      .catch(() => {
+        alert("server error");
+      })
   }
 
-  const register = function() {
+  const register = function () {
     axios.post(`${URL}/${route.params.clubId}`, null, {
       headers: {
         Authorization: sessionStorage.getItem('access-token')
       }
     })
-    .then(() => {
-      router.go(0);
-    })
-    .catch((error) => {
-      let num = error.response.data;
+      .then(() => {
+        router.go(0);
+      })
+      .catch((error) => {
+        let num = error.response.data;
         let message = "";
         switch (num) {
           case 1:
@@ -94,20 +108,20 @@ export const useClubStore = defineStore('club', () => {
             message = "server error";
         }
         alert(message);
-    })
+      })
   }
 
-  const unregister = function() {
+  const unregister = function () {
     axios.delete(`${URL}/${route.params.clubId}`, {
       headers: {
         Authorization: sessionStorage.getItem('access-token')
       }
     })
-    .then(() => {
-      router.go(0);
-    })
-    .catch((error) => {
-      let num = error.response.data;
+      .then(() => {
+        router.go(0);
+      })
+      .catch((error) => {
+        let num = error.response.data;
         let message = "";
         switch (num) {
           case 1:
@@ -117,13 +131,15 @@ export const useClubStore = defineStore('club', () => {
             message = "server error";
         }
         alert(message);
-    })
+      })
   }
 
   return {
     clubList,
     clubInfo,
-    search,
+    searchInfo,
+    insertSearch,
+    searchClub,
     getClubInfo,
     like,
     unlike,
