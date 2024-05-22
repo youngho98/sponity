@@ -177,7 +177,7 @@
 	
 	
 	<!-- 댓글 수정 -->
-	<update id="updateReview" >
+	<update id="updateReview" parameterType="Review">
 		UPDATE review
 		SET content = #{content}
 		WHERE review_id = #{reviewId}
