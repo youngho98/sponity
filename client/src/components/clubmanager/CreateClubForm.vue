@@ -54,7 +54,9 @@
 </template>
 
 <script setup>
+import router from '@/router';
 import { useClubManagerStore } from '@/stores/clubManager';
+import { useUserStore } from '@/stores/user';
 import { ref, onMounted } from 'vue';
 
 const clubInfo = ref({
@@ -65,9 +67,15 @@ const clubInfo = ref({
   introduction: '',
 });
 
+const userStore = useUserStore();
 const clubManagerStore = useClubManagerStore();
 
 const create = function () {
+  if (userStore.loginUser.nickname === '') {
+    alert("로그인이 필요합니다.");
+    router.push({name: 'loginForm'});
+    return;
+  }
   clubManagerStore.create(clubInfo);
 }
 

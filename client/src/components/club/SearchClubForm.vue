@@ -62,6 +62,11 @@ const userStore = useUserStore();
 const clubStore = useClubStore();
 
 const insertSearch = function () {
+  if (userStore.loginUser.nickname === '') {
+    alert("로그인이 필요합니다.");
+    router.push({name: 'loginForm'});
+    return;
+  }
   userStore.loginUser.showMyClub = 0;
   clubStore.insertSearch(searchInfo);
 }

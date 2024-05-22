@@ -38,7 +38,9 @@
 </template>
 
 <script setup>
+import router from '@/router';
 import { useChatgptStore } from '@/stores/chatgpt';
+import { useUserStore } from '@/stores/user';
 import { ref, onMounted } from 'vue';
 
 const searchInfoB = ref({
@@ -47,9 +49,15 @@ const searchInfoB = ref({
   category: '',
 });
 
+const userStore = useUserStore();
 const chatgptStore = useChatgptStore();
 
 const searchRestaurant = function () {
+  if (userStore.loginUser.nickname === '') {
+    alert("로그인이 필요합니다.");
+    router.push({name: 'loginForm'});
+    return;
+  }
   chatgptStore.searchRestaurant(searchInfoB);
 }
 
