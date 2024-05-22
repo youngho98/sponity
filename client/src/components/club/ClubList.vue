@@ -1,6 +1,6 @@
 <template>
 
-  <div class="w-3/4 mx-auto my-10 p-12 bg-white">
+  <div class="w-3/4 mx-auto my-40 p-12 bg-white">
     <div class="flex items-end justify-between mb-12 header">
       <div class="title">
         <p class="mb-4 text-4xl font-bold text-gray-800">

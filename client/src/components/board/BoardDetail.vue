@@ -1,7 +1,7 @@
 <template>
 
   <section class="text-gray-600 body-font overflow-hidden">
-    <div class="container py-12 mx-auto">
+    <div class="container py-12 mx-auto mb-20">
       <div class="w-3/5 mx-auto flex flex-wrap">
         <div class="flex flex-row-reverse ml-auto">
           <button

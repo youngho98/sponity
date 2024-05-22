@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col max-w-3xl bg-white rounded-lg shadow-2xl shadow-gray-500 px-8 py-8 mx-auto my-24">
+  <div class="flex flex-col max-w-3xl bg-white rounded-lg shadow-2xl px-8 py-8 mx-auto mt-20 mb-40">
     <div class="self-center mb-2 text-2xl font-light text-gray-500">
       게시글 작성
     </div>

@@ -1,5 +1,5 @@
 <template>
-  <section class="h-screen bg-white my-24">
+  <section class="h-screen bg-white my-40">
     <form class="container max-w-2xl mx-auto shadow-2xl w-3/4">
       <div class="p-4 border-t-2 border-green-400 rounded-lg bg-gray-100/5 ">
         <div class="max-w-sm mx-auto md:w-full md:mx-0">

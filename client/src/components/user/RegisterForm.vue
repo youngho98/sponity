@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col max-w-2xl bg-white rounded-lg shadow-2xl shadow-gray-500 px-8 py-8 mx-auto my-24">
+  <div class="flex flex-col max-w-2xl bg-white rounded-lg shadow-2xl shadow-gray-500 px-8 py-8 mx-auto my-40">
     <div class="self-center mb-2 text-2xl font-light text-gray-500">
       회원가입
     </div>

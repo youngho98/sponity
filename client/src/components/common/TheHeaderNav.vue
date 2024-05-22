@@ -8,14 +8,14 @@
               <a class="flex-shrink-0" href="/">
                 <img class="w-40 h-20" src="@/assets/sponity-logo.png" alt="sponity" />
               </a>
-              <RouterLink :to="{ name: 'searchClubForm' }"
-                class="text-gray-50 hover:text-green-500 px-3 py-2 ml-12 rounded-md text-base font-medium">
-                클럽검색
-              </RouterLink>
               <RouterLink :to="{ name: 'createClubForm' }"
-                class="text-gray-50  hover:text-green-500 px-3 py-2 rounded-md text-base font-medium">
+                class="text-gray-50  hover:text-green-500 px-3 py-2 ml-12 rounded-md text-base font-medium">
                 클럽생성
               </RouterLink>
+              <RouterLink :to="{ name: 'searchClubForm' }"
+                class="text-gray-50 hover:text-green-500 px-3 py-2 rounded-md text-base font-medium">
+                클럽검색
+              </RouterLink>  
               <RouterLink :to="{ name: 'chatgpt' }"
                 class="text-gray-50  hover:text-green-500 px-3 py-2 rounded-md text-base font-medium">
                 추천! with <b>ChatGPT</b>

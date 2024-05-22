@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col max-w-3xl bg-white rounded-lg shadow-2xl shadow-gray-500 px-8 py-8 mx-auto my-24">
+  <div class="flex flex-col max-w-3xl bg-white rounded-lg shadow-2xl px-8 py-8 mx-auto my-24">
     <div class="self-center mb-2 text-2xl font-light text-gray-500">
       클럽 관리
     </div>
@@ -16,10 +16,10 @@
         <p class="text-xs text-gray-500 mt-3 mx-3">운동 종목</p>
         <div class="flex flex-wrap text-center mb-2">
           <div v-for="(item, index) in categoryList" :key="index"
-            class="flex items-center border border-gray-200 rounded px-3 mx-3 my-2">
+            class="flex items-center border border-gray-200 rounded px-2 mx-3 my-2">
             <input type="radio" :id="item.key" v-model="clubInfo.category" :value="item.value"
               class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-1" />
-            <label :for="item.key" class="w-full py-4 ms-2 text-sm font-medium text-gray-900 ">{{
+            <label :for="item.key" class="w-full py-2 ms-2 text-sm font-medium text-gray-900 ">{{
               item.value }}</label>
           </div>
         </div>
