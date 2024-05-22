@@ -54,7 +54,7 @@ public interface ClubDao {
 
 	int insertReview(Review review);
 
-	int updateReview(Map<String, Object> map);
+	int updateReview(Review review);
 
 	int deleteReview(int reviewId);
 

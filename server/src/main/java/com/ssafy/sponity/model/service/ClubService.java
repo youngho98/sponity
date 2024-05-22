@@ -42,7 +42,7 @@ public interface ClubService {
 
 	int createReview(Review review);
 
-	int modifyReview(Map<String, Object> map);
+	int modifyReview(Review review);
 
 	int removeReview(int reviewId);
 

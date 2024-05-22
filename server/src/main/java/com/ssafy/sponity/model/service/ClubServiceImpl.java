@@ -264,8 +264,8 @@ public class ClubServiceImpl implements ClubService {
 
 	// 댓글 수정
 	@Override
-	public int modifyReview(Map<String, Object> map) {
-		return clubDao.updateReview(map);
+	public int modifyReview(Review review) {
+		return clubDao.updateReview(review);
 	}
 
 

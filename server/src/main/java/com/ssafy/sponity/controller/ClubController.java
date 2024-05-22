@@ -437,9 +437,9 @@ public class ClubController {
 	
 	// 댓글 작성
 	@PostMapping("/{clubId}/board/{boardId}")
-	public ResponseEntity<?> createReview(@PathVariable("boardId") int boardId, @RequestBody String content, HttpServletRequest request) {
-		Review review = new Review();
-
+	public ResponseEntity<?> createReview(@PathVariable("boardId") int boardId, @RequestBody Review review, HttpServletRequest request) {
+		// 입력 직후의 review 객체에는 content 값만 존재
+		
 		// boardId 세팅
 		review.setBoardId(boardId);
 		
@@ -447,9 +447,6 @@ public class ClubController {
 		String token = request.getHeader("Authorization").split(" ")[1];
 		String userId = jwtUtil.getUserId(token);
 		review.setUserId(userId);
-		
-		// content 세팅
-		review.setContent(content);
 		
 		int result = clubService.createReview(review);
 		
@@ -462,12 +459,13 @@ public class ClubController {
 	
 	// 댓글 수정
 	@PutMapping("/{clubId}/board/{boardId}/{reviewId}")
-	public ResponseEntity<?> modifyReview(@PathVariable("reviewId") int reviewId, @RequestBody String content) {
-		Map<String, Object> map = new HashMap<>();
-		map.put("reviewId", reviewId);
-		map.put("content", content);
+	public ResponseEntity<?> modifyReview(@PathVariable("reviewId") int reviewId, @RequestBody Review review) {
+		// 입력 직후의 review 객체에는 content 값만 존재
 		
-		int result = clubService.modifyReview(map);
+		// reviewId 세팅
+		review.setReviewId(reviewId);
+		
+		int result = clubService.modifyReview(review);
 		
 		if (result > 0) {
 			return new ResponseEntity<>(HttpStatus.OK);
