@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-      <div id="map"></div>
+      <div id="map" class="shadow-xl"></div>
       <div class="controls">
         <button @click="displayMarkers(searchList)">추천 마커 표시</button>
         <button @click="initMap">내위치</button>
@@ -162,6 +162,8 @@ flex-direction: column;
 align-items: center;
 justify-content: center;
 height: 100vh;
+margin-left: auto;
+margin-right: auto;
 }
 
 /* 지도 컨테이너 */
@@ -186,13 +188,13 @@ padding: 7px 10px;
 font-size: 16px;
 border: none;
 border-radius: 5px;
-background-color: #a5ef44;
-color: black;
+background-color: #16a34a;
+color: white;
 cursor: pointer;
 }
 
 button:hover {
-background-color: #9dce09;
+background-color: #15803d;
 }
 
 /* 테이블 컨테이너 */
