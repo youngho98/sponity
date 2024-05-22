@@ -67,6 +67,7 @@ export const useBoardStore = defineStore('board', () => {
     })
     .then(() => {
       alert("댓글이 등록되었습니다.");
+      router.go(0);
     })
     .catch(() => {
       alert("댓글 등록에 실패했습니다.");
@@ -81,6 +82,7 @@ export const useBoardStore = defineStore('board', () => {
     })
     .then(() => {
       alert("댓글이 수정되었습니다.");
+      router.go(0);
     })
     .catch(() => {
       alert("댓글 수정에 실패했습니다.");
@@ -95,6 +97,7 @@ export const useBoardStore = defineStore('board', () => {
     })
     .then(() => {
       alert("댓글이 삭제되었습니다.");
+      router.go(0);
     })
     .catch(() => {
       alert("댓글 삭제에 실패했습니다.");

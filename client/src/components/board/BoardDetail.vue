@@ -4,8 +4,9 @@
     <div class="container py-12 mx-auto">
       <div class="w-3/5 mx-auto flex flex-wrap">
         <div class="flex flex-row-reverse ml-auto">
-          <a href="#" @click="removeBoard" class="mx-2">삭제</a>
-          <RouterLink :to="{ name: 'modifyBoardForm', params: { boardId: boardStore.boardInfo.boardId } }" class="mx-2">
+          <button @click="removeBoard" class="mx-2 text-sky-600 hover:text-sky-700">삭제</button>
+          <RouterLink :to="{ name: 'modifyBoardForm', params: { boardId: boardStore.boardInfo.boardId } }"
+            class="mx-2 text-sky-600 hover:text-sky-700">
             수정</RouterLink>
         </div>
         <div class="w-full pb-6 my-0">
@@ -22,11 +23,14 @@
           </div>
         </div>
         <div class="flex flex-wrap">
-          <img v-if="boardStore.boardInfo.img1 !== null" :src="boardStore.boardInfo.img1" class="w-72 h-54 mx-1 object-cover object-center rounded">
+          <img v-if="boardStore.boardInfo.img1 !== null" :src="boardStore.boardInfo.img1"
+            class="w-72 h-54 mx-1 object-cover object-center rounded">
           <img v-else src="@/assets/no-image.png" class="w-72 h-54 mx-1 object-cover object-center rounded">
-          <img v-if="boardStore.boardInfo.img2 !== null" :src="boardStore.boardInfo.img2" class="w-72 h-54 mx-1 object-cover object-center rounded">
+          <img v-if="boardStore.boardInfo.img2 !== null" :src="boardStore.boardInfo.img2"
+            class="w-72 h-54 mx-1 object-cover object-center rounded">
           <img v-else src="@/assets/no-image.png" class="w-72 h-54 mx-1 object-cover object-center rounded">
-          <img v-if="boardStore.boardInfo.img3 !== null" :src="boardStore.boardInfo.img3" class="w-72 h-54 mx-1 object-cover object-center rounded">
+          <img v-if="boardStore.boardInfo.img3 !== null" :src="boardStore.boardInfo.img3"
+            class="w-72 h-54 mx-1 object-cover object-center rounded">
           <img v-else src="@/assets/no-image.png" class="w-72 h-54 mx-1 object-cover object-center rounded">
         </div>
 
