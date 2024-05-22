@@ -41,7 +41,9 @@ const userStore = useUserStore();
 const boardStore = useBoardStore();
 const route = useRoute();
 
-const reviewContent = ref('');
+const reviewContent = ref({
+  content: ''
+});
 
 const props = defineProps({
   review: Object
