@@ -11,7 +11,7 @@
         class="innline-block mt-0 mr-10 text-green-600 hover:text-green-800" href="#">
         클럽 목록
       </RouterLink>
-      <RouterLink :to="{ name: 'boardList' }"
+      <RouterLink v-if="userStore.loginUser.userStatus !== 1" :to="{ name: 'boardList' }"
         class="innline-block mt-0 mr-10 text-green-600 hover:text-green-800" href="#">
         게시판
       </RouterLink>
@@ -42,14 +42,6 @@ import { useClubStore } from '@/stores/club';
 
 const userStore = useUserStore();
 const clubStore = useClubStore();
-
-const like = function () {
-  clubStore.like();
-}
-
-const unlike = function () {
-  clubStore.unlike();
-}
 
 const register = function () {
   clubStore.register();
