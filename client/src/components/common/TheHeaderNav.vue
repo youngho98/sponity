@@ -4,9 +4,9 @@
       <div class="px-8 mx-auto max-w-7xl">
         <div class="flex items-center justify-between h-16">
           <div class="w-full justify-between flex items-center">
-            <div class="flex">
+            <div class="flex items-center">
               <a class="flex-shrink-0" href="/">
-                <img class="w-40 h-12" src="@/assets/sponity-logo.png" alt="sponity" />
+                <img class="w-40 h-20" src="@/assets/sponity-logo.png" alt="sponity" />
               </a>
               <RouterLink :to="{ name: 'searchClubForm' }"
                 class="text-green-500 hover:text-green-800 px-3 py-2 ml-12 rounded-md text-xl font-medium">
