@@ -1,6 +1,6 @@
 <template>
 
-  <div class="flex flex-col max-w-2xl bg-white rounded-lg shadow shadow-gray-500 px-8 py-8 mx-auto my-10">
+  <div class="flex flex-col max-w-2xl bg-white rounded-lg shadow-2xl shadow-gray-500 px-8 py-8 mx-auto my-10">
     <div class="p-6">
       <div class="self-center mb-2 text-base font-light text-gray-500">
         운동할 장소 추천 받기!
@@ -16,7 +16,7 @@
               class="w-1/3 rounded-lg border-transparent appearance-none border border-gray-300 py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
               readonly :value="searchInfoA.detailArea" placeholder="시/군/구" />
             <input type="button" @click="execDaumPostcode" value="주소 입력" :disabled="!isScriptLoaded"
-              class="w-1/4 py-2 px-4  bg-green-600 hover:bg-green-700 focus:ring-green-500 focus:ring-offset-green-200 text-white transition ease-in duration-200 text-center text-sm font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg " />
+              class="w-1/4 py-2 px-4 cursor-pointer bg-green-500 hover:bg-green-600 focus:ring-green-500 focus:ring-offset-green-200 text-white transition ease-in duration-200 text-center text-sm font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg " />
           </div>
         </div>
         <div class="flex flex-col mb-2">
@@ -29,7 +29,7 @@
         </div>
         <div class="flex w-full my-4">
           <input type="button" @click="searchExercisePlace" value="검색하기"
-            class="py-2 px-4  bg-green-600 hover:bg-green-700 focus:ring-green-500 focus:ring-offset-green-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg " />
+            class="py-2 px-4 cursor-pointer bg-green-500 hover:bg-green-600 focus:ring-green-500 focus:ring-offset-green-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg " />
         </div>
       </form>
     </div>

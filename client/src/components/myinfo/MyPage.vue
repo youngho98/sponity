@@ -1,6 +1,6 @@
 <template>
   <section class="h-screen bg-white my-24">
-    <form class="container max-w-2xl mx-auto shadow-md w-3/4">
+    <form class="container max-w-2xl mx-auto shadow-2xl w-3/4">
       <div class="p-4 border-t-2 border-green-400 rounded-lg bg-gray-100/5 ">
         <div class="max-w-sm mx-auto md:w-full md:mx-0">
           <div class="inline-flex items-center space-x-4">
@@ -10,19 +10,18 @@
               {{ profileStore.loginUser.userId }} 님의 유저 정보
             </h1>
             <RouterLink :to="{ name: 'profileImgForm' }" class="block text-sky-600 hover:text-sky-700"> 이미지 변경 </RouterLink>
-            <!-- <button class="block text-sky-600 hover:text-sky-700"> 나의 클럽 보기</button> -->
           </div>
         </div>
       </div>
       <div class="space-y-6 bg-white">
         <div class="items-center w-full p-4 space-y-0 text-gray-500 inline-flex">
           <h2 class="max-w-sm mx-auto w-1/3">
-            Personal info
+            개인 정보
           </h2>
           <div class="max-w-sm mx-auto space-y-5 w-2/3">
             <div>
               <div class=" relative flex items-center">
-                <h3 class="mx-5 text-sm">Name</h3>
+                <h3 class="mx-5 text-sm">이름</h3>
                 <input type="text" v-model="profileStore.loginUser.userName"
                   class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
                   :placeholder="profileStore.loginUser.userName" />
@@ -30,7 +29,7 @@
             </div>
             <div>
               <div class=" relative flex items-center">
-                <h3 class="mx-5 text-sm">Nickname</h3>
+                <h3 class="mx-5 text-sm">닉네임</h3>
                 <input type="text" v-model="profileStore.loginUser.nickname"
                   class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
                   :placeholder="profileStore.loginUser.nickname" />
@@ -38,7 +37,7 @@
             </div>
             <div>
               <div class=" relative flex items-center">
-                <h3 class="mx-5 text-sm">Email</h3>
+                <h3 class="mx-5 text-sm">이메일</h3>
                 <input type="text" v-model="profileStore.loginUser.email"
                   class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
                   :placeholder="profileStore.loginUser.email" />
@@ -49,7 +48,7 @@
         <hr />
         <div class="items-center w-full p-8 space-y-0 text-gray-500 inline-flex">
           <h2 class="max-w-sm mx-auto w-4/12">
-            Change Area
+            지역 변경
           </h2>
           <div class="max-w-sm mx-auto space-y-5 w-5/12 pl-9 inline-flex">
             <div class=" relative ">
@@ -62,26 +61,26 @@
             </div>
           </div>
           <div class="text-center w-3/12 pl-6">
-            <input type="button" value="Change" @click="execDaumPostcode" :disabled="!isScriptLoaded"
-              class="py-2 px-4  bg-green-600 hover:bg-green-700 focus:ring-green-500 focus:ring-offset-green-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg " />
+            <input type="button" value="변경" @click="execDaumPostcode" :disabled="!isScriptLoaded"
+              class="py-2 px-4 cursor-pointer bg-green-500 hover:bg-green-600 focus:ring-green-500 focus:ring-offset-green-200 text-white w-full transition ease-in duration-200 text-center text-sm font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg " />
           </div>
         </div>
         <hr />
         <div class="items-center w-full p-8 space-y-0 text-gray-500 inline-flex">
           <h2 class="max-w-sm mx-auto w-4/12">
-            Change password
+            비밀번호 변경
           </h2>
           <div class="max-w-sm mx-auto space-y-5 w-5/12 pl-9 inline-flex">
             <div class=" relative ">
-              <p class="text-xs text-gray-500 mt-3">Current Password</p>
+              <p class="text-xs text-gray-500 mt-3">현재 비밀번호</p>
               <input type="password" v-model="password.curPw"
                 class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
                 placeholder="Current Password" />
-              <p class="text-xs text-gray-500 mt-3">New Password</p>
+              <p class="text-xs text-gray-500 mt-3">새 비밀번호</p>
               <input type="password" v-model="password.newPw"
                 class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
                 placeholder="New Password" />
-              <p class="text-xs text-gray-500 mt-3">New Password Check</p>
+              <p class="text-xs text-gray-500 mt-3">비밀번호 재확인</p>
               <input type="password" v-model="password.newPwCheck"
                 class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
                 placeholder="New Password Check" />
@@ -89,18 +88,18 @@
           </div>
           <div class="text-center w-3/12 pl-6">
             <input type="button" value="Change" @click="changePw"
-              class="py-2 px-4  bg-green-600 hover:bg-green-700 focus:ring-green-500 focus:ring-offset-green-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg " />
+              class="py-2 px-4 cursor-pointer bg-green-500 hover:bg-green-600 focus:ring-green-500 focus:ring-offset-green-200 text-white w-full transition ease-in duration-200 text-center text-sm font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg " />
           </div>
         </div>
         <hr />
 
         <div class="flex justify-between px-4 pb-4 text-gray-500">
-          <input type="button" value="Withdrawal" @click="withdraw"
-            class="py-2 px-4 w-1/4 bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-red-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg " />
-          <input type="button" value="My Clubs" @click="showMyClubs"
-            class="py-2 px-4 w-1/4 bg-sky-600 hover:bg-sky-700 focus:ring-sky-500 focus:ring-offset-sky-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg " />
-          <input type="button" value="Save" @click="modifyProfile"
-            class="py-2 px-4 w-1/4 bg-green-600 hover:bg-green-700 focus:ring-green-500 focus:ring-offset-green-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg " />
+          <input type="button" value="회원 탈퇴" @click="withdraw"
+            class="py-2 px-4 w-1/4 cursor-pointer bg-red-500 hover:bg-red-600 focus:ring-red-500 focus:ring-offset-red-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg " />
+          <input type="button" value="나의 클럽" @click="showMyClubs"
+            class="py-2 px-4 w-1/4 cursor-pointer bg-sky-500 hover:bg-sky-600 focus:ring-sky-500 focus:ring-offset-sky-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg " />
+          <input type="button" value="저장" @click="modifyProfile"
+            class="py-2 px-4 w-1/4 cursor-pointer bg-green-500 hover:bg-green-600 focus:ring-green-500 focus:ring-offset-green-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg " />
         </div>
       </div>
     </form>

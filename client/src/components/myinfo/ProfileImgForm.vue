@@ -1,6 +1,6 @@
 <template>
 
-  <div class="p-4 bg-white shadow-lg rounded-2xl max-w-xl mx-auto my-40">
+  <div class="p-4 bg-white shadow-2xl rounded-2xl max-w-xl mx-auto my-40">
     <div class="flex flex-row items-start gap-4">
       <img v-if="imgUrl !== ''" :src="imgUrl" class="rounded-lg w-40 h-40" />
       <img v-else src="@/assets/avatar.png" class="rounded-lg w-40 h-40" />
@@ -22,12 +22,12 @@
     </div>
     <div class="flex items-center justify-between gap-4 mt-6">
       <button type="button" @click="deleteFile"
-        class="w-1/2 px-4 py-2 text-base bg-red-500 border rounded-lg text-white hover:bg-red-700 ">
-        delete
+        class="w-1/2 px-4 py-2 text-base bg-red-500 border rounded-lg text-white font-semibold hover:bg-red-600 ">
+        이미지 삭제
       </button>
       <button type="button" @click="uploadFile"
-        class="w-1/2 px-4 py-2 text-base text-white bg-green-500 border rounded-lg hover:bg-green-700 ">
-        Upload
+        class="w-1/2 px-4 py-2 text-base text-white bg-green-500 border rounded-lg font-semibold hover:bg-green-600 ">
+        이미지 업로드
       </button>
     </div>
   </div>

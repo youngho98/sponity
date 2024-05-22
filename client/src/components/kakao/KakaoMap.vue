@@ -1,7 +1,7 @@
 <template>
-    <div class="container">
-      <div id="map" class="shadow-xl"></div>
-      <div class="controls">
+    <div class="container my-24">
+      <div id="map" class="shadow-2xl"></div>
+      <div class="controls my-6">
         <button @click="displayMarkers(searchList)">추천 마커 표시</button>
         <button @click="initMap">내위치</button>
         <!-- <button @click="clearMarkers">추천 마커 해제</button> -->
@@ -188,13 +188,13 @@ padding: 7px 10px;
 font-size: 16px;
 border: none;
 border-radius: 5px;
-background-color: #16a34a;
+background-color: #22c55e;
 color: white;
 cursor: pointer;
 }
 
 button:hover {
-background-color: #15803d;
+background-color: #16a34a;
 }
 
 /* 테이블 컨테이너 */
