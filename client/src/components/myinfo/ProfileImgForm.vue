@@ -1,6 +1,6 @@
 <template>
 
-  <div class="p-4 bg-white shadow-2xl rounded-2xl max-w-xl mx-auto my-80">
+  <div class="p-4 bg-white shadow-2xl rounded-2xl max-w-xl mx-auto mt-72 mb-60">
     <div class="flex flex-row items-start gap-4">
       <img v-if="imgUrl !== ''" :src="imgUrl" class="rounded-lg w-40 h-40" />
       <img v-else src="@/assets/avatar.png" class="rounded-lg w-40 h-40" />

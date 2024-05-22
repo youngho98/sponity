@@ -1,7 +1,7 @@
 <template>
 
-  <div class="container flex flex-col items-center justify-center w-3/5 mx-auto mt-20 mb-80">
-    <div class="w-full px-4 py-5 mb-2 bg-white border rounded-md shadow sm:px-6 dark:bg-gray-800">
+  <div class="container flex flex-col items-center justify-center w-3/5 mx-auto mt-20 mb-96">
+    <div class="w-full px-4 py-4 mb-2 bg-white border rounded-md shadow sm:px-6 dark:bg-gray-800">
       <h3 class="text-xl font-medium leading-6 text-gray-900 dark:text-white">
         멤버 목록
       </h3>

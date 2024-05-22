@@ -5,26 +5,26 @@
     </div>
     <div class="p-6 mt-8">
       <form action="#">
-        <div class="flex flex-col mb-2">
+        <div class="flex flex-col mb-4">
           <div class=" relative ">
-            <p class="text-xs text-gray-500 mt-3 mx-3">클럽 이름</p>
+            <p class="text-xs text-gray-500 mt-3 mb-1 mx-2">클럽 이름</p>
             <input type="text" v-model="clubInfo.clubName"
               class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
               placeholder="Club Name" />
           </div>
         </div>
-        <p class="text-xs text-gray-500 mt-3 mx-3">운동 종목</p>
+        <p class="text-xs text-gray-500 mt-3 mb-1 mx-2">운동 종목</p>
         <div class="flex flex-wrap text-center mb-2">
           <div v-for="(item, index) in categoryList" :key="index"
-            class="flex items-center border border-gray-200 rounded px-2 mx-3 my-2">
+            class="flex items-center border border-gray-200 rounded px-2 mx-3 mb-2">
             <input type="radio" :id="item.key" v-model="clubInfo.category" :value="item.value"
               class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-1" />
-            <label :for="item.key" class="w-full py-2 ms-2 text-sm font-medium text-gray-900 ">{{
+            <label :for="item.key" class="w-full pt-2 ms-2 text-sm font-medium text-gray-900 ">{{
               item.value }}</label>
           </div>
         </div>
         <div class="flex flex-col mb-2">
-          <p class="text-xs text-gray-500 mt-3 mx-3">클럽 지역</p>
+          <p class="text-xs text-gray-500 mt-3 mb-1 mx-2">클럽 지역</p>
           <div class=" relative flex">
             <input type="text"
               class="w-5/12 rounded-lg border-transparent appearance-none border border-gray-300 py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
@@ -38,7 +38,7 @@
         </div>
         <div class="flex flex-col mb-2">
           <div class=" relative ">
-            <p class="text-xs text-gray-500 mt-3 mx-3">소개글</p>
+            <p class="text-xs text-gray-500 mt-3 mb-1 mx-2">소개글</p>
             <textarea v-model="clubInfo.introduction"
               class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full h-32 py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
               placeholder="introduction.." />

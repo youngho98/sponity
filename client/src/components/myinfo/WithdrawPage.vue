@@ -1,6 +1,6 @@
 <template>
 
-  <div class="w-96 p-4 mx-auto my-80 bg-white shadow-2xl rounded-2xl">
+  <div class="w-96 p-4 mx-auto mt-60 mb-48 bg-white shadow-2xl rounded-2xl">
     <div class="w-full h-full text-center">
       <div class="flex flex-col justify-between h-full">
         <svg width="40" height="40" class="w-12 h-12 m-auto mt-4 text-green-500" fill="currentColor"
