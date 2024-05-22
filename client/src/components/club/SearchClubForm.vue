@@ -48,6 +48,7 @@
 <script setup>
 import router from '@/router';
 import { useClubStore } from '@/stores/club';
+import { useUserStore } from '@/stores/user';
 import { ref, onMounted } from 'vue';
 
 const searchInfo = ref({
@@ -57,9 +58,11 @@ const searchInfo = ref({
   keyword: '',
 });
 
+const userStore = useUserStore();
 const clubStore = useClubStore();
 
 const insertSearch = function () {
+  userStore.loginUser.showMyClub = 0;
   clubStore.insertSearch(searchInfo);
 }
 

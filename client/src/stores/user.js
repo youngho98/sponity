@@ -11,6 +11,7 @@ export const useUserStore = defineStore('user', () => {
     profileImg: '',
     userStatus: '',
     isLike: '',
+    showMyClub: 0,
   });
 
   const register = function (userInfo) {

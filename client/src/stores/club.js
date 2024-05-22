@@ -40,8 +40,22 @@ export const useClubStore = defineStore('club', () => {
         clubList.value = response.data;
       })
       .catch(() => {
-        alert("검색에 실패했습니다.")
+        alert("검색에 실패했습니다.");
       })
+  }
+
+  const showMyClubs = function() {
+    axios.get("http://localhost:8080/my-page/club-list", {
+      headers: {
+        Authorization: sessionStorage.getItem('access-token')
+      }
+    })
+    .then((response) => {
+      clubList.value =response.data;
+    })
+    .catch(() => {
+      alert("검색에 실패했습니다.");
+    })
   }
 
   const getClubInfo = function (clubId) {
@@ -140,6 +154,7 @@ export const useClubStore = defineStore('club', () => {
     searchInfo,
     insertSearch,
     searchClub,
+    showMyClubs,
     getClubInfo,
     like,
     unlike,

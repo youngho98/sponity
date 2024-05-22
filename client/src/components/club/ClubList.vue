@@ -37,12 +37,18 @@
 import ClubItem from '@/components/club/ClubItem.vue';
 
 import { useClubStore } from '@/stores/club';
+import { useUserStore } from '@/stores/user';
 import { onMounted } from 'vue';
 
+const userStore = useUserStore();
 const clubStore = useClubStore();
 
 onMounted(() => {
-  clubStore.searchClub(clubStore.searchInfo);
+  if (userStore.loginUser.showMyClub != 1) {
+    clubStore.searchClub(clubStore.searchInfo);
+  } else {
+    clubStore.showMyClubs();
+  }
 })
 </script>
 
