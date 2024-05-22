@@ -91,8 +91,10 @@ const uploadFile = async () => {
     imgUrl.value = response.data;
     originFile.value = response.data;
     console.log('File uploaded successfully:', response.data);
+    alert("클럽 프로필 이미지가 변경되었습니다.");
   } catch (error) {
     console.error('Error uploading file:', error);
+    alert("클럽 프로필 이미지 변경에 실패했습니다.");
   }
 };
 
@@ -107,8 +109,10 @@ const deleteFile = async function () {
     });
     imgUrl.value = '';
     console.log('File deleted successfully', response.data);
+    alert("클럽 프로필 이미지가 삭제되었습니다.");
   } catch (error) {
     console.error('Error deleting file:', error);
+    alert("클럽 프로필 이미지가 삭제에 실패했습니다.");
   }
 }
 </script>

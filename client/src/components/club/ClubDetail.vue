@@ -1,7 +1,7 @@
 <template>
 
   <div class="flex w-2/3 mx-auto justify-between p-4">
-    <div class="font-semibold">
+    <div class="text-gray-400">
       {{ clubStore.clubInfo.introduction }}
     </div>
     <div>
@@ -16,8 +16,8 @@
         {{ clubStore.clubInfo.memberNum }}</button>
     </div>
   </div>
-  <img class="w-2/3 mx-auto rounded" src="@/assets/no-image.png">
-  <img src="@/assets/banner.png" class="mx-auto" />
+  <img v-if="clubStore.clubInfo.clubImg !== null" :src="clubStore.clubInfo.clubImg" class="w-2/3 mx-auto rounded" >
+  <img v-else src="@/assets/banner.png" class="mx-auto" />
 
 </template>
 
