@@ -8,8 +8,10 @@
     <div class="flex border-t border-gray-200 py-2">
       <span class="text-gray-500 w-1/6">작성일</span>
       <span class="text-gray-900 w-3/4">{{ review.regDate }}</span>
-      <button @click="modifyOn" class="text-sky-600 hover:text-sky-700 mx-auto">수정</button>
-      <button @click="deleteReview" class="text-sky-600 hover:text-sky-700 mx-auto">삭제</button>
+      <button v-if="userStore.loginUser.nickname === review.nickname" @click="modifyOn"
+        class="text-sky-600 hover:text-sky-700 mx-auto">수정</button>
+      <button v-if="userStore.loginUser.nickname === review.nickname || userStore.loginUser.userStatus === 3"
+        @click="deleteReview" class="text-sky-600 hover:text-sky-700 mx-auto">삭제</button>
     </div>
   </div>
 
@@ -57,7 +59,7 @@ const modifyReview = function () {
   boardStore.modifyReview(route.params.clubId, route.params.boardId, props.review.reviewId, reviewContent);
 }
 
-const deleteReview = function() {
+const deleteReview = function () {
   boardStore.deleteReview(route.params.clubId, route.params.boardId, props.review.reviewId);
 }
 </script>

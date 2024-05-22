@@ -4,8 +4,11 @@
     <div class="container py-12 mx-auto">
       <div class="w-3/5 mx-auto flex flex-wrap">
         <div class="flex flex-row-reverse ml-auto">
-          <button @click="removeBoard" class="mx-2 text-sky-600 hover:text-sky-700">삭제</button>
-          <RouterLink :to="{ name: 'modifyBoardForm', params: { boardId: boardStore.boardInfo.boardId } }"
+          <button
+            v-if="userStore.loginUser.nickname === boardStore.boardInfo.nickname || userStore.loginUser.userStatus === 3"
+            @click="removeBoard" class="mx-2 text-sky-600 hover:text-sky-700">삭제</button>
+          <RouterLink v-if="userStore.loginUser.nickname === boardStore.boardInfo.nickname"
+            :to="{ name: 'modifyBoardForm', params: { boardId: boardStore.boardInfo.boardId } }"
             class="mx-2 text-sky-600 hover:text-sky-700">
             수정</RouterLink>
         </div>
