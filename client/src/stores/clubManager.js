@@ -34,7 +34,7 @@ export const useClubManagerStore = defineStore('clubManager', () => {
     })
       .then(() => {
         alert("클럽이 성공적으로 수정되었습니다.");
-        router.replace({ name: 'searchClubForm' })
+        router.replace({ name: 'clubDetail' })
       })
       .catch(() => {
         alert("클럽 수정에 실패했습니다.")
@@ -49,7 +49,7 @@ export const useClubManagerStore = defineStore('clubManager', () => {
     })
       .then(() => {
         alert("클럽이 성공적으로 삭제되었습니다.");
-        router.replace({ name: 'searchClubForm' })
+        router.replace({ name: 'clubList' })
       })
       .catch((error) => {
         let num = error.response.data;
@@ -73,6 +73,7 @@ export const useClubManagerStore = defineStore('clubManager', () => {
     })
     .then(() => {
       alert("클럽장이 정상적으로 변경되었습니다.");
+      router.replace({ name: 'clubDetail' });
     })
     .catch(() => {
       alert("클럽장 위임에 실패했습니다.");
@@ -87,6 +88,7 @@ export const useClubManagerStore = defineStore('clubManager', () => {
     })
     .then(() => {
       alert("회원 삭제에 성공했습니다.");
+      router.go(0);
     })
     .catch(() => {
       alert("회원 삭제에 실패했습니다.");

@@ -9,7 +9,8 @@
             <h1 class="text-gray-600 ml-3 font-bold">
               {{ profileStore.loginUser.userId }} 님의 유저 정보
             </h1>
-            <RouterLink :to="{ name: 'profileImgForm' }" class="relative block text-sky-600"> 이미지 변경 </RouterLink>
+            <RouterLink :to="{ name: 'profileImgForm' }" class="block text-sky-600 hover:text-sky-700"> 이미지 변경 </RouterLink>
+            <!-- <button class="block text-sky-600 hover:text-sky-700"> 나의 클럽 보기</button> -->
           </div>
         </div>
       </div>
@@ -62,7 +63,7 @@
           </div>
           <div class="text-center w-3/12 pl-6">
             <input type="button" value="Change" @click="execDaumPostcode" :disabled="!isScriptLoaded"
-              class="py-2 px-4  bg-sky-600 hover:bg-sky-700 focus:ring-sky-500 focus:ring-offset-sky-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg " />
+              class="py-2 px-4  bg-green-600 hover:bg-green-700 focus:ring-green-500 focus:ring-offset-green-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg " />
           </div>
         </div>
         <hr />
@@ -88,16 +89,18 @@
           </div>
           <div class="text-center w-3/12 pl-6">
             <input type="button" value="Change" @click="changePw"
-              class="py-2 px-4  bg-sky-600 hover:bg-sky-700 focus:ring-sky-500 focus:ring-offset-sky-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg " />
+              class="py-2 px-4  bg-green-600 hover:bg-green-700 focus:ring-green-500 focus:ring-offset-green-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg " />
           </div>
         </div>
         <hr />
 
         <div class="flex justify-between px-4 pb-4 text-gray-500">
           <input type="button" value="Withdrawal" @click="withdraw"
-            class="py-2 px-4 w-1/3 bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-red-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg " />
+            class="py-2 px-4 w-1/4 bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-red-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg " />
+          <input type="button" value="My Clubs" @click="showMyClubs"
+            class="py-2 px-4 w-1/4 bg-sky-600 hover:bg-sky-700 focus:ring-sky-500 focus:ring-offset-sky-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg " />
           <input type="button" value="Save" @click="modifyProfile"
-            class="py-2 px-4 w-1/3 bg-green-600 hover:bg-green-700 focus:ring-green-500 focus:ring-offset-green-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg " />
+            class="py-2 px-4 w-1/4 bg-green-600 hover:bg-green-700 focus:ring-green-500 focus:ring-offset-green-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg " />
         </div>
       </div>
     </form>
@@ -110,6 +113,7 @@ import { useProfileStore } from '@/stores/profile';
 import { useUserStore } from '@/stores/user';
 import { onMounted, ref } from 'vue';
 
+const userStore = useUserStore();
 const profileStore = useProfileStore();
 
 const isScriptLoaded = ref(false);
@@ -160,6 +164,11 @@ const changePw = function () {
 
 const withdraw = function () {
   router.push({ name: 'withdrawPage' });
+}
+
+const showMyClubs = function() {
+  userStore.loginUser.showMyClub = 1;
+  router.push({ name: 'clubList' });
 }
 </script>
 

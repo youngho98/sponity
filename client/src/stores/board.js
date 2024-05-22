@@ -16,7 +16,8 @@ export const useBoardStore = defineStore('board', () => {
   const getBoardList = function(clubId) {
     axios.get(`${URL}/${clubId}/board`, {
       headers: {
-        Authorization: sessionStorage.getItem('access-token')
+        Authorization: sessionStorage.getItem('access-token'),
+        'Content-Type': 'text/plain',
       }
     })
       .then((response) => {
@@ -58,11 +59,59 @@ export const useBoardStore = defineStore('board', () => {
     })
   }
 
+  const createReview = function(clubId, boardId, reviewContent) {
+    axios.post(`${URL}/${clubId}/board/${boardId}`, reviewContent.value, {
+      headers: {
+        Authorization: sessionStorage.getItem('access-token')
+      }
+    })
+    .then(() => {
+      alert("댓글이 등록되었습니다.");
+      router.go(0);
+    })
+    .catch(() => {
+      alert("댓글 등록에 실패했습니다.");
+    })
+  }
+
+  const modifyReview = function(clubId, boardId, reviewId, reviewContent) {
+    axios.put(`${URL}/${clubId}/board/${boardId}/${reviewId}`, reviewContent.value, {
+      headers: {
+        Authorization: sessionStorage.getItem('access-token')
+      }
+    })
+    .then(() => {
+      alert("댓글이 수정되었습니다.");
+      router.go(0);
+    })
+    .catch(() => {
+      alert("댓글 수정에 실패했습니다.");
+    })
+  }
+
+  const deleteReview = function(clubId, boardId, reviewId) {
+    axios.delete(`${URL}/${clubId}/board/${boardId}/${reviewId}`, {
+      headers: {
+        Authorization: sessionStorage.getItem('access-token')
+      }
+    })
+    .then(() => {
+      alert("댓글이 삭제되었습니다.");
+      router.go(0);
+    })
+    .catch(() => {
+      alert("댓글 삭제에 실패했습니다.");
+    })
+  }
+
   return {
     boardList,
     boardInfo,
     getBoardList,
     getBoardInfo,
     removeBoard,
+    createReview,
+    modifyReview,
+    deleteReview,
   }
 });
