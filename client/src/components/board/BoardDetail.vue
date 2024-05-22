@@ -22,9 +22,12 @@
           </div>
         </div>
         <div class="flex flex-wrap">
-          <img alt="ecommerce" class="w-72 h-54 mx-1 object-cover object-center rounded" src="@/assets/no-image.png">
-          <img alt="ecommerce" class="w-72 h-54 mx-1 object-cover object-center rounded" src="@/assets/no-image.png">
-          <img alt="ecommerce" class="w-72 h-54 mx-1 object-cover object-center rounded" src="@/assets/no-image.png">
+          <img v-if="boardStore.boardInfo.img1 !== null" :src="boardStore.boardInfo.img1" class="w-72 h-54 mx-1 object-cover object-center rounded">
+          <img v-else src="@/assets/no-image.png" class="w-72 h-54 mx-1 object-cover object-center rounded">
+          <img v-if="boardStore.boardInfo.img2 !== null" :src="boardStore.boardInfo.img2" class="w-72 h-54 mx-1 object-cover object-center rounded">
+          <img v-else src="@/assets/no-image.png" class="w-72 h-54 mx-1 object-cover object-center rounded">
+          <img v-if="boardStore.boardInfo.img3 !== null" :src="boardStore.boardInfo.img3" class="w-72 h-54 mx-1 object-cover object-center rounded">
+          <img v-else src="@/assets/no-image.png" class="w-72 h-54 mx-1 object-cover object-center rounded">
         </div>
 
         <div class="w-full py-6 my-0">
