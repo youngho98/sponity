@@ -20,6 +20,10 @@
                 class="text-green-500  hover:text-green-800 px-3 py-2 rounded-md text-xl font-medium">
                 클럽생성
               </RouterLink>
+              <RouterLink  :to="{ name: 'chatgpt' }"
+                class="text-green-500  hover:text-green-800 px-3 py-2 rounded-md text-xl font-medium">
+                추천! with <b>ChatGPT</b>
+              </RouterLink>
             </div>
             <div class="flex">
               <div class="flex items-center ml-10 space-x-4">

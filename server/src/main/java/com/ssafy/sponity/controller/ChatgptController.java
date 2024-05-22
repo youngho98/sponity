@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.Data;
 
 @RestController
-@RequestMapping("/ai-rec")
+@RequestMapping("/chatgpt")
 public class ChatgptController {
     
     @Value("${chatgpt.apikey}")
@@ -32,10 +32,11 @@ public class ChatgptController {
     private String searchCondition = 
     		  "1. 장소는 3가지를 제시하시오. "
     		+ "2. 다음과 같이 2차원 List 형식으로 답하시오. "
-    		+ "  { {\"장소1의 이름\", \"장소1의 위도\", \"장소1의 경도\", \"추천 이유\"},"
-    		+ "    {\"장소2의 이름\", \"장소2의 위도\", \"장소2의 경도\", \"추천 이유\"},"
-    		+ "    {\"장소3의 이름\", \"장소3의 위도\", \"장소3의 경도\", \"추천 이유\"} }"
-    		+ "3. 추천 이유는 각각 한 줄로만 설명하시오.";
+    		+ "  { {\"장소1의 이름\", \"장소1의 위도\", \"장소1의 경도\", \"추천 이유 요약\", \"추천 이유 상세\"},"
+    		+ "    {\"장소2의 이름\", \"장소2의 위도\", \"장소2의 경도\", \"추천 이유 요약\", \"추천 이유 상세\"},"
+    		+ "    {\"장소3의 이름\", \"장소3의 위도\", \"장소3의 경도\", \"추천 이유 요약\", \"추천 이유 상세\"} }"
+    		+ "3. \"추천 이유 요약\"은 각각 20자 정도로 설명하시오."
+    		+ "4. \"추천 이유 상세\"는 각각 60자 정도로 \"~합니다.\"와 같은 문체로 설명하시오.";
     		
     
     
@@ -82,7 +83,7 @@ public class ChatgptController {
             // ChatGPT API에 전송할 데이터 구성
             JSONObject data = new JSONObject();
             data.put("model", "gpt-3.5-turbo");
-            data.put("temperature", 0.7);
+            data.put("temperature", 0.5);
             data.put("messages", messages);
             
             // API에 데이터를 전송
@@ -106,7 +107,7 @@ public class ChatgptController {
 
             // content 파싱하여 2차원 리스트로 변환
             List<List<String>> resultList = parseContentToList(content);
-
+            System.out.println(resultList);
             
             // 응답을 클라이언트에 반환
             // - 타입 추론 : ResponseEntity<List>를 반환시 스프링이 JSON으로 자동 변환 

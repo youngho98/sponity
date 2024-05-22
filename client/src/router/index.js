@@ -30,6 +30,10 @@ import CreateBoardForm from '@/components/board/CreateBoardForm.vue';
 import ModifyBoardForm from '@/components/board/ModifyBoardForm.vue';
 
 
+import ChatgptSearchForm from '@/components/chatgpt/ChatgptSearchForm.vue';
+import KakaoView from '@/views/KakaoView.vue';
+
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -156,6 +160,16 @@ const router = createRouter({
         },
       ],
     },
+    {
+      path: '/chatgpt',
+      name: 'chatgpt',
+      component: ChatgptSearchForm,
+    },
+    {
+      path: '/kakao',
+      name: 'kakao',
+      component: KakaoView,
+    }
   ]
 })
 
