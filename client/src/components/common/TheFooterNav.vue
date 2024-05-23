@@ -7,7 +7,7 @@
         </nav>
         <div class="w-2/3 flex flex-col items-center justify-center flex-1 border-gray-100 md:mt-0 md:border-r">
           <div class="text-gray-500 mx-12 my-3 text-xs">본 사이트의 콘텐츠는 저작권법의 보호를 받는 바 무단 전재, 복사, 배포 등을 금합니다.</div>
-          <a class="text-gray-500 hover:text-gray-700" href="https://github.com/youngho98/sponity">
+          <a class="text-gray-500 hover:text-gray-700" href="https://github.com/youngho98/sponity" target="_blank">
             <span class="sr-only">
               View on GitHub
             </span>
@@ -25,13 +25,13 @@
           </span>
           <span class="mt-7 md:mt-1 text-gray-500">
             Created by
-            <a class="underline text-gray-500 hover:text-gray-700" href="https://github.com/youngho98">
+            <a class="underline text-gray-500 hover:text-gray-700" href="https://github.com/youngho98" target="_blank">
               youngho98
             </a>
           </span>
           <span class="mt-7 md:mt-1 text-gray-500">
             Created by
-            <a class="underline text-gray-500 hover:text-gray-700" href="https://github.com/kevinlee94">
+            <a class="underline text-gray-500 hover:text-gray-700" href="https://github.com/kevinlee94" target="_blank">
               kevinlee94
             </a>
           </span>
