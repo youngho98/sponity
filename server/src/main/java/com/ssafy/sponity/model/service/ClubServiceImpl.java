@@ -181,6 +181,15 @@ public class ClubServiceImpl implements ClubService {
 			board.setNickname(nickname);			
 		}
 		
+        // 최신순으로 정렬
+		// = regDate 기준으로 내림차순 정렬
+        Collections.sort(boardList, new Comparator<Board>() {
+            @Override
+            public int compare(Board board1, Board board2) {
+                return board2.getRegDate().compareTo(board1.getRegDate());
+            }
+        });
+		
 		return boardList;
 	}
 
