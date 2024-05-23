@@ -1,7 +1,7 @@
 -- 유저 등록
 -- 비밀번호: qwer12!@
-insert into user(user_id, password, user_name, nickname, email, wide_area, detail_area)
-values ('youngho98', '$2a$10$0uglUFipGXz8N.yr.DRfw.6C3nm54cVQZR2Wvsyil7AvBB1FstaUG', '노영호', '영호', 'youngho.dev@gmail.com', '대전', '유성구');
+insert into user(user_id, password, user_name, nickname, email, wide_area, detail_area, profile_img)
+values ('youngho98', '$2a$10$0uglUFipGXz8N.yr.DRfw.6C3nm54cVQZR2Wvsyil7AvBB1FstaUG', '노영호', '영호', 'youngho.dev@gmail.com', '대전', '유성구', 'https://sponity.s3.ap-northeast-2.amazonaws.com/profile-picture/1716467970562_bluessom.png');
 insert into user(user_id, password, user_name, nickname, email, wide_area, detail_area, profile_img)
 values ('kevinlee94', '$2a$10$0uglUFipGXz8N.yr.DRfw.6C3nm54cVQZR2Wvsyil7AvBB1FstaUG', '이규빈', '규빈', 'kyubin.dev@gmail.com', '대전', '유성구', 'https://sponity.s3.ap-northeast-2.amazonaws.com/profile-picture/1716431170494_human.jpeg');
 insert into user(user_id, password, user_name, nickname, email, wide_area, detail_area, profile_img)
