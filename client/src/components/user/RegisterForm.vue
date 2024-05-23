@@ -54,7 +54,7 @@
         <div class="flex flex-col mb-2">
           <div class=" relative ">
             <p class="text-xs text-gray-500 mt-3 mb-1 mx-2">이메일</p>
-            <input type="text" v-model="userInfo.email"
+            <input type="email" v-model="userInfo.email"
               class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
               name="email" placeholder="Email Address" />
           </div>

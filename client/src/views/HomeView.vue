@@ -134,16 +134,15 @@
         <div class="ml-auto col-lg-5 col-md-6 col-12">
           <h2 class="mb-4 pb-2 text-4xl font-bold" data-aos="fade-up" data-aos-delay="200">이메일 불편접수</h2>
 
-          <form action="#" method="post" class="contact-form webform" data-aos="fade-up" data-aos-delay="400"
-            role="form">
-            <input type="text" class="form-control" name="cf-name" placeholder="Name">
+          <div class="contact-form webform" data-aos="fade-up" data-aos-delay="400">
+            <input type="text" class="form-control" name="cf-name" placeholder="Name" v-model="claim.name" />
 
-            <input type="email" class="form-control" name="cf-email" placeholder="Email">
+            <input type="email" class="form-control" name="cf-email" placeholder="Email" v-model="claim.email" />
 
-            <textarea class="form-control" rows="14" name="cf-message" placeholder="Message"></textarea>
+            <textarea class="form-control" rows="14" name="cf-message" placeholder="Message" v-model="claim.message" />
 
-            <button type="submit" class="form-control" id="submit-button" name="submit">Send Email</button>
-          </form>
+            <button @click="submit" class="form-control" id="submit-button" name="submit">Send Email</button>
+          </div>
         </div>
 
         <div class="mx-auto mt-4 mt-lg-0 mt-md-0 col-lg-5 col-md-6 col-12">
@@ -173,8 +172,35 @@
 
 <script setup>
 import { useUserStore } from '@/stores/user';
+import axios from 'axios';
+import { ref } from 'vue';
 
 const userStore = useUserStore();
+
+const claim = ref({
+  name: '',
+  email: '',
+  message: '',
+})
+
+const submit = function() {
+  if (userStore.loginUser.nickname === '') {
+    alert("로그인이 필요합니다.");
+    router.push({name: 'loginForm'});
+    return;
+  }
+  axios.post("http://localhost:8080/mail", claim.value, {
+      headers: {
+        Authorization: sessionStorage.getItem('access-token')
+      }
+    })
+    .then(() => {
+      alert("메일이 성공적으로 접수되었습니다.")
+    })
+    .catch(() => {
+      alert("메일 전송에 실패했습니다.")
+    })
+}
 </script>
 
 <style scoped></style>
