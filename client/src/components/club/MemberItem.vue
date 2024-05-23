@@ -5,7 +5,8 @@
       class="transition duration-500 shadow ease-in-out transform hover:-translate-y-1 hover:shadow-lg select-none bg-white dark:bg-gray-800 rounded-md flex flex-1 items-center p-4">
       <div class="flex flex-col items-center justify-center w-12 h-8 mr-4">
         <a href="#" class="relative block">
-          <img alt="profil" src="@/assets/avatar.png" class="mx-auto object-cover rounded-full h-12 w-12" />
+          <img v-if="member.profileImg !== null" :src="member.profileImg" class="mx-auto object-cover rounded-full h-12 w-12">
+          <img v-else src="@/assets/avatar.png" class="mx-auto object-cover rounded-full h-12 w-12" />
         </a>
       </div>
       <div class="flex-1 pl-1">
