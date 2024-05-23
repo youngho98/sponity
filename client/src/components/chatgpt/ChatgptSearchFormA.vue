@@ -7,7 +7,7 @@
       </div>
       <form action="#">
         <div class="flex flex-col mb-2">
-          <p class="text-xs text-gray-500 mt-3 mx-3">현재 어디에 있나요?</p>
+          <p class="text-xs text-gray-500 mt-3 mb-1 mx-2">현재 어디에 있나요?</p>
           <div class=" relative flex">
             <input type="text"
               class="w-5/12 rounded-lg border-transparent appearance-none border border-gray-300 py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
@@ -21,7 +21,7 @@
         </div>
         <div class="flex flex-col mb-2">
           <div class=" relative ">
-            <p class="text-xs text-gray-500 mt-3 mx-3">어떤 운동을 하고 싶나요?</p>
+            <p class="text-xs text-gray-500 mt-3 mb-1 mx-2">어떤 운동을 하고 싶나요?</p>
             <input type="text" v-model="searchInfoA.category"
               class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
               placeholder="하고 싶은 운동을 입력하세요." />
@@ -38,7 +38,9 @@
 </template>
 
 <script setup>
+import router from '@/router';
 import { useChatgptStore } from '@/stores/chatgpt';
+import { useUserStore } from '@/stores/user';
 import { ref, onMounted } from 'vue';
 
 const searchInfoA = ref({
@@ -47,9 +49,15 @@ const searchInfoA = ref({
   category: '',
 });
 
+const userStore = useUserStore();
 const chatgptStore = useChatgptStore();
 
 const searchExercisePlace = function () {
+  if (userStore.loginUser.nickname === '') {
+    alert("로그인이 필요합니다.");
+    router.push({name: 'loginForm'});
+    return;
+  }
   chatgptStore.searchExercisePlace(searchInfoA);
 }
 

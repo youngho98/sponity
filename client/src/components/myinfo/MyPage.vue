@@ -1,9 +1,9 @@
 <template>
-  <section class="h-screen bg-white my-24">
+  <section class="h-screen bg-white mt-52 mb-40">
     <form class="container max-w-2xl mx-auto shadow-2xl w-3/4">
-      <div class="p-4 border-t-2 border-green-400 rounded-lg bg-gray-100/5 ">
-        <div class="max-w-sm mx-auto md:w-full md:mx-0">
-          <div class="inline-flex items-center space-x-4">
+      <div class="p-4 border-t-2 bg-gray-100/5 border-b">
+        <div class="flex justify-center max-w-sm mx-auto md:w-full md:mx-0">
+          <div class="mx-auto flex items-center space-x-4">
             <img v-if="useUserStore().loginUser.profileImg !== ''" :src="useUserStore().loginUser.profileImg" class="rounded-lg w-16 h-16" />
             <img v-else src="@/assets/avatar.png" class="rounded-lg w-16 h-16" />
             <h1 class="text-gray-600 ml-3 font-bold">
@@ -21,7 +21,7 @@
           <div class="max-w-sm mx-auto space-y-5 w-2/3">
             <div>
               <div class=" relative flex items-center">
-                <h3 class="mx-5 text-sm">이름</h3>
+                <h3 class="mx-5 text-sm">이름&nbsp;&nbsp;&nbsp;&nbsp;</h3>
                 <input type="text" v-model="profileStore.loginUser.userName"
                   class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
                   :placeholder="profileStore.loginUser.userName" />
@@ -72,22 +72,22 @@
           </h2>
           <div class="max-w-sm mx-auto space-y-5 w-5/12 pl-9 inline-flex">
             <div class=" relative ">
-              <p class="text-xs text-gray-500 mt-3">현재 비밀번호</p>
+              <p class="text-xs text-gray-500 mt-3 mb-1 mx-2">현재 비밀번호</p>
               <input type="password" v-model="password.curPw"
                 class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
                 placeholder="Current Password" />
-              <p class="text-xs text-gray-500 mt-3">새 비밀번호</p>
+              <p class="text-xs text-gray-500 mt-3 mb-1 mx-2">새 비밀번호</p>
               <input type="password" v-model="password.newPw"
                 class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
                 placeholder="New Password" />
-              <p class="text-xs text-gray-500 mt-3">비밀번호 재확인</p>
+              <p class="text-xs text-gray-500 mt-3 mb-1 mx-2">비밀번호 재확인</p>
               <input type="password" v-model="password.newPwCheck"
                 class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
                 placeholder="New Password Check" />
             </div>
           </div>
           <div class="text-center w-3/12 pl-6">
-            <input type="button" value="Change" @click="changePw"
+            <input type="button" value="변경" @click="changePw"
               class="py-2 px-4 cursor-pointer bg-green-500 hover:bg-green-600 focus:ring-green-500 focus:ring-offset-green-200 text-white w-full transition ease-in duration-200 text-center text-sm font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg " />
           </div>
         </div>

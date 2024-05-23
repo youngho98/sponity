@@ -1,6 +1,6 @@
 <template>
-    <div class="container my-24">
-      <div id="map" class="shadow-2xl"></div>
+    <div class="container my-40">
+      <div id="map" class="shadow-2xl" style="z-index: 0;"></div>
       <div class="controls my-6">
         <button @click="displayMarkers(searchList)">추천 마커 표시</button>
         <button @click="initMap">내위치</button>

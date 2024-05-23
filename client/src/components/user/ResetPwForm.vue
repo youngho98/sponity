@@ -1,6 +1,6 @@
 <template>
 
-  <div class="flex flex-col w-full max-w-md px-8 py-8 bg-white rounded-lg shadow-2xl shadow-gray-500 mx-auto my-40">
+  <div class="flex flex-col w-full max-w-md px-8 py-8 bg-white rounded-lg shadow-2xl shadow-gray-500 mx-auto mt-60 mb-48">
     <div class="self-center mb-6 text-xl font-light text-gray-500 sm:text-2xl dark:text-white">
       비밀번호 찾기
     </div>

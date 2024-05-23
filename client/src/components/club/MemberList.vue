@@ -1,12 +1,12 @@
 <template>
 
-  <div class="container flex flex-col items-center justify-center w-3/5 mx-auto">
-    <div class="w-full px-4 py-5 mb-2 bg-white border rounded-md shadow sm:px-6 dark:bg-gray-800">
+  <div class="container flex flex-col items-center justify-center w-3/5 mx-auto mt-20 mb-96">
+    <div class="w-full px-4 py-4 mb-2 bg-white border rounded-md shadow sm:px-6 dark:bg-gray-800">
       <h3 class="text-xl font-medium leading-6 text-gray-900 dark:text-white">
-        User database
+        멤버 목록
       </h3>
       <p class="max-w-2xl mt-1 text-sm text-gray-500 dark:text-gray-200">
-        Details and informations about user.
+        클럽에 가입한 멤버들의 목록과 세부 정보
       </p>
     </div>
     <div class="grid grid-cols-2">

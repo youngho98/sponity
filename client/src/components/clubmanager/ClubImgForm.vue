@@ -1,6 +1,6 @@
 <template>
 
-  <div class="p-4 bg-white shadow-2xl rounded-2xl max-w-2xl mx-auto my-40">
+  <div class="p-4 bg-white shadow-2xl rounded-2xl max-w-2xl mx-auto my-32">
     <div class="flex flex-row items-start gap-4">
       <img v-if="imgUrl !== ''" :src="imgUrl" class="rounded-lg w-64 h-48" />
       <img v-else src="@/assets/no-image.png" class="rounded-lg w-64 h-48" />

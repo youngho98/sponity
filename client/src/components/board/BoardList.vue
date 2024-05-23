@@ -1,10 +1,10 @@
 <template>
 
-  <div class="w-2/3 mx-auto my-10 p-12 bg-white">
+  <div class="w-2/3 mx-auto mb-80 p-12 bg-white">
     <div class="items-end mb-12 header">
       <div class="title">
         <div class="flex text-center items-center justify-between">
-          <div class="text-4xl font-bold text-gray-800">
+          <div class="text-3xl font-semibold text-gray-800">
             게시판
           </div>
           <RouterLink :to="{ name: 'createBoardForm' }" class="text-right text-sky-600 hover:text-sky-700">게시글 작성</RouterLink>
