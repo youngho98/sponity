@@ -27,6 +27,7 @@ export const useUserStore = defineStore('user', () => {
 
     axios.post(`${URL}/join`, userInfo.value)
       .then(() => {
+        alert("성공적으로 가입되었습니다.")
         router.replace({ name: 'loginForm' });
       })
       .catch((error) => {

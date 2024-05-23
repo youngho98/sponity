@@ -69,6 +69,7 @@ const uploadFile = async () => {
     });
     userStore.loginUser.profileImg = response.data;
     console.log('File uploaded successfully:', response.data);
+    alert("프로필 이미지가 변경되었습니다.");
   } catch (error) {
     console.error('Error uploading file:', error);
   }
@@ -87,6 +88,7 @@ const deleteFile = async function () {
     userStore.loginUser.profileImg = '';
     imgUrl.value = '';
     console.log('File deleted successfully', response.data);
+    alert("프로필 이미지가 삭제되었습니다.");
   } catch (error) {
     console.error('Error deleting file:', error);
   }
