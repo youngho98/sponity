@@ -1,50 +1,4 @@
 <template>
-
-  <!-- 내비게이션 바 -->
-  <!-- <nav class="navbar navbar-expand-lg fixed-top">
-    <div class="container">
-
-      <a class="navbar-brand" href="index.html">S P O N I T Y</a>
-
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-lg-auto">
-          <li class="nav-item">
-            <a href="#home" class="nav-link smoothScroll">Home</a>
-          </li>
-
-          <li class="nav-item">
-            <a href="#about" class="nav-link smoothScroll">클럽 검색</a>
-          </li>
-
-          <li class="nav-item">
-            <a href="#class" class="nav-link smoothScroll">클럽 생성</a>
-          </li>
-
-          <li class="nav-item">
-            <a href="#schedule" class="nav-link smoothScroll">추천! with <b>ChatGPT</b></a>
-          </li>
-
-          <li class="nav-item">
-            <a href="#contact" class="nav-link smoothScroll">Contact</a>
-          </li>
-        </ul>
-
-        <ul class="social-icon ml-lg-3">
-          <li><a href="https://fb.com/tooplate" class="fa fa-facebook"></a></li>
-          <li><a href="#" class="fa fa-twitter"></a></li>
-          <li><a href="#" class="fa fa-instagram"></a></li>
-        </ul>
-      </div>
-
-    </div>
-  </nav> -->
-
-
   <!-- 첫 화면 -->
   <section class="hero d-flex flex-column justify-content-center align-items-center" id="home">
 
@@ -55,13 +9,13 @@
         <div class="col-lg-8 col-md-10 mx-auto col-12">
           <div class="hero-text mt-5 text-center">
 
-            <h6 data-aos="fade-up" data-aos-delay="300" class="text-xl font-light">같이,&nbsp;&nbsp;&nbsp;즐겁게,&nbsp;&nbsp;&nbsp;새롭게</h6>
+            <h6 data-aos="fade-up" data-aos-delay="300" class="text-xl font-light">당신 곁의 운동 메이트</h6>
 
             <h1 class="text-white text-5xl font-extrabold my-10" data-aos="fade-up" data-aos-delay="500">S P O N I T Y</h1>
 
             <h6 data-aos="fade-up" data-aos-delay="300" class="text-xl font-light">지금 바로 함께 운동할 동네 친구를 찾아보세요.</h6>
             <br>
-            <RouterLink :to="{ name: 'loginForm' }" class="btn btn-outline-success mt-3" data-aos="fade-up" data-aos-delay="700">로그인</RouterLink>
+            <RouterLink v-if="userStore.loginUser.nickname === ''" :to="{ name: 'loginForm' }" class="btn btn-outline-success mt-3" data-aos="fade-up" data-aos-delay="700">로그인</RouterLink>
 
           </div>
         </div>
@@ -215,36 +169,12 @@
     </div>
   </section>
 
-
-  <!-- FOOTER -->
-  <!-- <footer class="site-footer">
-    <div class="container">
-      <div class="row">
-
-        <div class="ml-auto col-lg-4 col-md-5">
-          <p class="copyright-text">Copyright &copy; 2020 Gymso Fitness Co.
-
-            <br>Design: <a href="https://www.tooplate.com">Tooplate</a>
-          </p>
-        </div>
-
-        <div class="d-flex justify-content-center mx-auto col-lg-5 col-md-7 col-12">
-          <p class="mr-4">
-            <i class="fa fa-envelope-o mr-1"></i>
-            <a href="#">hello@company.co</a>
-          </p>
-
-          <p><i class="fa fa-phone mr-1"></i> 010-020-0840</p>
-        </div>
-
-      </div>
-    </div>
-  </footer> -->
-
 </template>
 
 <script setup>
+import { useUserStore } from '@/stores/user';
 
+const userStore = useUserStore();
 </script>
 
 <style scoped></style>
