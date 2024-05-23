@@ -1,8 +1,8 @@
 <template>
 
-  <div class="flex flex-col w-full max-w-md px-8 py-8 bg-white rounded-lg shadow shadow-gray-500 mx-auto my-40">
+  <div class="flex flex-col w-full max-w-md px-8 py-8 bg-white rounded-lg shadow-2xl shadow-gray-500 mx-auto mt-60 mb-48">
     <div class="self-center mb-6 text-xl font-light text-gray-500 sm:text-2xl dark:text-white">
-      Reset Your Password
+      비밀번호 찾기
     </div>
     <div class="mt-8">
       <form action="#" autoComplete="off">
@@ -47,13 +47,13 @@
           <div class="flex ml-auto">
             <RouterLink :to="{ name: 'findIdForm' }"
               class="inline-flex text-sm font-thin text-gray-500 hover:text-gray-700">
-              Forgot Your ID?
+              아이디를 모르시나요?
             </RouterLink>
           </div>
         </div>
         <div class="flex w-full">
-          <input type="button" value="Submit" @click="resetPw"
-            class="py-2 px-4  bg-green-600 hover:bg-green-700 focus:ring-green-500 focus:ring-offset-green-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg " />
+          <input type="button" @click="resetPw" value="제출"
+            class="py-2 px-4 cursor-pointer bg-green-500 hover:bg-green-600 focus:ring-green-500 focus:ring-offset-green-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg " />
         </div>
       </form>
     </div>
@@ -61,7 +61,7 @@
       <RouterLink :to="{ name: 'registerForm' }"
         class="inline-flex items-center text-xs font-thin text-center text-gray-500 hover:text-gray-700">
         <span class="ml-2">
-          You don&#x27;t have an account?
+          혹시 계정이 없으신가요?
         </span>
       </RouterLink>
     </div>

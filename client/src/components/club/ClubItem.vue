@@ -15,10 +15,10 @@
           {{ shortIntro }}
         </p>
         <div class="flex flex-wrap items-center mt-4 justify-starts">
-          <div class="text-xs mr-2 py-1.5 px-4 text-gray-600 bg-green-100 rounded-2xl">
+          <div class="text-xs mr-2 py-1.5 px-3 text-gray-600 bg-green-100 rounded-2xl">
             {{ club.wideArea }}
           </div>
-          <div class="text-xs mr-2 py-1.5 px-4 text-gray-600 bg-green-100 rounded-2xl">
+          <div class="text-xs mr-2 py-1.5 px-3 text-gray-600 bg-green-100 rounded-2xl">
             {{ club.detailArea }}
           </div>
         </div>

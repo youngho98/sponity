@@ -23,7 +23,7 @@
     </div>
     <div class="flex border-t border-gray-600 py-2">
       <span class="text-gray-500 w-1/6">{{ userStore.loginUser.nickname }}</span>
-      <textarea v-model="reviewContent"
+      <textarea v-model="reviewContent.content"
         class="rounded-lg border-transparent flex-1 appearance-none border border-gray-400 w-full h-12 py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent" />
     </div>
   </div>
@@ -51,7 +51,7 @@ const props = defineProps({
 
 const modify = ref(false);
 const modifyOn = function () {
-  reviewContent.value = props.review.content;
+  reviewContent.value.content = props.review.content;
   modify.value = true;
 }
 const modifyOff = function () {

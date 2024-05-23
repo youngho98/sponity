@@ -16,8 +16,8 @@
         {{ clubStore.clubInfo.memberNum }}</button>
     </div>
   </div>
-  <img v-if="clubStore.clubInfo.clubImg !== null" :src="clubStore.clubInfo.clubImg" class="w-2/3 mx-auto rounded" >
-  <img v-else src="@/assets/banner.png" class="mx-auto" />
+  <img v-if="clubStore.clubInfo.clubImg !== null" :src="clubStore.clubInfo.clubImg" class="w-2/3 mx-auto mb-40 rounded" >
+  <img v-else src="@/assets/sponity-logo.png" class="w-2/3 mx-auto mb-40 rounded" />
 
 </template>
 

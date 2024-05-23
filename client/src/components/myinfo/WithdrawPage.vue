@@ -1,6 +1,6 @@
 <template>
 
-  <div class="w-96 p-4 m-auto my-48 bg-white shadow-lg rounded-2xl">
+  <div class="w-96 p-4 mx-auto mt-60 mb-48 bg-white shadow-2xl rounded-2xl">
     <div class="w-full h-full text-center">
       <div class="flex flex-col justify-between h-full">
         <svg width="40" height="40" class="w-12 h-12 m-auto mt-4 text-green-500" fill="currentColor"
@@ -10,21 +10,21 @@
           </path>
         </svg>
         <p class="mt-4 text-xl font-bold text-gray-800">
-          Withdraw Account
+          계정 삭제
         </p>
         <p class="px-6 py-2 text-xs text-gray-600">
-          Are you sure you want to withdraw our site ?
+          정말로 계정을 삭제하시겠습니까? 다시 복구할 수 없습니다.
         </p>
         <p class="px-6 py-4 text-l text-gray-600">
-          Enter your password
+          비밀번호를 입력하세요
         </p>
         <input type="password" v-model="password.curPw"
           class="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent" />
         <div class="flex items-center justify-between w-full gap-4 mt-8">
-          <input type="button" value="Withdraw" @click="withdraw"
-            class="py-2 px-4  bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-red-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg " />
-          <input type="button" value="Cancel" @click="cancel"
-            class="py-2 px-4  bg-white hover:bg-gray-100 focus:ring-green-500 focus:ring-offset-green-200 text-green-500 w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg " />
+          <input type="button" value="회원 탈퇴" @click="withdraw"
+            class="py-2 px-4 cursor-pointer bg-red-500 hover:bg-red-600 focus:ring-red-500 focus:ring-offset-red-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg " />
+          <input type="button" value="취소" @click="cancel"
+            class="py-2 px-4 cursor-pointer bg-white hover:bg-gray-100 focus:ring-green-500 focus:ring-offset-green-200 text-green-500 w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg " />
         </div>
       </div>
     </div>

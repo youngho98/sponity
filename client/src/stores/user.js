@@ -89,6 +89,9 @@ export const useUserStore = defineStore('user', () => {
         }
 
         router.replace({ name: 'home' });
+        setTimeout(() => {
+          router.go(0);
+        }, 100);
       })
       .catch(() => {
         alert("없는 회원이거나 잘못된 비밀번호입니다.");
