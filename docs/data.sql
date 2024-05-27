@@ -1,35 +1,35 @@
 -- 유저 등록
 -- 비밀번호: qwer12!@
 insert into user(user_id, password, user_name, nickname, email, wide_area, detail_area, profile_img)
-values ('youngho98', '$2a$10$0uglUFipGXz8N.yr.DRfw.6C3nm54cVQZR2Wvsyil7AvBB1FstaUG', '노영호', '영호', 'youngho.dev@gmail.com', '대전', '유성구', 'https://sponity.s3.ap-northeast-2.amazonaws.com/profile-picture/1716467970562_bluessom.png');
+values ('youngho98', '$2a$10$0uglUFipGXz8N.yr.DRfw.6C3nm54cVQZR2Wvsyil7AvBB1FstaUG', '노영호', '영호', 'youngho.dev@gmail.com', '대전', '유성구', 'https://sponity.s3.ap-northeast-2.amazonaws.com/profile-picture/1716773670174_bluessom.png');
 insert into user(user_id, password, user_name, nickname, email, wide_area, detail_area, profile_img)
-values ('kevinlee94', '$2a$10$0uglUFipGXz8N.yr.DRfw.6C3nm54cVQZR2Wvsyil7AvBB1FstaUG', '이규빈', '규빈', 'kyubin.dev@gmail.com', '대전', '유성구', 'https://sponity.s3.ap-northeast-2.amazonaws.com/profile-picture/1716431170494_human.jpeg');
+values ('kevinlee94', '$2a$10$0uglUFipGXz8N.yr.DRfw.6C3nm54cVQZR2Wvsyil7AvBB1FstaUG', '이규빈', '규빈', 'kyubin.dev@gmail.com', '대전', '유성구', 'https://sponity.s3.ap-northeast-2.amazonaws.com/profile-picture/1716773960843_human.jpeg');
 insert into user(user_id, password, user_name, nickname, email, wide_area, detail_area, profile_img)
-values ('qwer1', '$2a$10$0uglUFipGXz8N.yr.DRfw.6C3nm54cVQZR2Wvsyil7AvBB1FstaUG', '김싸피', '테니스', 'helloworld1@gmail.com', '대전', '유성구', 'https://sponity.s3.ap-northeast-2.amazonaws.com/profile-picture/1716431427464_tennis.jpeg');
+values ('qwer1', '$2a$10$0uglUFipGXz8N.yr.DRfw.6C3nm54cVQZR2Wvsyil7AvBB1FstaUG', '김싸피', '테니스', 'helloworld1@gmail.com', '대전', '유성구', 'https://sponity.s3.ap-northeast-2.amazonaws.com/profile-picture/1716774148538_tennis.jpeg');
 insert into user(user_id, password, user_name, nickname, email, wide_area, detail_area, profile_img)
-values ('qwer2', '$2a$10$0uglUFipGXz8N.yr.DRfw.6C3nm54cVQZR2Wvsyil7AvBB1FstaUG', '김싸피', '축구공', 'helloworld2@gmail.com', '대전', '유성구', 'https://sponity.s3.ap-northeast-2.amazonaws.com/profile-picture/1716431326981_soccerBall.jpeg');
+values ('qwer2', '$2a$10$0uglUFipGXz8N.yr.DRfw.6C3nm54cVQZR2Wvsyil7AvBB1FstaUG', '김싸피', '축구공', 'helloworld2@gmail.com', '대전', '유성구', 'https://sponity.s3.ap-northeast-2.amazonaws.com/profile-picture/1716774098038_soccerBall.jpeg');
 insert into user(user_id, password, user_name, nickname, email, wide_area, detail_area, profile_img)
-values ('qwer3', '$2a$10$0uglUFipGXz8N.yr.DRfw.6C3nm54cVQZR2Wvsyil7AvBB1FstaUG', '김싸피', '토끼', 'helloworld3@gmail.com', '대전', '유성구', 'https://sponity.s3.ap-northeast-2.amazonaws.com/profile-picture/1716431299477_rabbit.jpeg');
+values ('qwer3', '$2a$10$0uglUFipGXz8N.yr.DRfw.6C3nm54cVQZR2Wvsyil7AvBB1FstaUG', '김싸피', '토끼', 'helloworld3@gmail.com', '대전', '유성구', 'https://sponity.s3.ap-northeast-2.amazonaws.com/profile-picture/1716774066248_rabbit.jpeg');
 insert into user(user_id, password, user_name, nickname, email, wide_area, detail_area, profile_img)
-values ('qwer4', '$2a$10$0uglUFipGXz8N.yr.DRfw.6C3nm54cVQZR2Wvsyil7AvBB1FstaUG', '김싸피', '문어', 'helloworld4@gmail.com', '대전', '유성구', 'https://sponity.s3.ap-northeast-2.amazonaws.com/profile-picture/1716431232207_octopus.png');
+values ('qwer4', '$2a$10$0uglUFipGXz8N.yr.DRfw.6C3nm54cVQZR2Wvsyil7AvBB1FstaUG', '김싸피', '문어', 'helloworld4@gmail.com', '대전', '유성구', 'https://sponity.s3.ap-northeast-2.amazonaws.com/profile-picture/1716774010573_octopus.png');
 insert into user(user_id, password, user_name, nickname, email, wide_area, detail_area, profile_img)
-values ('qwer5', '$2a$10$0uglUFipGXz8N.yr.DRfw.6C3nm54cVQZR2Wvsyil7AvBB1FstaUG', '김싸피', '고양이', 'helloworld13@gmail.com', '대전', '유성구', 'https://sponity.s3.ap-northeast-2.amazonaws.com/profile-picture/1716430836873_cat.jpeg');
+values ('qwer5', '$2a$10$0uglUFipGXz8N.yr.DRfw.6C3nm54cVQZR2Wvsyil7AvBB1FstaUG', '김싸피', '고양이', 'helloworld13@gmail.com', '대전', '유성구', 'https://sponity.s3.ap-northeast-2.amazonaws.com/profile-picture/1716773775469_cat.jpeg');
 insert into user(user_id, password, user_name, nickname, email, wide_area, detail_area, profile_img)
-values ('qwer6', '$2a$10$0uglUFipGXz8N.yr.DRfw.6C3nm54cVQZR2Wvsyil7AvBB1FstaUG', '김싸피', '선글이', 'helloworld6@gmail.com', '대전', '유성구', 'https://sponity.s3.ap-northeast-2.amazonaws.com/profile-picture/1716431397647_sunglasses.png');
+values ('qwer6', '$2a$10$0uglUFipGXz8N.yr.DRfw.6C3nm54cVQZR2Wvsyil7AvBB1FstaUG', '김싸피', '선글이', 'helloworld6@gmail.com', '대전', '유성구', 'https://sponity.s3.ap-northeast-2.amazonaws.com/profile-picture/1716774127114_sunglasses.png');
 insert into user(user_id, password, user_name, nickname, email, wide_area, detail_area, profile_img)
-values ('qwer7', '$2a$10$0uglUFipGXz8N.yr.DRfw.6C3nm54cVQZR2Wvsyil7AvBB1FstaUG', '김싸피', '유니콘', 'helloworld7@gmail.com', '대전', '유성구', 'https://sponity.s3.ap-northeast-2.amazonaws.com/profile-picture/1716431461435_unicorn.png');
+values ('qwer7', '$2a$10$0uglUFipGXz8N.yr.DRfw.6C3nm54cVQZR2Wvsyil7AvBB1FstaUG', '김싸피', '유니콘', 'helloworld7@gmail.com', '대전', '유성구', 'https://sponity.s3.ap-northeast-2.amazonaws.com/profile-picture/1716774172822_unicorn.png');
 insert into user(user_id, password, user_name, nickname, email, wide_area, detail_area, profile_img)
-values ('qwer8', '$2a$10$0uglUFipGXz8N.yr.DRfw.6C3nm54cVQZR2Wvsyil7AvBB1FstaUG', '김싸피', '물고기', 'helloworld8@gmail.com', '대전', '유성구', 'https://sponity.s3.ap-northeast-2.amazonaws.com/profile-picture/1716430887075_deathFish.png');
+values ('qwer8', '$2a$10$0uglUFipGXz8N.yr.DRfw.6C3nm54cVQZR2Wvsyil7AvBB1FstaUG', '김싸피', '물고기', 'helloworld8@gmail.com', '대전', '유성구', 'https://sponity.s3.ap-northeast-2.amazonaws.com/profile-picture/1716773820838_deathFish.png');
 insert into user(user_id, password, user_name, nickname, email, wide_area, detail_area, profile_img)
-values ('qwer9', '$2a$10$0uglUFipGXz8N.yr.DRfw.6C3nm54cVQZR2Wvsyil7AvBB1FstaUG', '김싸피', '병아리', 'helloworld9@gmail.com', '대전', '유성구', 'https://sponity.s3.ap-northeast-2.amazonaws.com/profile-picture/1716431200229_miniChicken.png');
+values ('qwer9', '$2a$10$0uglUFipGXz8N.yr.DRfw.6C3nm54cVQZR2Wvsyil7AvBB1FstaUG', '김싸피', '병아리', 'helloworld9@gmail.com', '대전', '유성구', 'https://sponity.s3.ap-northeast-2.amazonaws.com/profile-picture/1716773984959_miniChicken.png');
 insert into user(user_id, password, user_name, nickname, email, wide_area, detail_area, profile_img)
-values ('qwer10', '$2a$10$0uglUFipGXz8N.yr.DRfw.6C3nm54cVQZR2Wvsyil7AvBB1FstaUG', '김싸피', '악마', 'helloworld10@gmail.com', '대전', '유성구', 'https://sponity.s3.ap-northeast-2.amazonaws.com/profile-picture/1716430934656_devil.png');
+values ('qwer10', '$2a$10$0uglUFipGXz8N.yr.DRfw.6C3nm54cVQZR2Wvsyil7AvBB1FstaUG', '김싸피', '악마', 'helloworld10@gmail.com', '대전', '유성구', 'https://sponity.s3.ap-northeast-2.amazonaws.com/profile-picture/1716773858372_devil.png');
 insert into user(user_id, password, user_name, nickname, email, wide_area, detail_area, profile_img)
-values ('qwer11', '$2a$10$0uglUFipGXz8N.yr.DRfw.6C3nm54cVQZR2Wvsyil7AvBB1FstaUG', '김싸피', '하트', 'helloworld11@gmail.com', '대전', '유성구', 'https://sponity.s3.ap-northeast-2.amazonaws.com/profile-picture/1716431135136_heart.png');
+values ('qwer11', '$2a$10$0uglUFipGXz8N.yr.DRfw.6C3nm54cVQZR2Wvsyil7AvBB1FstaUG', '김싸피', '하트', 'helloworld11@gmail.com', '대전', '유성구', 'https://sponity.s3.ap-northeast-2.amazonaws.com/profile-picture/1716773933404_heart.png');
 insert into user(user_id, password, user_name, nickname, email, wide_area, detail_area, profile_img)
-values ('qwer12', '$2a$10$0uglUFipGXz8N.yr.DRfw.6C3nm54cVQZR2Wvsyil7AvBB1FstaUG', '김싸피', '강아지', 'helloworld12@gmail.com', '대전', '유성구', 'https://sponity.s3.ap-northeast-2.amazonaws.com/profile-picture/1716431062340_dog.jpeg');
+values ('qwer12', '$2a$10$0uglUFipGXz8N.yr.DRfw.6C3nm54cVQZR2Wvsyil7AvBB1FstaUG', '김싸피', '강아지', 'helloworld12@gmail.com', '대전', '유성구', 'https://sponity.s3.ap-northeast-2.amazonaws.com/profile-picture/1716773891678_dog.jpeg');
 insert into user(user_id, password, user_name, nickname, email, wide_area, detail_area, profile_img)
-values ('qwer13', '$2a$10$0uglUFipGXz8N.yr.DRfw.6C3nm54cVQZR2Wvsyil7AvBB1FstaUG', '김싸피', '돼지', 'helloworld5@gmail.com', '대전', '유성구', 'https://sponity.s3.ap-northeast-2.amazonaws.com/profile-picture/1716437571682_pig.png');
+values ('qwer13', '$2a$10$0uglUFipGXz8N.yr.DRfw.6C3nm54cVQZR2Wvsyil7AvBB1FstaUG', '김싸피', '돼지', 'helloworld5@gmail.com', '대전', '유성구', 'https://sponity.s3.ap-northeast-2.amazonaws.com/profile-picture/1716774044061_pig.png');
 
 -- 축구 클럽 등록(축구, 대전 유성구)
 insert into club(club_name, category, wide_area, detail_area, introduction, club_img)
@@ -142,7 +142,6 @@ values (2,'kevinlee94', '클럽 만들었어요', '같이 축구 얘기도하고
 'https://sponity.s3.ap-northeast-2.amazonaws.com/board-picture/1716444528910_son.jpeg');
 
 -- 댓글
-select * from review;
 insert into review(board_id, user_id, content, reg_date)
 values (2, 'youngho98', '아쉽네요..ㅠㅠ', '2024-05-24 08:58:59');
 insert into review(board_id, user_id, content, reg_date)
