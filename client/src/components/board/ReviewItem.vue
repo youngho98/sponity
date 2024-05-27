@@ -10,6 +10,8 @@
       <span class="text-gray-900 w-3/4">{{ review.regDate }}</span>
       <button v-if="userStore.loginUser.nickname === review.nickname" @click="modifyOn"
         class="text-sky-600 hover:text-sky-700 mx-auto">수정</button>
+      <button v-else style="visibility: hidden;"
+        class="text-sky-600 hover:text-sky-700 mx-auto">수정</button>
       <button v-if="userStore.loginUser.nickname === review.nickname || userStore.loginUser.userStatus === 3"
         @click="deleteReview" class="text-sky-600 hover:text-sky-700 mx-auto">삭제</button>
     </div>
