@@ -18,40 +18,42 @@
 - FrontEnd 서브 (홈 화면 디자인, 외부 API 도입 등)
 
 ## 기술 스택
-<div style="display: flex; flex-direction: row;">
-<div style="width: 50%; padding-right: 10px;">
+<table style="width:100%; border-collapse:collapse; border:none;">
+<tr>
+<td style="width:50%; vertical-align:top; border:none;"">
 
-### FrontEnd
+<h3>FrontEnd</h3>
 <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black">
 <img src="https://img.shields.io/badge/Vue.js-4FC08D?style=flat-square&logo=vue.js&logoColor=white">
 <img src="https://img.shields.io/badge/Tailwind CSS-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white">
 
-### BackEnd
+<h3>BackEnd</h3>
 <img src="https://img.shields.io/badge/Java-007396?style=flat-square&logo=Java&logoColor=white">
 <img src="https://img.shields.io/badge/Spring-6DB33F?style=flat-square&logo=Spring&logoColor=white">
 <img src="https://img.shields.io/badge/Spring Boot-6DB33F?style=flat-square&logo=SpringBoot&logoColor=white">
 
-### Database
+<h3>Database</h3>
 <img src="https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=MySQL&logoColor=white">
 <img src="https://img.shields.io/badge/Amazon S3-569A31?style=flat-square&logo=AmazonS3&logoColor=white">
 
-</div>
-<div style="width: 50%; padding-right: 10px;">
+</td>
+<td style="width:50%; vertical-align:top; border:none;">
 
-### Security
+<h3>Security</h3>
 <img src="https://img.shields.io/badge/Spring Security-6DB33F?style=flat-square&logo=SpringSecurity&logoColor=white">
 <img src="https://img.shields.io/badge/JSON Web Tokens-000000?style=flat-square&logo=JSONWebTokens&logoColor=white">
 
-### API
+<h3>API</h3>
 <img src="https://img.shields.io/badge/ChatGPT-412991?style=flat-square&logo=OpenAI&logoColor=white">
 <img src="https://img.shields.io/badge/KakaoMap-FFCD00?style=flat-square&logo=kakao&logoColor=black">
 
-### Collaboration Tools
+<h3>Collaboration Tools</h3>
 <img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white">
 <img src="https://img.shields.io/badge/Notion-000000?style=flat-square&logo=Notion&logoColor=white">
 
-</div>
-</div>
+</td>
+</tr>
+</table>
 
 ## 주요 기능
 <img src="./assets/주요기능1.png">
@@ -117,8 +119,8 @@
 설계와 프론트 위주로 작업을 진행해보며, 프론트엔드 개발자의 입장에서 어떠한 형식으로 필요한 데이터를 받아오는 것이 좋을지 프론트에서 넘긴 데이터를 어떤식으로 DB에 저장해놓아야 좋을지 등을 생각해볼 수 있어 좋은 경험이 되었습니다.<br>
 또한 하나의 기능을 추가하기 위해 프론트와 백에서 각각 어떠한 작업을 해야하는지 DB 설계는 어떻게 이루어지고 관리되어야 하는지를 생각해볼 수 있어 좋은 경험이 되었습니다.<br>
 >> **추후 학습사항** <br>
->- 프로젝트에 사용했던 백엔드 파트 기술 추가 공부 (SpringSecurity, JWT, AWS S3 등)
 >- REST API 추가 학습
+>- JPA 학습
 
 > **이규빈 (kevinlee94)** <br>
 첫 프로젝트라 막막했지만 페어인 영호가 잘 이끌어줘서 잘 마무리할 수 있었습니다. 
